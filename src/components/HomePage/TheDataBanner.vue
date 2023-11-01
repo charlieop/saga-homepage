@@ -1,13 +1,13 @@
 <!-- 此部分未适配响应式设计 -->
 
 <template>
-  <div class="data-banner">
+  <section class="data-banner">
     <div class="data-banner__block">
       <div class="data-banner__figure">
         <span class="data-banner__number">3</span
         ><span class="data-banner__unit">年</span>
       </div>
-      <span class="data-banner__desc">我们成立已达</span>
+      <span class="data-banner__desc">SAGA 成立已达</span>
     </div>
     <div class="data-banner__block">
       <div class="data-banner__figure">
@@ -30,7 +30,7 @@
       </div>
       <span class="data-banner__desc">来自世界各地的志愿者</span>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup></script>
@@ -52,7 +52,7 @@
 }
 .data-banner__figure {
   font-family: var(--ff-accent);
-  font-size: var(--fs-800);
+  font-size: var(--fs-700);
   font-weight: 700;
 }
 .data-banner__unit {

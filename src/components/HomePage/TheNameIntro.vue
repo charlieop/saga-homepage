@@ -1,20 +1,249 @@
 <template>
-  <div class="name-intro">
-    <h1>haha</h1>
-  </div>
+  <section class="name-intro">
+    <div class="name-intro__sticky-area">
+      <h2 class="name-intro__header">
+        什么是&nbsp;
+        <span class="name-intro__title-letter">S</span>
+        <span class="name-intro__title-letter">A</span>
+        <span class="name-intro__title-letter">G</span>
+        <span class="name-intro__title-letter">A</span>
+        ?
+      </h2>
+    </div>
+    <div class="name-intro__scrolling-area">
+      <article class="name-intro__article" data-index="0">
+        <h3 class="name-intro__word">
+          <span class="name-intro__initial">S</span>ense
+        </h3>
+        <div class="name-intro__desc">
+          <p class="name-intro__title">共情</p>
+          <p class="name-intro__detail">
+            我们关注白血病儿童的身心健康，倾听他们的故事，感受他们的情感，并希望以此与孩子产生共鸣。
+          </p>
+        </div>
+      </article>
+      <article class="name-intro__article" data-index="1">
+        <h3 class="name-intro__word">
+          <span class="name-intro__initial">A</span>ccompany
+        </h3>
+        <div class="name-intro__desc">
+          <p class="name-intro__title">陪伴</p>
+          <p class="name-intro__detail">
+            我们希望与孩子们建立亦师亦友的关系，在他们的成长道路上给予了学习和生活上的陪伴。
+          </p>
+        </div>
+      </article>
+      <article class="name-intro__article" data-index="2">
+        <h3 class="name-intro__word">
+          <span class="name-intro__initial">G</span>uide
+        </h3>
+        <div class="name-intro__desc">
+          <p class="name-intro__title">引导</p>
+          <p class="name-intro__detail">
+            我们希望引导孩子们探索未知的世界，挑战自我，克服困难，并在这个过程中建立信心。
+          </p>
+        </div>
+      </article>
+      <article class="name-intro__article" data-index="3">
+        <h3 class="name-intro__word">
+          <span class="name-intro__initial">A</span>dventure
+        </h3>
+        <div class="name-intro__desc">
+          <p class="name-intro__title">共赴冒险</p>
+          <p class="name-intro__detail">
+            我们认为人生是一场冒险，我们希望与孩子们一起共赴冒险旅程，并在这个过程中分享感动瞬间，感受成长带来的快乐。
+          </p>
+        </div>
+      </article>
+      <div class="name-intro__article--placeholder"></div>
+      <div class="decoration1"></div>
+      <div class="decoration2"></div>
+      <div class="decoration3"></div>
+    </div>
+  </section>
 </template>
 
-<script setup></script>
+<script setup>
+import { onMounted } from "vue";
+
+onMounted(() => {
+  const articles = document.querySelectorAll(".name-intro__article");
+  let observer = new IntersectionObserver(handleIntersection, {
+    rootMargin: "200% 1000% 0% 1000%",
+    threshold: 0.7,
+  });
+  articles.forEach((article) => {
+    observer.observe(article);
+  });
+  setTimeout(() => {
+    setActive(-1);
+  }, 100);
+});
+
+function handleIntersection(entries) {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      console.log(entry.target.dataset.index);
+      setActive(entry.target.dataset.index);
+      setDisappear(entry.target.dataset.index - 1);
+    } else {
+      setAppear(entry.target.dataset.index - 1);
+      setActive(entry.target.dataset.index - 1);
+    }
+  });
+}
+
+function setActive(i) {
+  if (i == undefined) {
+    console.log("nono");
+    return;
+  }
+  const letters = document.querySelectorAll(".name-intro__title-letter");
+  letters.forEach((letter) => {
+    letter.classList.remove("name-intro__title-letter--active");
+  });
+  letters[i]?.classList.add("name-intro__title-letter--active");
+}
+
+function setDisappear(i) {
+  const articles = document.querySelectorAll(".name-intro__article");
+  articles[i]?.classList.add("name-intro__article--disappear");
+}
+
+function setAppear(i) {
+  const articles = document.querySelectorAll(".name-intro__article");
+  articles[i]?.classList.remove("name-intro__article--disappear");
+}
+</script>
 
 <style scoped>
 .name-intro {
-    /* remove after done */
-    min-height: 100svh;
-    margin-bottom: 50svh;
-}
-.name-intro {
-  background-color: var(--clr-background-muted);
+  --_bg-clr: var(--clr-background-muted);
+  background-color: var(--_bg-clr);
   border-radius: 0 0 10vw 10vw;
-  padding: 5rem var(--page-padding-inline);
+  margin-bottom: 150svh;
+}
+
+.name-intro__sticky-area {
+  position: sticky;
+  top: 0;
+  padding-top: 3rem;
+  margin-bottom: 50svh;
+  background-color: var(--_bg-clr);
+}
+
+.name-intro__header {
+  font-size: var(--fs-800);
+  font-weight: 700;
+  text-align: center;
+  font-family: var(--ff-accent);
+  height: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 0.1ch;
+}
+
+.name-intro__title-letter {
+  transition: all 0.3s ease-in-out;
+  font-size: 1.25em;
+  color: var(--clr-text-muted);
+}
+
+.name-intro__title-letter--active {
+  font-size: 1.8em;
+  color: var(--clr-primary);
+  transition: all 0.3s ease-in-out;
+}
+
+.name-intro__scrolling-area {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-inline: var(--page-padding-inline);
+  gap: 50vh;
+  /* outline: 1px solid red; */
+}
+.name-intro__article {
+  --_height: 50vh;
+  /* outline: 1px solid green; */
+  position: sticky;
+  top: 10rem;
+  height: 20rem;
+  background-color: var(--clr-background-muted);
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  place-items: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.name-intro__article--disappear {
+  opacity: 0;
+  transform: translateX(5%);
+}
+
+.name-intro__article--placeholder {
+  height: 10em;
+}
+
+.name-intro__word {
+  font-size: var(--fs-800);
+  letter-spacing: 0.1ch;
+}
+
+.name-intro__initial {
+  font-size: 1.5em;
+  color: var(--clr-primary);
+}
+
+.name-intro__desc {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: var(--fs-400);
+  padding-inline: 1rem;
+}
+.name-intro__title {
+  font-size: var(--fs-800);
+  font-family: var(--ff-accent);
+}
+.name-intro__detail {
+  font-size: var(--fs-400);
+  line-height: 1.5;
+}
+
+.decoration1 {
+  width: 25rem;
+  height: 10rem;
+  background-color: var(--clr-primary);
+  position: absolute;
+  z-index: 10;
+  transform: rotate(-45deg);
+  top: 50svh;
+  left: -10rem;
+}
+.decoration2 {
+  width: 25rem;
+  height: 15rem;
+  background-color: var(--clr-accent);
+  position: absolute;
+  z-index: 10;
+  transform: rotate(60deg);
+  top: 150svh;
+  right: -15re·m;
+}
+
+.decoration3 {
+  width: 25rem;
+  height: 15rem;
+  background-color: var(--clr-text-muted);
+  position: absolute;
+  border-radius: 5rem;
+  z-index: 10;
+  top: 250svh;
+  left: -15rem;
 }
 </style>
