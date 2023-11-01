@@ -1,6 +1,7 @@
+import "@/assets/css/resets.css";
+import "@/assets/css/style.css";
+import "@/assets/css/fonts.css";
 import { createApp } from "vue";
-import "./resets.css";
-import "./style.css";
 import App from "./App.vue";
 import router from "./router";
 

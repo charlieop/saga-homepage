@@ -1,0 +1,44 @@
+/* Gloal Colors */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --clr-text: #fdfcfc;
+    --clr-text-muted: #8c8c8c;
+    --clr-background: #1e1e1e;
+    --clr-background-muted: #fef9f2;
+    --clr-primary: #e66f00;
+    --clr-secondary: #30300d;
+    --clr-accent: #cccc3e;
+  }
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --clr-text: #000000;
+    --clr-text-muted: #6c6c6c;
+    --clr-background: #fdfcfc;
+    --clr-background-muted: #fef9f2;
+    --clr-primary: #ff881a;
+    --clr-secondary: #f2f2cf;
+    --clr-accent: #c1c133;
+  }
+}
+
+/* Global Settings */
+:root {
+  --page-padding-inline: 10rem;
+}
+
+body {
+  background-color: var(--clr-background);
+  color: var(--clr-text);
+  font-family: var(--ff-primary);
+}
+
+@media (max-width: 1200px) {
+  :root {
+  }
+}
+
+@media (max-width: 700px) {
+  :root {
+  }
+}
