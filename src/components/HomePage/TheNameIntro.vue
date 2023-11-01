@@ -233,7 +233,7 @@ function setAppear(i) {
   z-index: 10;
   transform: rotate(60deg);
   top: 150svh;
-  right: -15re·m;
+  right: -15rem;
 }
 
 .decoration3 {
