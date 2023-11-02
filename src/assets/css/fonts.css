@@ -8,8 +8,15 @@
   可以参考网站 http://jimyuan.github.io/blog/2014/12/02/cn-web-font-guide.html
   */
 :root {
-  --ff-primary: "Roboto", sans-serif;
-  --ff-accent: "Roboto Slab", serif;
+  --ff-primary: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, 
+  z szsFira Sans, Droid Sans, Helvetica Neue, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, sans-serif;
+  --ff-accent: 'happyzcool', serif;
+}
+
+@font-face {
+  font-family: 'happyzcool';
+  src: url('zhankukuaileti2016xiudingban-2-webfont.woff2') format('woff2'),
+  font-display: swap;
 }
 
 /* Global Font Sizes */
