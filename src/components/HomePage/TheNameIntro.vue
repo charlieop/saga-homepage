@@ -60,6 +60,12 @@
       <div class="decoration2"></div>
       <div class="decoration3"></div>
     </div>
+    <svg class="arrow-down" x="0px" y="0px" viewBox="0 20 100 60">
+      <path
+        xmlns="http://www.w3.org/2000/svg"
+        d="M94.675,40.841c-2.487-4.476-5.408-8.566-8.823-12.381c-1.748-1.953-5.262,0.504-3.77,2.758      c1.17,1.768,2.34,3.537,3.509,5.305c-8.517-3.195-17.708-5.38-26.487-4.241c-0.032-0.039-0.06-0.081-0.092-0.12      C50.136,21.4,33.229,21.455,22.436,29.055C9.538,38.137-0.33,61.035,8.181,75.852c0.535,0.932,2.009,0.374,1.754-0.687      c-3.299-13.77,1.573-30.487,12.148-40.09c8.329-7.563,23.392-9.812,31.863-1.702c-2.649,0.787-5.24,1.927-7.737,3.507      c-5.011,3.169-9.76,8.704-9.076,15.041c0.686,6.35,6.985,10.084,13.007,9.429c12.392-1.348,15.882-14.82,11.597-24.687      c7.591-0.498,15.526,1.609,22.777,4.409c-2.37,0.508-4.711,1.152-7.039,1.965c-2.86,0.999-1.731,5.607,1.15,4.597      c4.441-1.556,8.868-2.577,13.563-3.001c0.622-0.056,1.237-0.359,1.697-0.798C94.847,43.263,95.384,42.116,94.675,40.841z       M52.073,56.082c-4.214,1.656-10.324,0.037-10.378-5.404c-0.038-3.813,3.188-7.295,6.097-9.309      c2.919-2.021,6.029-3.314,9.245-4.041C60.738,43.761,59.687,53.089,52.073,56.082z"
+      />
+    </svg>
   </section>
 </template>
 
@@ -69,7 +75,7 @@ import { onMounted } from "vue";
 onMounted(() => {
   const articles = document.querySelectorAll(".name-intro__article");
   let observer = new IntersectionObserver(handleIntersection, {
-    rootMargin: "200% 1000% 0% 1000%",
+    rootMargin: "200% 1000% -10% 1000%",
     threshold: 0.7,
   });
   articles.forEach((article) => {
@@ -121,15 +127,26 @@ function setAppear(i) {
   --_bg-clr: var(--clr-background-muted);
   background-color: var(--_bg-clr);
   border-radius: 0 0 10vw 10vw;
-  margin-bottom: 150svh;
+  position: relative;
 }
 
 .name-intro__sticky-area {
+  --_header_height: 6rem;
   position: sticky;
   top: 0;
   padding-top: 3rem;
-  margin-bottom: 50svh;
-  background-color: var(--_bg-clr);
+  padding-bottom: 33svh;
+}
+
+.name-intro__sticky-area::after {
+  content: "";
+  position: absolute;
+  transform: translateY(1rem);
+  left: 20%;
+  right: 20%;
+  height: 0.2rem;
+  border-radius: 100rem;
+  background-color: var(--clr-background);
 }
 
 .name-intro__header {
@@ -137,7 +154,7 @@ function setAppear(i) {
   font-weight: 700;
   text-align: center;
   font-family: var(--ff-accent);
-  height: 6rem;
+  height: var(--_header_height);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -162,22 +179,20 @@ function setAppear(i) {
   flex-direction: column;
   align-items: center;
   padding-inline: var(--page-padding-inline);
-  gap: 50vh;
-  /* outline: 1px solid red; */
+  gap: 40vh;
+  contain: paint;
 }
 .name-intro__article {
   --_height: 50vh;
-  /* outline: 1px solid green; */
   position: sticky;
   top: 10rem;
   height: 20rem;
-  background-color: var(--clr-background-muted);
   display: grid;
   gap: 2rem;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr;
   place-items: center;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .name-intro__article--disappear {
@@ -186,7 +201,7 @@ function setAppear(i) {
 }
 
 .name-intro__article--placeholder {
-  height: 10em;
+  height: 20svh;
 }
 
 .name-intro__word {
@@ -233,17 +248,27 @@ function setAppear(i) {
   z-index: 10;
   transform: rotate(60deg);
   top: 150svh;
-  right: -15rem;
+  right: -13rem;
 }
 
 .decoration3 {
   width: 25rem;
-  height: 15rem;
+  height: 20rem;
   background-color: var(--clr-text-muted);
   position: absolute;
   border-radius: 5rem;
   z-index: 10;
-  top: 250svh;
+  top: 230svh;
   left: -15rem;
+}
+
+.arrow-down {
+  --_width: 13rem;
+  transform: rotate(135deg) scale(1.3);
+  position: absolute;
+  bottom: calc(var(--_width) * -0.7);
+  left: calc(50% - var(--_width) / 2);
+  width: var(--_width);
+  fill: var(--clr-accent);
 }
 </style>
