@@ -14,9 +14,8 @@
   text-align: center;
   padding: 10rem;
   font-size: var(--fs-400);
-
-
   min-height: 100svh;
+  outline: 3px solid var(--clr-primary);
 }
 
 </style>
