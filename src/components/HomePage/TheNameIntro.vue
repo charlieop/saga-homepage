@@ -202,10 +202,6 @@ function setAppear(i) {
   transform: translateX(5%);
 }
 
-.name-intro__article--placeholder {
-  /* height: 5svh; */
-}
-
 .name-intro__word {
   font-size: var(--fs-800);
   letter-spacing: 0.1ch;
