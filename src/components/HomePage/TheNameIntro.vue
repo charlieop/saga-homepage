@@ -55,6 +55,8 @@
           </p>
         </div>
       </article>
+      <div class="place_holder"></div>
+
       <!-- <div class="name-intro__article--placeholder"></div> -->
       <div class="decoration1"></div>
       <div class="decoration2"></div>
@@ -200,10 +202,6 @@ function setAppear(i) {
   transform: translateX(5%);
 }
 
-.name-intro__article--placeholder {
-  /* height: 5svh; */
-}
-
 .name-intro__word {
   font-size: var(--fs-800);
   letter-spacing: 0.1ch;
@@ -237,7 +235,7 @@ function setAppear(i) {
   position: absolute;
   z-index: 10;
   transform: rotate(-45deg);
-  top:40svh;
+  top: 40svh;
   left: -10rem;
 }
 .decoration2 {

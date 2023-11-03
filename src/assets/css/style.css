@@ -2,9 +2,9 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --clr-text: #fdfcfc;
-    --clr-text-muted: #8c8c8c;
+    --clr-text-muted: #b5b5b5;
     --clr-background: #1e1e1e;
-    --clr-background-muted: #4d2d00;
+    --clr-background-muted: #4b2f15;
     --clr-primary: #e66f00;
     --clr-secondary: #30300d;
     --clr-accent: #cccc3e;

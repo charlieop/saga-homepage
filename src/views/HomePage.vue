@@ -1,4 +1,5 @@
 <template>
+  <TheMainNavigation></TheMainNavigation>
   <TheLanding></TheLanding>
   <TheDataBanner></TheDataBanner>
   <TheNameIntro></TheNameIntro>
@@ -7,6 +8,7 @@
 </template>
 
 <script setup>
+import TheMainNavigation from "@/components/HomePage/TheMainNavigation.vue";
 import TheLanding from "@/components/HomePage/TheLanding.vue";
 import TheDataBanner from "@/components/HomePage/TheDataBanner.vue";
 import TheNameIntro from "@/components/HomePage/TheNameIntro.vue";
@@ -15,8 +17,6 @@ import TheValues from "@/components/HomePage/TheValues.vue";
 
 <style scoped>
 .main__add-blank {
-  
-  height: 11rem;  
+  height: 11rem;
 }
-
 </style>
