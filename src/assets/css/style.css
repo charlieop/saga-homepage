@@ -8,6 +8,7 @@
     --clr-primary: #e66f00;
     --clr-secondary: #30300d;
     --clr-accent: #cccc3e;
+    --clr-footer-text: #e4e4e4;
   }
 }
 @media (prefers-color-scheme: light) {
@@ -19,6 +20,7 @@
     --clr-primary: #ff881a;
     --clr-secondary: #f2f2cf;
     --clr-accent: #c1c133;
+    --clr-footer-text: #efeeee;
   }
 }
 

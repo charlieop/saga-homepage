@@ -19,12 +19,7 @@
       </h2>
       <h1 class="landing__main-heading">SAGA星光公益课堂</h1>
     </div>
-    <div class="landing__img">
-      <img
-        src="https://w7.pngwing.com/pngs/974/719/png-transparent-man-standing-wearing-black-suit-jacket-graphy-xchng-businessman-image-file-formats-photography-people.png"
-        alt="hero image"
-      />
-    </div>
+      <img class="landing__img" src="@/assets/imgs/hero.jpg" alt="hero image" />
   </section>
 </template>
 
@@ -57,18 +52,19 @@ function displayNextWord() {
 .landing {
   height: 100svh;
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 3rem;
 }
 .landing__headings {
-  padding-left: var(--page-padding-inline);
+  padding-left: 5vw;
   font-family: var(--ff-accent);
   font-weight: 700;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 3rem;
   text-align: end;
+  z-index: 10;
 }
 .landing__main-heading {
   font-size: var(--fs-900);
@@ -83,7 +79,7 @@ function displayNextWord() {
   color: var(--clr-primary);
 }
 .landing__keyword {
-  --_color: #E85D75;
+  --_color: #e85d75;
   position: absolute;
   right: 0;
   top: 0;
@@ -105,16 +101,9 @@ function displayNextWord() {
   text-shadow: 0px 7px 2px var(--_color);
 }
 .landing__img {
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  flex-direction: start;
-  padding-top: 7rem;
-}
-
-.landing__img img {
-  flex-grow: 1;
-  height: 40rem;
+  place-self: center;
+  width: 80%;
+  border-radius: 3rem;
   object-fit: contain;
 }
 
