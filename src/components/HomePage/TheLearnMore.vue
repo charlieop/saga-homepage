@@ -20,6 +20,13 @@ import { onMounted, ref } from 'vue';
     imgUrl.value = props.imageUrl
 </script>
 <style>
+
+.learn-more{
+    display: flex;
+    justify-content: space-evenly;
+    box-sizing: border-box;
+  }
+
 .card{
     flex: 1;
     margin: 12.5rem 1.2rem 3.1rem 1.2rem;
@@ -43,7 +50,7 @@ import { onMounted, ref } from 'vue';
 .line{
     height: 0.9rem;
     width: 22rem;
-    background-color: var(--clr-background-muted);
+    background-color: var(--clr-text-muted);
     margin-bottom: 1.2rem;
     text-align: right;
     transform: translateX(0.9rem);
@@ -71,7 +78,7 @@ import { onMounted, ref } from 'vue';
     position: absolute;
     top: 70%;
     left: 3.2rem;
-    background-color: var(--clr-background-muted);
+    background-color: var(--clr-secondary);
     font-size: 1.5rem;
     width: 10rem;
     height: 3rem;
@@ -83,7 +90,7 @@ import { onMounted, ref } from 'vue';
 }
 
 .more-saga:hover{
-    background-color: var(--clr-secondary);
+    background-color: var(--clr-text-muted);
     transform: translateY(-30px);
 }
 
