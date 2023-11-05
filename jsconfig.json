@@ -3,7 +3,7 @@
         "src/**/*"
     ],
     "compilerOptions": {
-        "baseUrl": "./",
+        "baseUrl": "/saga-homepage/",
         "paths": {
             "@/*": ["src/*"]
         }
