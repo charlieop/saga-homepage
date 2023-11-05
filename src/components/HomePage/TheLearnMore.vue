@@ -1,95 +1,59 @@
 <template>
-    <div class="card" :style="{backgroundImage:'url('+imgUrl+')'}">
-        <!-- :style="{backgroundImage:`url(${imageUr1})`}" -->
-        <div class="title">{{ title }}</div>
-        <div class="line"></div>
-        <div v-if="showFlag" class="title">
-            <div class="detail">{{ detail }}</div>
+    <div class="contact">
+        <div class="left">
+            <div class="left-title">联系我们 Contact us</div>
+            <div class="left-saga">详情 For more details</div>
         </div>
-        <div class="more-saga" @mouseover="showFlag = true" @mouseout="showFlag=false">了解详情</div>
+        <div class="right">
+            <div class="right-title">联系方式 Contact information</div>
+            <div class="way">Email：external-affairs@saga-xingguang.com</div>
+            <div class="way">Wechat: 13730835212(手机与微信同号)</div>
+            <div class="way"> WeChat official account (微信公众号)：星光SAGA</div>
+        </div>
     </div>
 </template>
 
-<script setup>
-import { onMounted, ref } from 'vue';
-    // 控制显示隐藏
-    const showFlag = ref(false)
-    // 图片路径
-    const imgUrl = ref('')
-    const props = defineProps(['imageUrl', 'title', 'detail']) 
-    imgUrl.value = props.imageUrl
-</script>
+<script setup></script>
+
 <style>
-.card{
-    flex: 1;
-    margin: 12.5rem 1.2rem 3.1rem 1.2rem;
-    border-radius: 1.2rem;
-    height: 20rem;
-    padding-top: 3.2rem;
-    /* background-image: url(../../assets/image/rose.jpg); */
-    /* background-size: 100% 100%; */
-    background-position: right top;
-    background-repeat: no-repeat;
-    position: relative;
-}
-.title{
-    font-size: 2rem;
-    color: var(--clr-text);
-    font-weight: 600;
-    text-align: right;
-    width: 23rem;
-}
-
-.line{
-    height: 0.9rem;
-    width: 22rem;
-    background-color: var(--clr-background-muted);
-    margin-bottom: 1.2rem;
-    text-align: right;
-    transform: translateX(0.9rem);
-}
-
-.detail{
-    width: 12rem;
-    color: var(--clr-text);
-    font-size: 1.4rem;
-    animation-duration: 1s;
-    animation-name: slidein;
-}
-@keyframes slidein {
-    from {
-      margin-left: 100%;
-      width: 70%;
-    }
-  
-    to {
-      margin-left: 0%;
-      width: 12rem;
-    }
-  }
-.more-saga{
-    position: absolute;
-    top: 70%;
-    left: 3.2rem;
-    background-color: var(--clr-background-muted);
-    font-size: 1.5rem;
-    width: 10rem;
-    height: 3rem;
-    border-radius: 0.33rem;
-    text-align: center;
-    line-height: 3.1rem;
-    cursor: pointer;
-    transition: background-color 0.5s, transform 0.5s;
-}
-
-.more-saga:hover{
+.contact{
     background-color: var(--clr-secondary);
-    transform: translateY(-30px);
+    height: 12rem;
+    color: var(--clr-text-muted);
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem 0;
 }
-
-@keyframes hideShow {  
-  0% {opacity: 0;}  
-  100% {opacity: 1;}  
+.left{
+    margin-right: 10rem;
+}
+.left-title{
+    color: var( --clr-text);
+    font-size: 3rem;
+    margin-bottom: 1.2rem;
+}
+.left-saga{
+    width: 15rem;
+    height: 3.5rem;
+    background-color: var(--clr-text-muted);
+    font-size: 1.5rem;
+    line-height: 3.2rem;
+    text-align: center;
+    border-radius: 2.1rem;
+    color: var(--clr-text);
+}
+.right{
+    padding-left: 1.3rem;
+    color:  var(--clr-text);
+}
+.right-title{
+    padding-top: 0.8rem;
+    font-size: 1.2rem;
+    padding-bottom: 1rem;
+}
+.way{
+    margin-bottom: 0.3rem;
 }
 </style>
+  
   
