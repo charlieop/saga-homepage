@@ -55,7 +55,9 @@
           </p>
         </div>
       </article>
-      <div class="name-intro__article--placeholder"></div>
+      <div class="place_holder"></div>
+
+      <!-- <div class="name-intro__article--placeholder"></div> -->
       <div class="decoration1"></div>
       <div class="decoration2"></div>
       <div class="decoration3"></div>
@@ -180,17 +182,17 @@ function setAppear(i) {
   align-items: center;
   padding-inline: var(--page-padding-inline);
   gap: 40vh;
+  padding-bottom: 2rem;
   contain: paint;
 }
 .name-intro__article {
-  --_height: 50vh;
   position: sticky;
-  top: 10rem;
-  height: 20rem;
+  top: 15rem;
+  margin-bottom: 2rem;
+  background-color: var(--_bg-clr);
   display: grid;
   gap: 2rem;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr;
   place-items: center;
   transition: all 0.5s ease-in-out;
 }
@@ -198,10 +200,6 @@ function setAppear(i) {
 .name-intro__article--disappear {
   opacity: 0;
   transform: translateX(5%);
-}
-
-.name-intro__article--placeholder {
-  height: 20svh;
 }
 
 .name-intro__word {
@@ -237,7 +235,7 @@ function setAppear(i) {
   position: absolute;
   z-index: 10;
   transform: rotate(-45deg);
-  top: 50svh;
+  top: 40svh;
   left: -10rem;
 }
 .decoration2 {
@@ -247,7 +245,7 @@ function setAppear(i) {
   position: absolute;
   z-index: 10;
   transform: rotate(60deg);
-  top: 150svh;
+  top: 110svh;
   right: -13rem;
 }
 
@@ -258,13 +256,13 @@ function setAppear(i) {
   position: absolute;
   border-radius: 5rem;
   z-index: 10;
-  top: 230svh;
+  top: 170svh;
   left: -15rem;
 }
 
 .arrow-down {
   --_width: 13rem;
-  transform: rotate(135deg) scale(1.3);
+  transform: rotate(110deg) scale(1.3);
   position: absolute;
   bottom: calc(var(--_width) * -0.7);
   left: calc(50% - var(--_width) / 2);

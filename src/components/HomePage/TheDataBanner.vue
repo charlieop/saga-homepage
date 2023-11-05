@@ -36,13 +36,15 @@
 <script setup></script>
 
 <style scoped>
+
 .data-banner {
   background-color: var(--clr-background-muted);
-  padding: 5rem var(--page-padding-inline);
+  padding: 3rem var(--page-padding-inline) 6rem;
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: repeat(4, 1fr);
 }
+
 .data-banner__block {
   display: flex;
   flex-direction: column;
