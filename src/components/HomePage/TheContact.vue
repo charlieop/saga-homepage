@@ -17,7 +17,7 @@
 
 <style>
 .contact{
-    background-color: var(--clr-background-muted);
+    background-color: var(--clr-secondary);
     height: 12rem;
     color: var(--clr-text-muted);
     display: flex;
@@ -55,5 +55,6 @@
     margin-bottom: 0.3rem;
 }
 </style>
+  
   
   
