@@ -1,59 +1,73 @@
 <template>
-  <div class="contact">
-      <div class="left">
-          <div class="left-title">联系我们 Contact us</div>
-          <div class="left-saga">详情 For more details</div>
+  <footer>
+    <h2 class="footer__title">星光SAGA公益课堂</h2>
+    <div class="footer__content">
+      <div class="footer__content_col">
+        <h3 class="footer__content__title">联系我们</h3>
+        <div class="footer__content__item">
+          <p class="footer__content__item__text">电话：086 13730835212</p>
+          <p class="footer__content__item__text">
+            邮箱：<a href="mailto:external-affairs@saga-xingguang.com"
+              >external-affairs@saga-xingguang.com</a
+            >
+          </p>
+          <p class="footer__content__item__text">微信：13730835212</p>
+        </div>
       </div>
-      <div class="right">
-          <div class="right-title">联系方式 Contact information</div>
-          <div class="way">Email：external-affairs@saga-xingguang.com</div>
-          <div class="way">Wechat: 13730835212(手机与微信同号)</div>
-          <div class="way"> WeChat official account (微信公众号)：星光SAGA</div>
+      <div class="footer__content_col">
+        <h3 class="footer__content__title">关注我们</h3>
+        <div class="footer__content__item">
+          <img class="footer__content__item__img" src="@/assets/imgs/qrCode.jpg" />
+        </div>
       </div>
-  </div>
+    </div>
+  </footer>
 </template>
-
 <script setup></script>
+<style scoped>
+footer {
+  min-height: 60svh;
+  background-color: var(--clr-primary);
+  color: var(--clr-footer-text);
+  padding: 2rem var(--page-padding-inline);
+}
+.footer__title {
+  font-size: var(--fs-700);
+  font-weight: 700;
+  padding-block: 3rem 5rem;
+}
 
-<style>
-.contact{
-  background-color: var(--clr-secondary);
-  height: 12rem;
-  color: var(--clr-text-muted);
+.footer__content {
+  padding-inline: 2rem;
   display: flex;
-  justify-content: center;
-  padding: 1.5rem 0;
+  align-items: flex-start;
+  gap: 5rem;
 }
-.left{
-  margin-right: 10rem;
+
+.footer__content_col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 1rem;
 }
-.left-title{
-  color: var( --clr-text);
-  font-size: 3rem;
-  margin-bottom: 1.2rem;
+
+.footer__content__title {
+  font-size: var(--fs-500);
+  font-weight: 700;
 }
-.left-saga{
-  width: 15rem;
-  height: 3.5rem;
-  background-color: var(--clr-text-muted);
-  font-size: 1.5rem;
-  line-height: 3.2rem;
-  text-align: center;
-  border-radius: 2.1rem;
-  color: var(--clr-text);
+
+.footer__content__item {
+  padding-left: 2ch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
 }
-.right{
-  padding-left: 1.3rem;
-  color:  var(--clr-text);
-}
-.right-title{
-  padding-top: 0.8rem;
-  font-size: 1.2rem;
-  padding-bottom: 1rem;
-}
-.way{
-  margin-bottom: 0.3rem;
+
+.footer__content__item__img {
+  object-fit: contain;
+  width: 7rem;
 }
 </style>
-
-
