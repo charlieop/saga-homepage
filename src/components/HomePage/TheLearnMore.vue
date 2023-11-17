@@ -38,7 +38,7 @@ imgUrl.value = props.imageUrl;
 .card {
   flex: 1;
   border-radius: 1.2rem;
-  height: 20rem;
+  min-height: 20rem;
   padding-top: 3.2rem;
   /* background-image: url(../../assets/image/rose.jpg); */
   /* background-size: 100% 100%; */
@@ -47,7 +47,7 @@ imgUrl.value = props.imageUrl;
   position: relative;
 }
 .title {
-  font-size: 2rem;
+  /* font-size: 2rem; */
   color: var(--clr-text);
   font-weight: 600;
   text-align: right;
@@ -107,6 +107,18 @@ imgUrl.value = props.imageUrl;
   }
   100% {
     opacity: 1;
+  }
+}
+@media (max-width:796px) {
+  .card{
+    width:100%;
+    min-height: 15rem;
+  }
+  .title{
+    width: 80%;
+  }
+  .line{
+    width: 80%;
   }
 }
 </style>

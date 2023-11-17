@@ -26,4 +26,16 @@ import Footer from "@/components/Footer.vue";
 .main__add-blank {
   height: 11rem;
 }
+@media (max-width: 786px) {
+  .learn-more{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  Footer{
+    width: 100%;
+  }
+}
 </style>
