@@ -185,4 +185,20 @@
   font-family: var(--ff-accent);
   line-height: 1.5;
 }
+
+@media (max-width: 700px) {
+  .values {
+    padding-top: 5rem;
+  }
+  .value__block {
+    flex-direction: column;
+    margin-bottom: 5rem;
+    text-align: center;
+    gap: 2rem;
+  }
+  .value__block:nth-child(even) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
 </style>
