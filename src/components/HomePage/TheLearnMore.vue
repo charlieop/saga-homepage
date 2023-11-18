@@ -47,7 +47,7 @@ imgUrl.value = props.imageUrl;
   position: relative;
 }
 .title {
-  /* font-size: 2rem; */
+ font-size:var(--fs-600);
   color: var(--clr-text);
   font-weight: 600;
   text-align: right;
@@ -86,7 +86,7 @@ imgUrl.value = props.imageUrl;
   top: 70%;
   left: 3.2rem;
   background-color: var(--clr-secondary);
-  font-size: 1.5rem;
+   font-size: var(--fs-400);
   width: 10rem;
   height: 3rem;
   border-radius: 0.33rem;
