@@ -70,4 +70,13 @@
   font-size: var(--fs-300);
   color: var(--clr-text-muted);
 }
+@media (max-width:700px) {
+  .data-banner{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 3rem var(--page-padding-inline) 6rem;
+
+  }
+}
 </style>

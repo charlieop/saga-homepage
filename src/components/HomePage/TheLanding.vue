@@ -115,4 +115,28 @@ function displayNextWord() {
 .decoration svg {
   display: block;
 }
+@media (max-width: 700px) {
+  
+  .landing{
+    padding-top:6rem ;
+    display: flex;
+    flex-direction: column;
+  }
+  .landing__headings{
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .landing__main-heading{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align:center
+  }
+  .landing__img{
+    width: 50%;
+  }
+}
 </style>
