@@ -154,7 +154,7 @@
 <style scoped>
 .values {
   padding-inline: var(--page-padding-inline);
-  padding-block: 0 10rem;
+  padding-block: 0 3rem;
 }
 .value__block {
   /* outline: 3px red solid; */

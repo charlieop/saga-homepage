@@ -17,7 +17,10 @@
       <div class="footer__content_col">
         <h3 class="footer__content__title">关注我们</h3>
         <div class="footer__content__item">
-          <img class="footer__content__item__img" src="@/assets/imgs/qrCode.jpg" />
+          <img
+            class="footer__content__item__img"
+            src="@/assets/imgs/qrCode.jpg"
+          />
         </div>
       </div>
     </div>
@@ -71,8 +74,8 @@ footer {
   object-fit: contain;
   width: 7rem;
 }
-@media (max-width:700px) {
-  .footer__content{
+@media (max-width: 700px) {
+  .footer__content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;

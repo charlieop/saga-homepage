@@ -4,28 +4,28 @@
   <section class="data-banner">
     <div class="data-banner__block">
       <div class="data-banner__figure">
-        <span class="data-banner__number">3</span
+        <span class="data-banner__number">{{ foundedYears }}</span
         ><span class="data-banner__unit">年</span>
       </div>
       <span class="data-banner__desc">SAGA星光成立已达</span>
     </div>
     <div class="data-banner__block">
       <div class="data-banner__figure">
-        <span class="data-banner__number">10</span
+        <span class="data-banner__number">{{ teachingMintues }}</span
         ><span class="data-banner__unit">万</span>
       </div>
       <span class="data-banner__desc">提供的教学时长 (分钟)</span>
     </div>
     <div class="data-banner__block">
       <div class="data-banner__figure">
-        <span class="data-banner__number">500+</span
+        <span class="data-banner__number">{{ childrenServed }}+</span
         ><span class="data-banner__unit">名</span>
       </div>
       <span class="data-banner__desc">服务的白血病儿童</span>
     </div>
     <div class="data-banner__block">
       <div class="data-banner__figure">
-        <span class="data-banner__number">500+</span
+        <span class="data-banner__number">{{ volunteers }}+</span
         ><span class="data-banner__unit">名</span>
       </div>
       <span class="data-banner__desc">来自世界各地的志愿者</span>
@@ -33,7 +33,30 @@
   </section>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref, onMounted } from "vue";
+
+const finalYears = 3;
+const finalMinutes = 10;
+const finalChildren = 500;
+const finalVolunteers = 500;
+
+let foundedYears = ref(finalYears);
+let teachingMintues = ref(finalMinutes);
+let childrenServed = ref(finalChildren);
+let volunteers = ref(finalVolunteers);
+
+onMounted(() => {
+  let observer = new IntersectionObserver(
+    () => {
+    },
+    {
+      threshold: 1,
+    }
+  );
+  observer.observe(document.querySelector(".data-banner"));
+});
+</script>
 
 <style scoped>
 .data-banner {
