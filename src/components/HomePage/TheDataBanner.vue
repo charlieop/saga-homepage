@@ -36,7 +36,6 @@
 <script setup></script>
 
 <style scoped>
-
 .data-banner {
   background-color: var(--clr-background-muted);
   padding: 3rem var(--page-padding-inline) 6rem;
@@ -70,13 +69,22 @@
   font-size: var(--fs-300);
   color: var(--clr-text-muted);
 }
-@media (max-width:700px) {
-  .data-banner{
+
+@media (max-width: 1200px) {
+  .data-banner {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .data-banner {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 7svh;
     padding: 3rem var(--page-padding-inline) 6rem;
-
   }
 }
 </style>

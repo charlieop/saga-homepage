@@ -31,6 +31,7 @@ footer {
   color: var(--clr-footer-text);
   padding: 2rem var(--page-padding-inline);
 }
+
 .footer__title {
   font-size: var(--fs-700);
   font-weight: 700;
@@ -74,8 +75,9 @@ footer {
   .footer__content{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    gap: 3rem;
   }
 }
 </style>
