@@ -52,6 +52,7 @@
   flex-direction: column;
   align-items: center;
   color: var(--clr-background);
+  padding: 1rem;
 }
 
 .card:hover {
@@ -71,7 +72,7 @@
   background-color: var(--_color);
   opacity: 1;
   z-index: -1;
-}
+} 
 
 .card:hover .decoration {
   border-radius: 0;
