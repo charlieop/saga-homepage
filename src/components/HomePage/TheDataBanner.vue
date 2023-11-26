@@ -7,7 +7,7 @@
         <span class="data-banner__number">3</span
         ><span class="data-banner__unit">年</span>
       </div>
-      <span class="data-banner__desc">SAGA 成立已达</span>
+      <span class="data-banner__desc">SAGA星光成立已达</span>
     </div>
     <div class="data-banner__block">
       <div class="data-banner__figure">

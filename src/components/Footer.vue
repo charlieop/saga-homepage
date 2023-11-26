@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <h2 class="footer__title">星光SAGA公益课堂</h2>
+    <h2 class="footer__title">SAGA星光公益课堂</h2>
     <div class="footer__content">
       <div class="footer__content_col">
         <h3 class="footer__content__title">联系我们</h3>
