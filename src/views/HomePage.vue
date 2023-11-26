@@ -5,10 +5,6 @@
   <TheNameIntro></TheNameIntro>
   <div class="main__add-blank"></div>
   <TheValues></TheValues>
-  <!-- <div class="learn-more">
-    <TheLearnMore imageUrl="/src/assets/imgs/lotus.jpg" title="志愿者报名" detail="Work with us!"></TheLearnMore>
-    <TheLearnMore imageUrl="/src/assets/imgs/rose.jpg" title="学生报名" detail="来体验我们的课程!"></TheLearnMore>
-  </div> -->
   <CallToActionCards></CallToActionCards>
   <TheAcknowledgments></TheAcknowledgments>
   <Footer></Footer>

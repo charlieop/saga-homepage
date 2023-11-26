@@ -2,7 +2,53 @@
   <section class="ack-page">
     <h2>特别鸣谢</h2>
     <div class="marquee__container">
-      <div class="marquee-group" v-for="i in 2">
+      <div class="marquee-group" v-for="i in 3">
+        <div class="marquee__block">
+          <img
+            src="@/assets/imgs/logos/canva.png"
+            alt=""
+            class="marquee__image"
+          />
+        </div>
+        <div class="marquee__block">
+          <img
+            src="@/assets/imgs/logos/feishu.png"
+            alt=""
+            class="marquee__image"
+          />
+        </div>
+        <div class="marquee__block">
+          <img
+            src="@/assets/imgs/logos/classin.svg"
+            alt=""
+            class="marquee__image"
+          />
+        </div>
+        <div class="marquee__block">
+          <img
+            src="@/assets/imgs/logos/tencent.png"
+            alt=""
+            class="marquee__image"
+          />
+        </div>
+        <div class="marquee__block">
+          <img
+            src="@/assets/imgs/logos/tencent-charity.png"
+            alt=""
+            class="marquee__image"
+          />
+        </div>
+        <div class="marquee__block">
+          <img
+            src="@/assets/imgs/logos/hku.svg"
+            alt=""
+            class="marquee__image"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="marquee__container reverse">
+      <div class="marquee-group" v-for="i in 3">
         <div class="marquee__block">
           <img
             src="@/assets/imgs/logos/canva.png"
@@ -55,10 +101,10 @@
 <style scoped>
 .ack-page {
   --_color-logo: navy;
-  --_color-bg: var(--clr-footer-text);
+  --_color-bg: transparent;
   --_width: clamp(10rem, 1rem + 30vmin, 12rem);
   --_gap: 1rem;
-  --_duration: 30s;
+  --_duration: 45s;
   --_scroll-start: 0;
   --_scroll-end: calc(-100% - var(--_gap));
 
@@ -85,6 +131,15 @@ h2 {
   );
   user-select: none;
   gap: var(--_gap);
+}
+
+.reverse {
+    margin-block: var(--_gap) 5rem;
+}
+
+.reverse .marquee-group {
+  animation-direction: reverse;
+  flex-direction: row-reverse;
 }
 
 @keyframes scroll-x {
@@ -124,7 +179,8 @@ h2 {
   width: 100%;
   object-fit: contain;
   object-position: center;
-  filter: grayscale(100%);
+  filter: grayscale(100%) contrast(0.15) 
+  sepia(110%) saturate(320%) brightness(1.1);
   transition: 0.3s ease-in-out;
 }
 
