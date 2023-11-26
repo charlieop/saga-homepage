@@ -118,14 +118,14 @@ function displayNextWord() {
 @media (max-width: 700px) {
   
   .landing{
-    padding-top:6rem ;
+    padding: 15svh 0.5rem;
     display: flex;
     flex-direction: column;
   }
   .landing__headings{
     padding: 0px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
   }
   .landing__main-heading{
@@ -133,10 +133,13 @@ function displayNextWord() {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align:center
+    text-align:center;
+    font-size: 3em;
+    text-wrap: balance;
+    
   }
   .landing__img{
-    width: 50%;
+    width: 80%;
   }
 }
 </style>

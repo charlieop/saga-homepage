@@ -76,10 +76,19 @@ import { onMounted } from "vue";
 
 onMounted(() => {
   const articles = document.querySelectorAll(".name-intro__article");
+
+  const screenWidth = window.innerWidth;
+  let rootMargin = "200% 1000% -10% 1000%";
+  if (screenWidth < 700) {
+    rootMargin = "200% 1000% 30% 1000%";
+  }
+
+  // Create the IntersectionObserver with updated rootMargin
   let observer = new IntersectionObserver(handleIntersection, {
-    rootMargin: "200% 1000% -10% 1000%",
+    rootMargin,
     threshold: 0.7,
   });
+
   articles.forEach((article) => {
     observer.observe(article);
   });
@@ -305,7 +314,7 @@ function setAppear(i) {
     height: 10rem;
     border-radius: 2rem;
     width: 21rem;
-    top: 230svh;
+    top: 250svh;
     left: calc(-19rem);
   }
   .name-intro__sticky-area {
@@ -320,7 +329,7 @@ function setAppear(i) {
     padding: 0 10svw;
   }
   .name-intro__scrolling-area {
-    gap: 25vh;
+    gap: 35vh;
   }
 }
 </style>

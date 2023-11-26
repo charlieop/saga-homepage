@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <h2 class="footer__title">星光SAGA公益课堂</h2>
+    <h2 class="footer__title">SAGA星光公益课堂</h2>
     <div class="footer__content">
       <div class="footer__content_col">
         <h3 class="footer__content__title">联系我们</h3>
@@ -17,7 +17,10 @@
       <div class="footer__content_col">
         <h3 class="footer__content__title">关注我们</h3>
         <div class="footer__content__item">
-          <img class="footer__content__item__img" src="@/assets/imgs/qrCode.jpg" />
+          <img
+            class="footer__content__item__img"
+            src="@/assets/imgs/qrCode.jpg"
+          />
         </div>
       </div>
     </div>
@@ -31,6 +34,7 @@ footer {
   color: var(--clr-footer-text);
   padding: 2rem var(--page-padding-inline);
 }
+
 .footer__title {
   font-size: var(--fs-700);
   font-weight: 700;
@@ -70,12 +74,13 @@ footer {
   object-fit: contain;
   width: 7rem;
 }
-@media (max-width:700px) {
-  .footer__content{
+@media (max-width: 700px) {
+  .footer__content {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    gap: 3rem;
   }
 }
 </style>

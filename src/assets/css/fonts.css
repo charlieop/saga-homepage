@@ -28,7 +28,7 @@
   --fs-600: 2.125rem;
   --fs-700: 3rem;
   --fs-800: 3.5rem;
-  --fs-900: 4.5rem;
+  --fs-900: 4.25rem;
   --fs-primary: var(--fs-400);
   --fs-accent: var(--fs-700);
 }
@@ -39,7 +39,7 @@
     --fs-400: 1.25em;
     --fs-500: 1.5rem;
     --fs-600: 1.8125rem;
-    --fs-700: 2.125rem;
+    --fs-700: 2.5rem;
     --fs-800: 3rem;
     --fs-900: 3.5rem;
   }
