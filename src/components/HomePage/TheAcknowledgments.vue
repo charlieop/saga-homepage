@@ -51,42 +51,70 @@
       <div class="marquee-group" v-for="i in 3">
         <div class="marquee__block">
           <img
-            src="@/assets/imgs/logos/canva.png"
+            src="@/assets/imgs/logos/bixing-charity-min.png"
             alt=""
             class="marquee__image"
           />
         </div>
         <div class="marquee__block">
           <img
-            src="@/assets/imgs/logos/feishu.png"
+            src="@/assets/imgs/logos/cuaa-min.png"
             alt=""
             class="marquee__image"
           />
         </div>
-        <div class="marquee__block">
+                <div class="marquee__block">
           <img
-            src="@/assets/imgs/logos/classin.svg"
+            src="@/assets/imgs/logos/ewb-min.png"
             alt=""
             class="marquee__image"
           />
         </div>
-        <div class="marquee__block">
+                <div class="marquee__block">
           <img
-            src="@/assets/imgs/logos/tencent.png"
+            src="@/assets/imgs/logos/kokuyo-charity-min.png"
             alt=""
             class="marquee__image"
           />
         </div>
-        <div class="marquee__block">
+                <div class="marquee__block">
           <img
-            src="@/assets/imgs/logos/tencent-charity.png"
+            src="@/assets/imgs/logos/qingnuan-charity-min.png"
             alt=""
             class="marquee__image"
           />
         </div>
-        <div class="marquee__block">
+                <div class="marquee__block">
           <img
-            src="@/assets/imgs/logos/hku.svg"
+            src="@/assets/imgs/logos/qnsjxd-min.png"
+            alt=""
+            class="marquee__image"
+          />
+        </div>
+                <div class="marquee__block">
+          <img
+            src="@/assets/imgs/logos/seagulls-society-min.png"
+            alt=""
+            class="marquee__image"
+          />
+        </div>
+                <div class="marquee__block">
+          <img
+            src="@/assets/imgs/logos/shiyu-children-foundation-min.png"
+            alt=""
+            class="marquee__image"
+          />
+        </div>
+                <div class="marquee__block">
+          <img
+            src="@/assets/imgs/logos/vous-min.png"
+            alt=""
+            class="marquee__image"
+          />
+        </div>
+                <div class="marquee__block">
+          <img
+            src="@/assets/imgs/logos/zhiyuanhui-min.png"
             alt=""
             class="marquee__image"
           />
@@ -134,7 +162,7 @@ h2 {
 }
 
 .reverse {
-    margin-block: var(--_gap) 5rem;
+  margin-block: var(--_gap) 5rem;
 }
 
 .reverse .marquee-group {
@@ -179,8 +207,8 @@ h2 {
   width: 100%;
   object-fit: contain;
   object-position: center;
-  filter: grayscale(100%) contrast(0.15) 
-  sepia(110%) saturate(320%) brightness(1.1);
+  filter: grayscale(100%) contrast(0.15) sepia(110%) saturate(320%)
+    brightness(1.1);
   transition: 0.3s ease-in-out;
 }
 
