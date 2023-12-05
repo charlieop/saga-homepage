@@ -3,14 +3,21 @@
     <h2 class="footer__title">SAGA星光公益课堂</h2>
     <div class="footer__content">
       <div class="footer__content_col">
+        <h3 class="footer__content__title">页面导航</h3>
+        <div class="footer__content__item">
+          <p class="footer__content__item__text">暂无</p>
+        </div>
+      </div>
+      <div class="footer__content_col">
         <h3 class="footer__content__title">联系我们</h3>
         <div class="footer__content__item">
-          <p class="footer__content__item__text">电话：086 13730835212</p>
+          <p class="footer__content__item__text">电话：+86-13730835212</p>
           <p class="footer__content__item__text">
             邮箱：<a href="mailto:external-affairs@saga-xingguang.com"
               >external-affairs@saga-xingguang.com</a
             >
           </p>
+          <p class="footer__content__item__text">微信公众号：星光SAGA</p>
           <p class="footer__content__item__text">微信：13730835212</p>
         </div>
       </div>
@@ -45,6 +52,7 @@ footer {
   padding-inline: 2rem;
   display: flex;
   align-items: flex-start;
+  justify-content: flex-end;
   gap: 5rem;
 }
 

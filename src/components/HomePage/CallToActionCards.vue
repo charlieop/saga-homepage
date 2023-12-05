@@ -8,7 +8,7 @@
     </article>
     <article class="card">
       <h2 class="title">小朋友报名</h2>
-      <p class="text">让我们一同为教育出一份力</p>
+      <p class="text">你从不孤单</p>
       <div class="button-container"><a href="" class="button">参与课程</a></div>
       <div class="decoration"></div>
     </article>
@@ -52,6 +52,7 @@
   flex-direction: column;
   align-items: center;
   color: var(--clr-background);
+  padding: 1rem;
 }
 
 .card:hover {
@@ -71,7 +72,7 @@
   background-color: var(--_color);
   opacity: 1;
   z-index: -1;
-}
+} 
 
 .card:hover .decoration {
   border-radius: 0;
