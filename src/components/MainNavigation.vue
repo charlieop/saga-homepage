@@ -40,9 +40,11 @@
 <style scoped>
 .main-navigation {
   display: flex;
+  align-items: center;
   position: absolute;
   top: 0;
   width: 100%;
+  height: var(--nav-height);
   z-index: 999;
   padding: 1rem 2rem;
 }

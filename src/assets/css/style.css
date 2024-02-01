@@ -27,6 +27,7 @@
 /* Global Settings */
 :root {
   --page-padding-inline: 10rem;
+  --nav-height: 7rem;
 }
 
 body {

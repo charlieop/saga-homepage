@@ -7,7 +7,6 @@
       </p>
     </header>
     <div class="header-divider"></div>
-
     <div class="section-container">
       <div class="volunteers-container">
         <div class="filter-by-dept">
@@ -43,6 +42,7 @@
     </div>
   </section>
 </template>
+
 <script>
 import members from '@/assets/dataset/volunteers_fourth.json';
 
@@ -98,7 +98,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .thanks {
   margin-bottom: 5rem;
 }
