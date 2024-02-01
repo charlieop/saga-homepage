@@ -44,7 +44,7 @@
   </section>
 </template>
 <script>
-import members from '/Users/jade/Downloads/saga-homepage-main/src/assets/dataset/volunteers_fourth.json';
+import members from '@/assets/dataset/volunteers_fourth.json';
 
 export default {
   data() {
