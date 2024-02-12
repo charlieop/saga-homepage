@@ -164,7 +164,7 @@
       ></Volunteers>
       <Volunteers
         name="滑雪"
-        dept="核心团队部"
+        dept="核心团队"
         uni="香港大学"
         honor="SAGA志愿者"
       ></Volunteers>
