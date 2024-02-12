@@ -7,6 +7,8 @@
             'https://picsum.photos/seed/' + 'picsum' + name + uni + '/400/400'
           "
           alt="volunteer-avatar"
+          height="100"
+          width="100"
         />
       </div>
       <div class="volunteer-info">
@@ -85,7 +87,7 @@ let color = computed(() => {
 
 <style scoped>
 .card-wrapper {
-  width: clamp(250px, 100%, 350px);
+  width: minmax(250px, 100%);
   container-type: inline-size;
 }
 .volunteer-card {
@@ -102,6 +104,14 @@ let color = computed(() => {
   border-radius: 1rem 4rem 1rem 1rem;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25);
   overflow: clip;
+  transition: all 0.3s ease-in-out;
+}
+
+.volunteer-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.35);
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
 }
 
 @container (max-width: 290px) {
@@ -118,6 +128,25 @@ let color = computed(() => {
   }
 }
 
+@media (max-width: 700px) {
+  .card-wrapper .volunteer-card {
+    aspect-ratio: 3 / 2;
+    grid-template-columns: 1fr 40%;
+    grid-template-rows: 1fr;
+    border-radius: 1rem 1rem 1rem 1rem;
+  }
+  .row {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-bottom: 0.75rem;
+  }
+  .volunteer-name {
+    margin-top: 0.75rem;
+  }
+  .volunteer-dept {
+    margin-top: auto;
+  }
+}
 .volunteer-avatar {
   background-color: var(--clr-accent);
 }
@@ -145,7 +174,7 @@ let color = computed(() => {
   fill: var(--clr-background);
   overflow: hidden;
   z-index: 1;
-  transform: translateY(calc(-100% + 4px)) rotateY(180deg);
+  transform: translateY(calc(-100% + 5px)) rotateY(180deg);
   transform-origin: bottom;
 }
 

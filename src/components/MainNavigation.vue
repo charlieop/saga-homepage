@@ -1,6 +1,6 @@
 <!-- initial vue file -->
 <template>
-  <nav class="main-navigation">
+  <nav class="main-navigation" id="nav">
     <div class="main-navigation__logo">
       <a href="/">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="100 0 400 400">

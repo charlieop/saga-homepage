@@ -19,7 +19,7 @@
       </h2>
       <h1 class="landing__main-heading">SAGA星光公益课堂</h1>
     </div>
-      <img class="landing__img" src="@/assets/imgs/hero.jpg" alt="hero image" />
+    <img class="landing__img" src="@/assets/imgs/hero.jpg" alt="hero image" />
   </section>
 </template>
 
@@ -116,29 +116,27 @@ function displayNextWord() {
   display: block;
 }
 @media (max-width: 700px) {
-  
-  .landing{
+  .landing {
     padding: 15svh 0.5rem;
     display: flex;
     flex-direction: column;
   }
-  .landing__headings{
+  .landing__headings {
     padding: 0px;
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
   }
-  .landing__main-heading{
+  .landing__main-heading {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align:center;
+    text-align: center;
     font-size: 3em;
     text-wrap: balance;
-    
   }
-  .landing__img{
+  .landing__img {
     width: 80%;
   }
 }
