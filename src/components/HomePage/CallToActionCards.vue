@@ -3,19 +3,25 @@
     <article class="card">
       <h2 class="title">志愿者报名</h2>
       <p class="text">让这个世界变得更加美好</p>
-      <div class="button-container"><a href="" class="button">加入我们</a></div>
+      <div class="button-container">
+        <a href="#nav" class="button">加入我们</a>
+      </div>
       <div class="decoration"></div>
     </article>
     <article class="card">
       <h2 class="title">小朋友报名</h2>
       <p class="text">你从不孤单</p>
-      <div class="button-container"><a href="" class="button">参与课程</a></div>
+      <div class="button-container">
+        <a href="#nav" class="button">参与课程</a>
+      </div>
       <div class="decoration"></div>
     </article>
     <article class="card">
       <h2 class="title">组织合作</h2>
       <p class="text">与我们携手为孩子教育出一份力</p>
-      <div class="button-container"><a href="" class="button">联系我们</a></div>
+      <div class="button-container">
+        <a href="#nav" class="button">联系我们</a>
+      </div>
       <div class="decoration"></div>
     </article>
   </section>
@@ -72,7 +78,7 @@
   background-color: var(--_color);
   opacity: 1;
   z-index: -1;
-} 
+}
 
 .card:hover .decoration {
   border-radius: 0;
@@ -128,17 +134,16 @@
   --_color: var(--clr-accent);
 }
 .card:nth-child(3) {
-  --_color: #2196F3;
+  --_color: #2196f3;
 }
 
 @media (hover: none) {
-    .text {
-        opacity: 1;
-        color: var(--clr-text);
-    }
-    .title {
-        padding-top: 9rem;
-    }
+  .text {
+    opacity: 1;
+    color: var(--clr-text);
+  }
+  .title {
+    padding-top: 9rem;
+  }
 }
-
 </style>

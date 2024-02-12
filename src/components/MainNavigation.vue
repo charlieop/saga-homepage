@@ -1,6 +1,6 @@
 <!-- initial vue file -->
 <template>
-  <nav class="main-navigation">
+  <nav class="main-navigation" id="nav">
     <div class="main-navigation__logo">
       <a href="/">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="100 0 400 400">
@@ -40,9 +40,11 @@
 <style scoped>
 .main-navigation {
   display: flex;
+  align-items: center;
   position: absolute;
   top: 0;
   width: 100%;
+  height: var(--nav-height);
   z-index: 999;
   padding: 1rem 2rem;
 }

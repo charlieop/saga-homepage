@@ -8,7 +8,10 @@
       <div class="block">
         <p>点点星光绽放, 比太阳还耀眼</p>
         <p>
-          请点击<a href="" title="SAGA星光全体志愿者名单"></a>
+          请点击<RouterLink
+            to="acknowledgment"
+            title="SAGA星光全体志愿者名单"
+          ></RouterLink>
           寻找每一颗闪耀过的星星✨
         </p>
         <p>我们会一直在，希望你们也是❤️</p>
