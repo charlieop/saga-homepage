@@ -54,121 +54,8 @@
       </div>
     </div>
     <div class="volunteers-display-area">
-      <Volunteers
-        name="张三"
-        dept="核心团队"
-        uni="香港大学"
-        honor="教学部Leader"
-      ></Volunteers>
-      <Volunteers
-        name="李四"
-        dept="核心团队"
-        uni="香港大学"
-        honor="IT部Leader"
-      ></Volunteers>
-      <Volunteers
-        name="王五"
-        dept="主席团"
-        uni="香港大学"
-        honor="校友会"
-      ></Volunteers>
-      <Volunteers
-        name="蒲公英"
-        dept="教学部"
-        uni="香港大学"
-        honor="优秀志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="显示器"
-        dept="行研部"
-        uni="香港大学"
-        honor="SAGA志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="起名字"
-        dept="教学部"
-        uni="香港大学"
-        honor="SAGA志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="你好吗"
-        dept="IT部"
-        uni="香港大学"
-        honor="优秀志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="四个字的"
-        dept="行研部"
-        uni="香港大学"
-        honor="SAGA志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="周六"
-        dept="宣传部"
-        uni="香港大学"
-        honor="最佳进步奖"
-      ></Volunteers>
-      <Volunteers
-        name="吃饭"
-        dept="法务部"
-        uni="香港大学"
-        honor="SAGA志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="白菜"
-        dept="IT部"
-        uni="香港大学"
-        honor="最佳进步奖"
-      ></Volunteers>
-      <Volunteers
-        name="小白"
-        dept="财务部"
-        uni="香港大学"
-        honor="SAGA志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="白菜"
-        dept="人事部"
-        uni="香港大学"
-        honor="最佳贡献奖"
-      ></Volunteers>
-      <Volunteers
-        name="小白"
-        dept="外联部"
-        uni="香港大学"
-        honor="SAGA志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="lorem"
-        dept="IT部"
-        uni="香港大学"
-        honor="SAGA志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="大大卷"
-        dept="主席团"
-        uni="香港大学"
-        honor="SAGA志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="绿箭"
-        dept="法务部"
-        uni="香港大学"
-        honor="SAGA志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="咔咔"
-        dept="财务部"
-        uni="香港大学"
-        honor="SAGA志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="滑雪"
-        dept="核心团队"
-        uni="香港大学"
-        honor="SAGA志愿者"
-      ></Volunteers>
-      <Volunteers name="错误" dept="错误" uni="错误" honor="错误"></Volunteers>
+      <Volunteers v-for="(item, key) in members" :key="key" :name="item.name" :dept="item.department" :honor="item.honor"></Volunteers>
+      <!-- <Volunteers v-for="(item, key) in members" :key="key" :name="item.name" :dept="item.department" :uni="item.school" :honor="item.honor"></Volunteers> -->
     </div>
   </section>
 
@@ -184,6 +71,7 @@ import Volunteers from "@/components/AcknowledgmentsPage/Volunteer.vue";
 import TheAcknowledgments from "@/components/AcknowledgmentsPage/TheVolunteersList.vue";
 import Footer from "@/components/Footer.vue";
 import { onMounted } from "vue";
+import members from '@/assets/dataset/volunteers_list.json';
 
 // remove this function when impliment real algrithm
 function shuffleChildren() {
