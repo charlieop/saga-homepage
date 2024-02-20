@@ -7,11 +7,7 @@
     </div>
     <div class="filter-bar">
       <div class="filter-entry--wrapper">
-        <select
-          class="filter-entry"
-          id="term-select"
-          @change="handelTermChange($event)"
-        >
+        <select class="filter-entry" id="term-select" @change="handelTermChange($event)">
           <option value="4" selected>SAGA第四期</option>
           <option value="3">SAGA第三期</option>
           <option value="2">SAGA第二期</option>
@@ -19,11 +15,7 @@
         </select>
       </div>
       <div class="filter-entry--wrapper">
-        <select
-          class="filter-entry"
-          id="dept-select"
-          @change="handelDeptChange($event)"
-        >
+        <select class="filter-entry" id="dept-select" @change="handelDeptChange($event)">
           <option selected>所有部门</option>
           <hr />
           <option>主席团</option>
@@ -39,11 +31,7 @@
         </select>
       </div>
       <div class="filter-entry--wrapper">
-        <select
-          class="filter-entry"
-          id="honor-select"
-          @change="handleHonorChange($event)"
-        >
+        <select class="filter-entry" id="honor-select" @change="handleHonorChange($event)">
           <option selected>所有荣誉</option>
           <hr />
           <option>特殊贡献奖</option>
@@ -54,8 +42,9 @@
       </div>
     </div>
     <div class="volunteers-display-area">
-      <Volunteers v-for="(item, key) in members" :key="key" :name="item.name" :dept="item.department" :honor="item.honor"></Volunteers>
       <!-- <Volunteers v-for="(item, key) in members" :key="key" :name="item.name" :dept="item.department" :uni="item.school" :honor="item.honor"></Volunteers> -->
+      <Volunteers v-for="(item, key) in selectedMembers" :key="key" :name="item.name" :dept="item.department"
+        :honor="item.honor"></Volunteers>
     </div>
   </section>
 
@@ -70,27 +59,20 @@ import MainNavigation from "@/components/MainNavigation.vue";
 import Volunteers from "@/components/AcknowledgmentsPage/Volunteer.vue";
 import TheAcknowledgments from "@/components/AcknowledgmentsPage/TheVolunteersList.vue";
 import Footer from "@/components/Footer.vue";
-import { onMounted } from "vue";
-import members from '@/assets/dataset/volunteers_list.json';
+import { onMounted, ref } from "vue";
+import { members } from '@/assets/dataset/volunteers_list.js';
 
-// remove this function when impliment real algrithm
-function shuffleChildren() {
-  const container = document.querySelector(".volunteers-display-area");
-  for (let i = 0; i < 10; i++) {
-    const children = container.children;
-    const index1 = Math.floor(Math.random() * children.length);
-    const index2 = Math.floor(Math.random() * children.length);
-    container.insertBefore(children[index1], children[index2]);
-  }
-}
+const selectedMembers = ref([])
+
+onMounted(() => {
+  selectedMembers.value = members.slice(0)
+})
 
 function handelTermChange(event) {
   hideAllVolunteers();
 
   setTimeout(() => {
-    // remove this when impliment real algrithm
-    console.log(event.target.value);
-    shuffleChildren();
+    selectMembers('term', event.target.value)
 
     // keep this
     showAllVolunteers();
@@ -101,10 +83,8 @@ function handelDeptChange(event) {
   hideAllVolunteers();
 
   setTimeout(() => {
-    // remove this when impliment real algrithm
-    console.log(event.target.value);
-    shuffleChildren();
 
+    selectMembers('department', event.target.value)
     // keep this
     showAllVolunteers();
   }, 1000);
@@ -113,16 +93,24 @@ function handelDeptChange(event) {
 function handleHonorChange(event) {
   hideAllVolunteers();
 
-  console.log(event.target.value);
-
   setTimeout(() => {
-    // remove this when impliment real algrithm
-    console.log(event.target.value);
-    shuffleChildren();
 
-    // keep this
+    selectMembers('honor', event.target.value)
+
     showAllVolunteers();
   }, 1000);
+}
+
+function selectMembers(attr, values) {
+  selectedMembers.value.length = 0
+
+  let tempMembers = []
+  for (let item of members) {
+    if (item[attr] == values) {
+      tempMembers.push(item)
+    }
+  }
+  selectedMembers.value = tempMembers.slice(0)
 }
 
 function hideAllVolunteers() {
@@ -211,9 +199,11 @@ function showAllVolunteers() {
 #term-select {
   --_color: #f97d00;
 }
+
 #dept-select {
   --_color: rgb(67, 188, 33);
 }
+
 #honor-select {
   --_color: rgb(59, 162, 252);
 }
@@ -255,13 +245,11 @@ function showAllVolunteers() {
   color: var(--_color);
   font-family: var(--ff-accent);
   font-size: var(--fs-300);
-  background: linear-gradient(
-    90deg,
-    var(--clr-background) 0%,
-    var(--clr-background) calc(100% - var(--_icon-size)),
-    var(--_color) calc(100% - var(--_icon-size)),
-    var(--_color) 100%
-  );
+  background: linear-gradient(90deg,
+      var(--clr-background) 0%,
+      var(--clr-background) calc(100% - var(--_icon-size)),
+      var(--_color) calc(100% - var(--_icon-size)),
+      var(--_color) 100%);
   cursor: pointer;
 }
 
@@ -270,16 +258,20 @@ function showAllVolunteers() {
     grid-template-columns: 100%;
     gap: 1.5rem;
   }
+
   .volunteers-acknowledgments .subheading {
     padding-left: 0;
   }
+
   .volunteers-acknowledgments .filter-bar {
     padding-inline: 0;
     gap: 1rem;
   }
-  .volunteers-acknowledgments .filter-bar > * {
+
+  .volunteers-acknowledgments .filter-bar>* {
     flex: 1 1 100%;
   }
+
   .volunteers-acknowledgments .filter-entry {
     width: 100%;
   }
