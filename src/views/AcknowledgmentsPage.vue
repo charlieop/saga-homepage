@@ -7,7 +7,11 @@
     </div>
     <div class="filter-bar">
       <div class="filter-entry--wrapper">
-        <select class="filter-entry" id="term-select" @change="handelTermChange($event)">
+        <select
+          class="filter-entry"
+          id="term-select"
+          @change="handelTermChange($event)"
+        >
           <option value="4" selected>SAGA第四期</option>
           <option value="3">SAGA第三期</option>
           <option value="2">SAGA第二期</option>
@@ -15,8 +19,12 @@
         </select>
       </div>
       <div class="filter-entry--wrapper">
-        <select class="filter-entry" id="dept-select" @change="handelDeptChange($event)">
-          <option selected>所有部门</option>
+        <select
+          class="filter-entry"
+          id="dept-select"
+          @change="handelDeptChange($event)"
+        >
+          <option value="all" selected>所有部门</option>
           <hr />
           <option>主席团</option>
           <option>核心团队</option>
@@ -31,8 +39,12 @@
         </select>
       </div>
       <div class="filter-entry--wrapper">
-        <select class="filter-entry" id="honor-select" @change="handleHonorChange($event)">
-          <option selected>所有荣誉</option>
+        <select
+          class="filter-entry"
+          id="honor-select"
+          @change="handleHonorChange($event)"
+        >
+          <option value="all" selected>所有荣誉</option>
           <hr />
           <option>特殊贡献奖</option>
           <option>最佳进步奖</option>
@@ -41,76 +53,118 @@
         </select>
       </div>
     </div>
+    <template v-if="selectedMembers.length === 0">
+      <p class="fade-in not-found">没有找到符合条件的志愿者哦</p>
+    </template>
     <div class="volunteers-display-area">
       <!-- <Volunteers v-for="(item, key) in members" :key="key" :name="item.name" :dept="item.department" :uni="item.school" :honor="item.honor"></Volunteers> -->
-      <Volunteers v-for="(item, key) in selectedMembers" :key="key" :name="item.name" :dept="item.department"
-        :honor="item.honor"></Volunteers>
+      <Volunteers
+        v-for="(item, key) in selectedMembers"
+        :key="key"
+        :name="item.name"
+        :dept="item.department"
+        :honor="item.honor"
+        class="fade-in"
+      ></Volunteers>
     </div>
   </section>
 
-  <!-- <div class="pageContent-wrapper">
-    <TheAcknowledgments></TheAcknowledgments>
-  </div> -->
   <Footer></Footer>
 </template>
 
 <script setup>
 import MainNavigation from "@/components/MainNavigation.vue";
 import Volunteers from "@/components/AcknowledgmentsPage/Volunteer.vue";
-import TheAcknowledgments from "@/components/AcknowledgmentsPage/TheVolunteersList.vue";
 import Footer from "@/components/Footer.vue";
 import { onMounted, ref } from "vue";
-import { members } from '@/assets/dataset/volunteers_list.js';
+import { members } from "@/assets/dataset/volunteers_list.js";
 
-const selectedMembers = ref([])
+const selectedMembers = ref([]);
+let selectedInfo = ref({
+  term: 4,
+  department: "所有部门",
+  honor: "所有荣誉",
+});
 
 onMounted(() => {
-  selectedMembers.value = members.slice(0)
-})
+  selectedMembers.value = members.slice(0);
+
+  selectedInfo.value.term = document.querySelector("#term-select").value;
+  selectedInfo.value.department = document.querySelector("#dept-select").value;
+  selectedInfo.value.honor = document.querySelector("#honor-select").value;
+  console.log(selectedInfo.value);
+
+  showAllVolunteers();
+});
 
 function handelTermChange(event) {
   hideAllVolunteers();
+  const hint = document.querySelector(".not-found");
+  if (hint) hint.classList.add("hide");
+
+  selectedInfo.value.term = event.target.value;
 
   setTimeout(() => {
-    selectMembers('term', event.target.value)
+    selectMembersBy(selectedInfo.value);
 
     // keep this
     showAllVolunteers();
+    const hint = document.querySelector(".not-found");
+    if (hint) hint.classList.remove("hide");
   }, 1000);
 }
 
 function handelDeptChange(event) {
   hideAllVolunteers();
+  const hint = document.querySelector(".not-found");
+  if (hint) hint.classList.add("hide");
+
+  selectedInfo.value.department = event.target.value;
 
   setTimeout(() => {
+    selectMembersBy(selectedInfo.value);
 
-    selectMembers('department', event.target.value)
     // keep this
     showAllVolunteers();
+    const hint = document.querySelector(".not-found");
+    if (hint) hint.classList.remove("hide");
   }, 1000);
 }
 
 function handleHonorChange(event) {
   hideAllVolunteers();
+  const hint = document.querySelector(".not-found");
+  if (hint) hint.classList.add("hide");
+
+  selectedInfo.value.honor = event.target.value;
 
   setTimeout(() => {
-
-    selectMembers('honor', event.target.value)
+    selectMembersBy(selectedInfo.value);
 
     showAllVolunteers();
+    const hint = document.querySelector(".not-found");
+    if (hint) hint.classList.remove("hide");
   }, 1000);
 }
 
-function selectMembers(attr, values) {
-  selectedMembers.value.length = 0
-
-  let tempMembers = []
-  for (let item of members) {
-    if (item[attr] == values) {
-      tempMembers.push(item)
+function selectMembersBy(info) {
+  selectedMembers.value = members.filter((member) => {
+    console.log(member.term, info.term);
+    if (member.term != info.term) {
+      return false;
     }
-  }
-  selectedMembers.value = tempMembers.slice(0)
+    if (info.department != "all") {
+      if (member.department != info.department) {
+        return false;
+      }
+    }
+    if (info.honor != "all") {
+      if (member.honor != info.honor) {
+        return false;
+      }
+    }
+    return true;
+  });
 }
 
 function hideAllVolunteers() {
@@ -137,9 +191,47 @@ function showAllVolunteers() {
 </script>
 
 <style>
+.volunteers-acknowledgments .fade-in {
+  animation: fade-in 0.3s ease-in-out forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10%);
+  }
+}
+
 .volunteers-acknowledgments .hide {
   opacity: 0;
   transform: translateY(50%);
+}
+
+.not-found {
+  font-size: var(--fs-400);
+  color: var(--clr-text-muted);
+  text-align: center;
+  margin-top: 5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.not-found.hide {
+  animation: fade-out 0.3s ease-in-out forwards;
 }
 
 .volunteers-acknowledgments.pageContent-wrapper {
@@ -245,11 +337,13 @@ function showAllVolunteers() {
   color: var(--_color);
   font-family: var(--ff-accent);
   font-size: var(--fs-300);
-  background: linear-gradient(90deg,
-      var(--clr-background) 0%,
-      var(--clr-background) calc(100% - var(--_icon-size)),
-      var(--_color) calc(100% - var(--_icon-size)),
-      var(--_color) 100%);
+  background: linear-gradient(
+    90deg,
+    var(--clr-background) 0%,
+    var(--clr-background) calc(100% - var(--_icon-size)),
+    var(--_color) calc(100% - var(--_icon-size)),
+    var(--_color) 100%
+  );
   cursor: pointer;
 }
 
@@ -268,7 +362,7 @@ function showAllVolunteers() {
     gap: 1rem;
   }
 
-  .volunteers-acknowledgments .filter-bar>* {
+  .volunteers-acknowledgments .filter-bar > * {
     flex: 1 1 100%;
   }
 
