@@ -24,6 +24,7 @@
           id="dept-select"
           @change="handelDeptChange($event)"
         >
+
           <option value="all" selected>所有部门</option>
           <hr />
           <option>主席团</option>
@@ -68,7 +69,7 @@
       ></Volunteers>
     </div>
   </section>
-
+  
   <Footer></Footer>
 </template>
 
@@ -111,6 +112,7 @@ function handelTermChange(event) {
     showAllVolunteers();
     const hint = document.querySelector(".not-found");
     if (hint) hint.classList.remove("hide");
+
   }, 1000);
 }
 
@@ -361,7 +363,7 @@ function showAllVolunteers() {
     padding-inline: 0;
     gap: 1rem;
   }
-
+  
   .volunteers-acknowledgments .filter-bar > * {
     flex: 1 1 100%;
   }
