@@ -24,7 +24,8 @@
           id="dept-select"
           @change="handelDeptChange($event)"
         >
-          <option selected>所有部门</option>
+
+          <option value="all" selected>所有部门</option>
           <hr />
           <option>主席团</option>
           <option>核心团队</option>
@@ -44,7 +45,7 @@
           id="honor-select"
           @change="handleHonorChange($event)"
         >
-          <option selected>所有荣誉</option>
+          <option value="all" selected>所有荣誉</option>
           <hr />
           <option>特殊贡献奖</option>
           <option>最佳进步奖</option>
@@ -53,188 +54,119 @@
         </select>
       </div>
     </div>
+    <template v-if="selectedMembers.length === 0">
+      <p class="fade-in not-found">没有找到符合条件的志愿者哦</p>
+    </template>
     <div class="volunteers-display-area">
+      <!-- <Volunteers v-for="(item, key) in members" :key="key" :name="item.name" :dept="item.department" :uni="item.school" :honor="item.honor"></Volunteers> -->
       <Volunteers
-        name="张三"
-        dept="核心团队"
-        uni="香港大学"
-        honor="教学部Leader"
+        v-for="(item, key) in selectedMembers"
+        :key="key"
+        :name="item.name"
+        :dept="item.department"
+        :honor="item.honor"
+        class="fade-in"
       ></Volunteers>
-      <Volunteers
-        name="李四"
-        dept="核心团队"
-        uni="香港大学"
-        honor="IT部Leader"
-      ></Volunteers>
-      <Volunteers
-        name="王五"
-        dept="主席团"
-        uni="香港大学"
-        honor="校友会"
-      ></Volunteers>
-      <Volunteers
-        name="蒲公英"
-        dept="教学部"
-        uni="香港大学"
-        honor="优秀志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="显示器"
-        dept="行研部"
-        uni="香港大学"
-        honor="SAGA志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="起名字"
-        dept="教学部"
-        uni="香港大学"
-        honor="SAGA志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="你好吗"
-        dept="IT部"
-        uni="香港大学"
-        honor="优秀志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="四个字的"
-        dept="行研部"
-        uni="香港大学"
-        honor="SAGA志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="周六"
-        dept="宣传部"
-        uni="香港大学"
-        honor="最佳进步奖"
-      ></Volunteers>
-      <Volunteers
-        name="吃饭"
-        dept="法务部"
-        uni="香港大学"
-        honor="SAGA志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="白菜"
-        dept="IT部"
-        uni="香港大学"
-        honor="最佳进步奖"
-      ></Volunteers>
-      <Volunteers
-        name="小白"
-        dept="财务部"
-        uni="香港大学"
-        honor="SAGA志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="白菜"
-        dept="人事部"
-        uni="香港大学"
-        honor="最佳贡献奖"
-      ></Volunteers>
-      <Volunteers
-        name="小白"
-        dept="外联部"
-        uni="香港大学"
-        honor="SAGA志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="lorem"
-        dept="IT部"
-        uni="香港大学"
-        honor="SAGA志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="大大卷"
-        dept="主席团"
-        uni="香港大学"
-        honor="SAGA志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="绿箭"
-        dept="法务部"
-        uni="香港大学"
-        honor="SAGA志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="咔咔"
-        dept="财务部"
-        uni="香港大学"
-        honor="SAGA志愿者"
-      ></Volunteers>
-      <Volunteers
-        name="滑雪"
-        dept="核心团队"
-        uni="香港大学"
-        honor="SAGA志愿者"
-      ></Volunteers>
-      <Volunteers name="错误" dept="错误" uni="错误" honor="错误"></Volunteers>
     </div>
   </section>
-
-  <!-- <div class="pageContent-wrapper">
-    <TheAcknowledgments></TheAcknowledgments>
-  </div> -->
+  
   <Footer></Footer>
 </template>
 
 <script setup>
 import MainNavigation from "@/components/MainNavigation.vue";
 import Volunteers from "@/components/AcknowledgmentsPage/Volunteer.vue";
-import TheAcknowledgments from "@/components/AcknowledgmentsPage/TheVolunteersList.vue";
 import Footer from "@/components/Footer.vue";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
+import { members } from "@/assets/dataset/volunteers_list.js";
 
-// remove this function when impliment real algrithm
-function shuffleChildren() {
-  const container = document.querySelector(".volunteers-display-area");
-  for (let i = 0; i < 10; i++) {
-    const children = container.children;
-    const index1 = Math.floor(Math.random() * children.length);
-    const index2 = Math.floor(Math.random() * children.length);
-    container.insertBefore(children[index1], children[index2]);
-  }
-}
+const selectedMembers = ref([]);
+let selectedInfo = ref({
+  term: 4,
+  department: "所有部门",
+  honor: "所有荣誉",
+});
+
+onMounted(() => {
+  selectedMembers.value = members.slice(0);
+
+  selectedInfo.value.term = document.querySelector("#term-select").value;
+  selectedInfo.value.department = document.querySelector("#dept-select").value;
+  selectedInfo.value.honor = document.querySelector("#honor-select").value;
+  console.log(selectedInfo.value);
+
+  showAllVolunteers();
+});
 
 function handelTermChange(event) {
   hideAllVolunteers();
+  const hint = document.querySelector(".not-found");
+  if (hint) hint.classList.add("hide");
+
+  selectedInfo.value.term = event.target.value;
 
   setTimeout(() => {
-    // remove this when impliment real algrithm
-    console.log(event.target.value);
-    shuffleChildren();
+    selectMembersBy(selectedInfo.value);
 
     // keep this
     showAllVolunteers();
+    const hint = document.querySelector(".not-found");
+    if (hint) hint.classList.remove("hide");
+
   }, 1000);
 }
 
 function handelDeptChange(event) {
   hideAllVolunteers();
+  const hint = document.querySelector(".not-found");
+  if (hint) hint.classList.add("hide");
+
+  selectedInfo.value.department = event.target.value;
 
   setTimeout(() => {
-    // remove this when impliment real algrithm
-    console.log(event.target.value);
-    shuffleChildren();
+    selectMembersBy(selectedInfo.value);
 
     // keep this
     showAllVolunteers();
+    const hint = document.querySelector(".not-found");
+    if (hint) hint.classList.remove("hide");
   }, 1000);
 }
 
 function handleHonorChange(event) {
   hideAllVolunteers();
+  const hint = document.querySelector(".not-found");
+  if (hint) hint.classList.add("hide");
 
-  console.log(event.target.value);
+  selectedInfo.value.honor = event.target.value;
 
   setTimeout(() => {
-    // remove this when impliment real algrithm
-    console.log(event.target.value);
-    shuffleChildren();
+    selectMembersBy(selectedInfo.value);
 
-    // keep this
     showAllVolunteers();
+    const hint = document.querySelector(".not-found");
+    if (hint) hint.classList.remove("hide");
   }, 1000);
+}
+
+function selectMembersBy(info) {
+  selectedMembers.value = members.filter((member) => {
+    console.log(member.term, info.term);
+    if (member.term != info.term) {
+      return false;
+    }
+    if (info.department != "all") {
+      if (member.department != info.department) {
+        return false;
+      }
+    }
+    if (info.honor != "all") {
+      if (member.honor != info.honor) {
+        return false;
+      }
+    }
+    return true;
+  });
 }
 
 function hideAllVolunteers() {
@@ -261,9 +193,47 @@ function showAllVolunteers() {
 </script>
 
 <style>
+.volunteers-acknowledgments .fade-in {
+  animation: fade-in 0.3s ease-in-out forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10%);
+  }
+}
+
 .volunteers-acknowledgments .hide {
   opacity: 0;
   transform: translateY(50%);
+}
+
+.not-found {
+  font-size: var(--fs-400);
+  color: var(--clr-text-muted);
+  text-align: center;
+  margin-top: 5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.not-found.hide {
+  animation: fade-out 0.3s ease-in-out forwards;
 }
 
 .volunteers-acknowledgments.pageContent-wrapper {
@@ -323,9 +293,11 @@ function showAllVolunteers() {
 #term-select {
   --_color: #f97d00;
 }
+
 #dept-select {
   --_color: rgb(67, 188, 33);
 }
+
 #honor-select {
   --_color: rgb(59, 162, 252);
 }
@@ -382,16 +354,20 @@ function showAllVolunteers() {
     grid-template-columns: 100%;
     gap: 1.5rem;
   }
+
   .volunteers-acknowledgments .subheading {
     padding-left: 0;
   }
+
   .volunteers-acknowledgments .filter-bar {
     padding-inline: 0;
     gap: 1rem;
   }
+  
   .volunteers-acknowledgments .filter-bar > * {
     flex: 1 1 100%;
   }
+
   .volunteers-acknowledgments .filter-entry {
     width: 100%;
   }
