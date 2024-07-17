@@ -9,7 +9,9 @@
         <p>点点星光绽放, 比太阳还耀眼</p>
         <p>
           请点击<RouterLink
-            to="acknowledgment"
+            :to="{
+              name: 'AcknowledgementsPage',
+            }"
             title="SAGA星光全体志愿者名单"
           ></RouterLink>
           寻找每一颗闪耀过的星星✨
