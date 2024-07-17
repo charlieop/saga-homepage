@@ -10,6 +10,7 @@
     "deploy": "git subtree push --prefix dist origin github-pages"
   },
   "dependencies": {
+    "@vueform/vueform": "^1.10.1",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5"
   },
