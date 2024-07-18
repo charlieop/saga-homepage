@@ -2,39 +2,85 @@
   <!-- <MainNavigation></MainNavigation> -->
   <section class="volinteers-application">
     <Vueform
+      :endpoint="false"
+      @submit="handleSubmit"
       :display-errors="false"
       validate-on="step"
       :force-labels="false"
-      :float-placeholders="true"
       add-class="vf-volunteer-application"
     >
       <template #empty>
-        <FormSteps>
+        <FormSteps v-if="!isMobile">
           <FormStep
             name="page0"
-            label="Step 0"
+            label="介绍"
             :elements="[
               'title',
               'subtitle',
               'info',
               'info__text1',
               'info__text2',
-              'p',
-              'h3',
+              'info__text3',
+              'info__text4',
             ]"
           />
           <FormStep
             name="page1"
-            label="Step 1"
-            :elements="['basic_info', 'name', 'email', 'phone', 'sex']"
+            label="基本信息"
+            :elements="[
+              'basic_info',
+              'name',
+              'email',
+              'wechat',
+              'phone',
+              'sex',
+            ]"
           />
           <FormStep
             name="page2"
-            label="Step 2"
+            label="学业信息"
             :elements="['academic_info', 'school', 'major', 'grade']"
           />
-          <FormStep name="page3" label="Step 3" :elements="[]" />
-          <FormStep name="page4" label="Step 4" :elements="[]" />
+          <FormStep
+            name="page3"
+            label="志愿信息"
+            :elements="[
+              'choice_info',
+              'first_choice',
+              'second_choice',
+              'third_choice',
+              'subject_choice',
+            ]"
+          />
+          <FormStep
+            name="page4"
+            label="个人介绍"
+            :elements="['about_me', 'self_intro', 'disposable_time']"
+          />
+          <FormStep
+            name="page5"
+            label="确认信息"
+            :elements="[
+              'confirmation',
+              'confirm_email',
+              'commitment',
+              'confirm',
+              'signature',
+            ]"
+          />
+          <FormStep
+            name="page6"
+            label="结束"
+            :elements="[
+              'end',
+              'ending_text1',
+              'ending_text2',
+              'ending_text3',
+              'ending_text4',
+              'ending_text5',
+              'ending_text6',
+            ]"
+          />
         </FormSteps>
 
         <FormElements>
@@ -48,7 +94,7 @@
           <StaticElement
             name="subtitle"
             tag="p"
-            content="感谢你对SAGA星光的兴趣与关注, 我们非常期待你的加入!"
+            content="感谢你对SAGA星光的兴趣与关注,<br>我们非常期待你的加入!"
             align="right"
             size="sm"
             bottom="3"
@@ -65,16 +111,26 @@
             content="SAGA 星光非常重视你的隐私. 我们保证在未经你同意的情况下不会向任何第三方透露你在申请中提交的信息."
           />
           <StaticElement
-            name="p"
+            name="info__text3"
             tag="p"
             content="如果你在申请的过程中遇到任何问题, 或是有任何疑问, 请随时于 <a href='mailto:support@saga-xingguang.com'>support@saga-xingguang.com</a> 与我们取得联系"
           />
           <StaticElement
-            name="h3"
-            tag="h3"
+            name="info__text4"
+            tag="h4"
+            top="1"
             align="right"
             content="让我们开始吧! &nbsp; ↓ &nbsp;"
           />
+
+          <StaticElement
+            name="divider1"
+            tag="hr"
+            top="1"
+            bottom="1"
+            v-if="isMobile"
+          />
+
           <StaticElement
             name="basic_info"
             tag="h2"
@@ -84,31 +140,34 @@
           <TextElement
             name="name"
             label="你的名字是?"
-            placeholder="张三"
             :floating="false"
             field-name="姓名"
-            :rules="['required', 'min:2']"
+            :rules="['required', 'min:2', 'max:10']"
           />
           <TextElement
             name="email"
             label="你的电子邮箱是?"
             input-type="email"
-            :rules="['required']"
-            :floating="false"
-            placeholder="person@example.com"
+            :rules="['required', 'max:30', 'email']"
+            info="建议使用学校邮箱"
             field-name="电子邮箱"
           />
           <TextElement
             name="phone"
-            :rules="['required', 'regex:^\\d{11}$']"
-            autocomplete="off"
+            :rules="['required', 'regex:^\\d{11}$', 'max:11']"
             label="你的手机号码是?"
-            placeholder="13912340000"
-            :floating="false"
+            info="请输入中国大陆手机号"
             :addons="{
               before: '+86 ',
             }"
             field-name="手机号码"
+          />
+          <TextElement
+            name="wechat"
+            :rules="['required', 'max:30']"
+            label="你的微信号是？"
+            :floating="false"
+            field-name="微信号"
           />
           <SelectElement
             name="sex"
@@ -134,6 +193,15 @@
             open-direction="top"
             field-name="性别"
           />
+
+          <StaticElement
+            name="divider2"
+            tag="hr"
+            top="1"
+            bottom="1"
+            v-if="isMobile"
+          />
+
           <StaticElement
             name="academic_info"
             tag="h2"
@@ -144,21 +212,19 @@
             name="school"
             label="你就读的院校是?"
             :floating="false"
-            placeholder="香港科技大学"
-            description="海外大学请填写中文全名, 高三学生请填写: 暂定"
+            description="海外大学请填写中文全名, 高三学生请填写: 暂无"
             info="你目前所就读/ 毕业的高等教育机构"
             field-name="就读院校"
-            :rules="['required', 'min:2']"
+            :rules="['required', 'min:2', 'max:30']"
           />
           <TextElement
             name="major"
             label="你的专业是?"
             info="本科生请填写专业, 研究生请填写课题方向"
-            placeholder="计算机科学"
             description="无专业请填写: 暂无"
             field-name="专业"
             :floating="false"
-            :rules="['required', 'min:2']"
+            :rules="['required', 'min:2', 'max:30']"
           />
           <SelectElement
             name="grade"
@@ -202,31 +268,439 @@
             :rules="['required']"
             field-name="年级"
           />
+
+          <StaticElement
+            name="divider3"
+            tag="hr"
+            top="1"
+            bottom="1"
+            v-if="isMobile"
+          />
+
+          <StaticElement
+            name="choice_info"
+            tag="h2"
+            top="1"
+            content="志愿信息"
+          />
+          <SelectElement
+            name="first_choice"
+            label="你最希望在哪个部门担任志愿者?"
+            :items="[
+              {
+                value: 'TUT',
+                label: '教学部',
+              },
+              {
+                value: 'CM',
+                label: '行研部',
+              },
+              {
+                value: 'IT',
+                label: 'IT部',
+              },
+              {
+                value: 'HR',
+                label: '人事部',
+              },
+              {
+                value: 'PR',
+                label: '宣传部',
+              },
+              {
+                value: 'FIN',
+                label: '财务部',
+              },
+              {
+                value: 'LAW',
+                label: '法务部',
+              },
+              {
+                value: 'LIA',
+                label: '外联部',
+              },
+            ]"
+            :native="false"
+            :search="true"
+            input-type="search"
+            open-direction="top"
+            :rules="['required']"
+            field-name="第一志愿部门"
+            info="我们将基于你的第一志愿部门发放笔试内容"
+          />
+          <SelectElement
+            name="second_choice"
+            label="你的第二意向部门是? (选填)"
+            :rules="['different:first_choice']"
+            :items="[
+              {
+                value: 'TUT',
+                label: '教学部',
+              },
+              {
+                value: 'CM',
+                label: '行研部',
+              },
+              {
+                value: 'IT',
+                label: 'IT部',
+              },
+              {
+                value: 'HR',
+                label: '人事部',
+              },
+              {
+                value: 'PR',
+                label: '宣传部',
+              },
+              {
+                value: 'FIN',
+                label: '财务部',
+              },
+              {
+                value: 'LAW',
+                label: '法务部',
+              },
+              {
+                value: 'LIA',
+                label: '外联部',
+              },
+            ]"
+            :native="false"
+            :search="true"
+            input-type="search"
+            open-direction="top"
+            :conditions="[['first_choice', 'not_empty']]"
+            field-name="第二志愿部门"
+          />
+          <SelectElement
+            name="third_choice"
+            label="你的第三意向部门是? (选填)"
+            :rules="['different:first_choice', 'different:second_choice']"
+            :items="[
+              {
+                value: 'TUT',
+                label: '教学部',
+              },
+              {
+                value: 'CM',
+                label: '行研部',
+              },
+              {
+                value: 'IT',
+                label: 'IT部',
+              },
+              {
+                value: 'HR',
+                label: '人事部',
+              },
+              {
+                value: 'PR',
+                label: '宣传部',
+              },
+              {
+                value: 'FIN',
+                label: '财务部',
+              },
+              {
+                value: 'LAW',
+                label: '法务部',
+              },
+              {
+                value: 'LIA',
+                label: '外联部',
+              },
+            ]"
+            :native="false"
+            :search="true"
+            input-type="search"
+            open-direction="top"
+            :conditions="[['second_choice', 'not_empty']]"
+            field-name="第三志愿部门"
+          />
+          <SelectElement
+            name="subject_choice"
+            label="教学部中, 你最希望教授的科目是? (选填)"
+            :items="[
+              {
+                value: 'MATH',
+                label: '数学',
+                selected: false,
+              },
+              {
+                value: 'CHI',
+                label: '语文',
+                selected: false,
+              },
+              {
+                value: 'ENG',
+                label: '英语',
+                selected: false,
+              },
+            ]"
+            :native="false"
+            :search="true"
+            input-type="search"
+            open-direction="top"
+            :rules="['required']"
+            :conditions="[
+              [
+                ['first_choice', 'in', ['TUT']],
+                ['second_choice', 'in', ['TUT']],
+                ['third_choice', 'in', ['TUT']],
+              ],
+            ]"
+            field-name="偏好科目"
+          />
+
+          <StaticElement
+            name="divider4"
+            tag="hr"
+            top="1"
+            bottom="1"
+            v-if="isMobile"
+          />
+
+          <StaticElement name="about_me" tag="h2" top="1" content="个人介绍" />
+          <TextareaElement
+            name="self_intro"
+            label="请向我们介绍一下你自己"
+            info="可以包含内容: 你是一个怎样的人? 为什么想要参加SAGA? 有哪些相关经历? 等等..."
+            :rows="8"
+            field-name="个人陈述"
+            description="不超过150字"
+            :rules="['required', 'max:200']"
+            :autogrow="false"
+          />
+          <RadiogroupElement
+            name="disposable_time"
+            view="tabs"
+            :items="[
+              {
+                value: '1',
+                label: '1',
+              },
+              {
+                value: '2',
+                label: '2',
+              },
+              {
+                value: '3',
+                label: '3',
+              },
+              {
+                value: '4',
+                label: '4',
+              },
+              {
+                value: '5',
+                label: '5',
+              },
+            ]"
+            :rules="['required']"
+            label="你每周大约可花费在SAGA上多少小时呢?"
+            info="单位: x小时/周"
+            field-name="可花费时间"
+          />
+
+          <StaticElement
+            name="divider5"
+            tag="hr"
+            top="1"
+            bottom="1"
+            v-if="isMobile"
+          />
+
+          <StaticElement
+            name="confirmation"
+            tag="h2"
+            top="1"
+            content="确认个人信息"
+          />
+          <TextElement
+            name="confirm_email"
+            label="请再次输入你的邮箱"
+            input-type="email"
+            info="在申请初始填写的邮箱"
+            :rules="['required', 'same:email']"
+            :submit="false"
+            description="请确保两次输入的邮箱一致"
+            field-name="确认邮箱"
+          />
+          <StaticElement
+            name="commitment"
+            tag="blockquote"
+            content="SAGA星光每期活动将持续一年,其中教学活动将于每年9月至次年4月开展. 为确保教学质量以及志愿者招募的有效性, 在此我郑重承诺:
+            <br>
+            <strong style='font-weight: bold'>我不会中途退出活动, 并会认真完成所有工作.</strong>"
+          />
+          <CheckboxElement
+            :submit="false"
+            name="confirm"
+            text="我已阅读并同意以上承诺"
+            :native="false"
+            :rules="['required']"
+            field-name="承诺"
+          />
+          <SignatureElement
+            name="signature"
+            label="本人签名"
+            :height="200"
+            :max-width="800"
+            :colors="['#000000']"
+            :modes="['draw']"
+            :rules="['required']"
+            field-name="签名"
+            :submit="false"
+          />
+
+          <StaticElement
+            name="divider6"
+            tag="hr"
+            top="1"
+            bottom="1"
+            v-if="isMobile"
+          />
+
+          <StaticElement name="end" tag="h2" top="1" content="最后一步" />
+          <StaticElement
+            name="ending_text1"
+            tag="p"
+            content="恭喜你, 你已经完成了 SAGA星光第五期 的招募问卷! "
+          />
+          <StaticElement
+            name="ending_text2"
+            tag="p"
+            content="我们将很快与你<strong style='font-weight: bold'>通过邮箱</strong>取得联系. <strong style='font-weight: bold'>请定期检查你的邮件收件箱以及垃圾信箱</strong>, 邮件将会是SAGA星光联系你的主要方式."
+          />
+          <StaticElement
+            name="ending_text3"
+            tag="p"
+            content="如果你在申请中遇到任何问题, 抑或是有任何疑问, 你可以随时于<a href='mailto:support@saga-xingguang.com'>support@saga-xingguang.com</a> 与我们取得联系. 你也可以直接与申请的部门进行沟通, 以下是各部门的邮箱. 我们将会尽快回复."
+          />
+          <StaticElement
+            name="ending_text4"
+            tag="blockquote"
+            content="教学部: tuition@saga-xingguang.com <br>
+行研部: class-management@saga-xingguang.com <br>
+财务部: finance@saga-xingguang.com <br>
+宣传部: publicity@saga-xingguang.com <br>
+法务部: legal-affairs@saga-xingguang.com <br>
+IT部: developers@saga-xingguang.com <br>
+人事部: human-resources@saga-xingguang.com <br>
+外联部: liaison@saga-xingguang.com"
+          />
+          <StaticElement
+            name="ending_text5"
+            tag="p"
+            content="我们感谢你对社会公益事业的关注与支持, 祝你好运! "
+          />
+          <StaticElement
+            name="ending_text6"
+            tag="h4"
+            align="right"
+            top="1"
+            content="请点击这里提交你的申请 &nbsp; ↓ &nbsp;"
+          />
         </FormElements>
 
-        <FormStepsControls />
+        <StaticElement
+          name="divider7"
+          tag="hr"
+          top="1"
+          bottom="1"
+          v-if="isMobile"
+        />
+
+        <FormStepsControls v-if="!isMobile" />
+        <ButtonElement
+          name="submit"
+          button-label="提交申请"
+          :submits="true"
+          :full="true"
+          top="3"
+          v-else="screenWith < 768"
+        />
       </template>
     </Vueform>
   </section>
+  <div
+    class="volinteers-application-overlay"
+    id="volinteers-application-overlay"
+  >
+    <div class="message-box">
+      <div class="mesage-box__title">{{ messageTitle }}</div>
+      <div class="mesage-box__text">{{ messageText }}</div>
+      <div class="message-box__footer">
+        如果页面无反应, 你也可以点击<RouterLink
+          :to="{
+            name: 'HomePage',
+          }"
+          title="返回首页"
+          >这里</RouterLink
+        >返回首页.
+      </div>
+    </div>
+  </div>
   <!-- <Footer></Footer> -->
 </template>
 
 <script setup>
 import MainNavigation from "@/components/MainNavigation.vue";
-
 import Footer from "@/components/Footer.vue";
+import { onMounted, ref } from "vue";
+import { routeLocationKey, useRouter } from "vue-router";
+
+const router = useRouter();
+
+let isMobile = ref(window.innerWidth <= 768);
+let messageTitle = ref("");
+let messageText = ref("");
+
+onMounted(() => {
+  window.scrollTo(0, 0);
+});
+
+async function handleSubmit(form$, FormData) {
+  const requestData = form$.requestData;
+  console.log(requestData);
+  form$.submitting = true;
+  // perform request here...
+  setTimeout(onFailed, 2000);
+  form$.submitting = false;
+}
+
+function onSuccess() {
+  const overlay = document.querySelector("#volinteers-application-overlay");
+  messageTitle.value = "提交成功";
+  messageText.value = "即将重定向至首页...";
+  overlay.style.display = "flex";
+  setTimeout(() => {
+    router.push({ name: "HomePage" });
+  }, 2000);
+}
+
+function onFailed() {
+  const overlay = document.querySelector("#volinteers-application-overlay");
+  messageTitle.value = "提交失败";
+  messageText.value = "请在稍后重试...";
+  overlay.style.display = "flex";
+  setTimeout(() => {
+    overlay.style.display = "none";
+  }, 3000);
+}
 </script>
 
-<style scoped>
+<style>
 .volinteers-application {
   display: flex;
   justify-content: center;
   padding: 5rem 2rem;
   min-height: 100vh;
-  background-color: rgb(155, 155, 155);
+  background-color: var(--clr-background-muted);
 }
 
-form {
+.volinteers-application form {
   color: var(--clr-text);
   width: 100%;
   max-width: 40rem;
@@ -237,311 +711,65 @@ form {
   box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
 }
 
-.vf-volunteer-application *,
-.vf-volunteer-application *:before,
-.vf-volunteer-application *:after,
-.vf-volunteer-application:root {
-  --vf-primary: #07bf9b;
-  --vf-primary-darker: #06ac8b;
-  --vf-color-on-primary: #ffffff;
-  --vf-danger: #ef4444;
-  --vf-danger-lighter: #fee2e2;
-  --vf-success: #10b981;
-  --vf-success-lighter: #d1fae5;
-  --vf-gray-50: #f9fafb;
-  --vf-gray-100: #f3f4f6;
-  --vf-gray-200: #e5e7eb;
-  --vf-gray-300: #d1d5db;
-  --vf-gray-400: #9ca3af;
-  --vf-gray-500: #6b7280;
-  --vf-gray-600: #4b5563;
-  --vf-gray-700: #374151;
-  --vf-gray-800: #1f2937;
-  --vf-gray-900: #111827;
-  --vf-dark-50: #efefef;
-  --vf-dark-100: #dcdcdc;
-  --vf-dark-200: #bdbdbd;
-  --vf-dark-300: #a0a0a0;
-  --vf-dark-400: #848484;
-  --vf-dark-500: #737373;
-  --vf-dark-600: #393939;
-  --vf-dark-700: #323232;
-  --vf-dark-800: #262626;
-  --vf-dark-900: #191919;
-  --vf-ring-width: 2px;
-  --vf-ring-color: #07bf9b66;
-  --vf-link-color: var(--vf-primary);
-  --vf-link-decoration: inherit;
-  --vf-font-size: 1rem;
-  --vf-font-size-sm: 0.875rem;
-  --vf-font-size-lg: 1rem;
-  --vf-font-size-small: 0.875rem;
-  --vf-font-size-small-sm: 0.8125rem;
-  --vf-font-size-small-lg: 0.875rem;
-  --vf-font-size-h1: 2.125rem;
-  --vf-font-size-h1-sm: 2.125rem;
-  --vf-font-size-h1-lg: 2.125rem;
-  --vf-font-size-h2: 1.875rem;
-  --vf-font-size-h2-sm: 1.875rem;
-  --vf-font-size-h2-lg: 1.875rem;
-  --vf-font-size-h3: 1.5rem;
-  --vf-font-size-h3-sm: 1.5rem;
-  --vf-font-size-h3-lg: 1.5rem;
-  --vf-font-size-h4: 1.25rem;
-  --vf-font-size-h4-sm: 1.25rem;
-  --vf-font-size-h4-lg: 1.25rem;
-  --vf-font-size-h1-mobile: 1.5rem;
-  --vf-font-size-h1-mobile-sm: 1.5rem;
-  --vf-font-size-h1-mobile-lg: 1.5rem;
-  --vf-font-size-h2-mobile: 1.25rem;
-  --vf-font-size-h2-mobile-sm: 1.25rem;
-  --vf-font-size-h2-mobile-lg: 1.25rem;
-  --vf-font-size-h3-mobile: 1.125rem;
-  --vf-font-size-h3-mobile-sm: 1.125rem;
-  --vf-font-size-h3-mobile-lg: 1.125rem;
-  --vf-font-size-h4-mobile: 1rem;
-  --vf-font-size-h4-mobile-sm: 1rem;
-  --vf-font-size-h4-mobile-lg: 1rem;
-  --vf-font-size-blockquote: 1rem;
-  --vf-font-size-blockquote-sm: 0.875rem;
-  --vf-font-size-blockquote-lg: 1rem;
-  --vf-line-height: 1.5rem;
-  --vf-line-height-sm: 1.25rem;
-  --vf-line-height-lg: 1.5rem;
-  --vf-line-height-small: 1.25rem;
-  --vf-line-height-small-sm: 1.125rem;
-  --vf-line-height-small-lg: 1.25rem;
-  --vf-line-height-headings: 1.2;
-  --vf-line-height-headings-sm: 1.2;
-  --vf-line-height-headings-lg: 1.2;
-  --vf-line-height-blockquote: 1.5rem;
-  --vf-line-height-blockquote-sm: 1.25rem;
-  --vf-line-height-blockquote-lg: 1.5rem;
-  --vf-letter-spacing: 0px;
-  --vf-letter-spacing-sm: 0px;
-  --vf-letter-spacing-lg: 0px;
-  --vf-letter-spacing-small: 0px;
-  --vf-letter-spacing-small-sm: 0px;
-  --vf-letter-spacing-small-lg: 0px;
-  --vf-letter-spacing-headings: 0px;
-  --vf-letter-spacing-headings-sm: 0px;
-  --vf-letter-spacing-headings-lg: 0px;
-  --vf-letter-spacing-blockquote: 0px;
-  --vf-letter-spacing-blockquote-sm: 0px;
-  --vf-letter-spacing-blockquote-lg: 0px;
-  --vf-gutter: 1rem;
-  --vf-gutter-sm: 0.5rem;
-  --vf-gutter-lg: 1rem;
-  --vf-min-height-input: 2.375rem;
-  --vf-min-height-input-sm: 2.125rem;
-  --vf-min-height-input-lg: 2.875rem;
-  --vf-py-input: 0.375rem;
-  --vf-py-input-sm: 0.375rem;
-  --vf-py-input-lg: 0.625rem;
-  --vf-px-input: 0.75rem;
-  --vf-px-input-sm: 0.5rem;
-  --vf-px-input-lg: 0.875rem;
-  --vf-py-btn: 0.375rem;
-  --vf-py-btn-sm: 0.375rem;
-  --vf-py-btn-lg: 0.625rem;
-  --vf-px-btn: 0.875rem;
-  --vf-px-btn-sm: 0.75rem;
-  --vf-px-btn-lg: 1.25rem;
-  --vf-py-btn-small: 0.25rem;
-  --vf-py-btn-small-sm: 0.25rem;
-  --vf-py-btn-small-lg: 0.375rem;
-  --vf-px-btn-small: 0.625rem;
-  --vf-px-btn-small-sm: 0.625rem;
-  --vf-px-btn-small-lg: 0.75rem;
-  --vf-py-group-tabs: 0.375rem;
-  --vf-py-group-tabs-sm: 0.375rem;
-  --vf-py-group-tabs-lg: 0.625rem;
-  --vf-px-group-tabs: 0.75rem;
-  --vf-px-group-tabs-sm: 0.5rem;
-  --vf-px-group-tabs-lg: 0.875rem;
-  --vf-py-group-blocks: 0.75rem;
-  --vf-py-group-blocks-sm: 0.625rem;
-  --vf-py-group-blocks-lg: 0.875rem;
-  --vf-px-group-blocks: 1rem;
-  --vf-px-group-blocks-sm: 1rem;
-  --vf-px-group-blocks-lg: 1rem;
-  --vf-py-tag: 0px;
-  --vf-py-tag-sm: 0px;
-  --vf-py-tag-lg: 0px;
-  --vf-px-tag: 0.4375rem;
-  --vf-px-tag-sm: 0.4375rem;
-  --vf-px-tag-lg: 0.4375rem;
-  --vf-py-slider-tooltip: 0.125rem;
-  --vf-py-slider-tooltip-sm: 0.0625rem;
-  --vf-py-slider-tooltip-lg: 0.1875rem;
-  --vf-px-slider-tooltip: 0.375rem;
-  --vf-px-slider-tooltip-sm: 0.3125rem;
-  --vf-px-slider-tooltip-lg: 0.5rem;
-  --vf-py-blockquote: 0.25rem;
-  --vf-py-blockquote-sm: 0.25rem;
-  --vf-py-blockquote-lg: 0.25rem;
-  --vf-px-blockquote: 0.75rem;
-  --vf-px-blockquote-sm: 0.75rem;
-  --vf-px-blockquote-lg: 0.75rem;
-  --vf-py-hr: 0.25rem;
-  --vf-space-addon: 0px;
-  --vf-space-addon-sm: 0px;
-  --vf-space-addon-lg: 0px;
-  --vf-space-checkbox: 0.375rem;
-  --vf-space-checkbox-sm: 0.375rem;
-  --vf-space-checkbox-lg: 0.375rem;
-  --vf-space-tags: 0.1875rem;
-  --vf-space-tags-sm: 0.1875rem;
-  --vf-space-tags-lg: 0.1875rem;
-  --vf-space-static-tag-1: 1rem;
-  --vf-space-static-tag-2: 2rem;
-  --vf-space-static-tag-3: 3rem;
-  --vf-floating-top: 0rem;
-  --vf-floating-top-sm: 0rem;
-  --vf-floating-top-lg: 0.6875rem;
-  --vf-bg-input: #ffffff;
-  --vf-bg-input-hover: #ffffff;
-  --vf-bg-input-focus: #ffffff;
-  --vf-bg-input-danger: #ffffff;
-  --vf-bg-input-success: #ffffff;
-  --vf-bg-checkbox: #ffffff;
-  --vf-bg-checkbox-hover: #ffffff;
-  --vf-bg-checkbox-focus: #ffffff;
-  --vf-bg-checkbox-danger: #ffffff;
-  --vf-bg-checkbox-success: #ffffff;
-  --vf-bg-disabled: var(--vf-gray-200);
-  --vf-bg-selected: #1118270d;
-  --vf-bg-passive: var(--vf-gray-300);
-  --vf-bg-icon: var(--vf-gray-500);
-  --vf-bg-danger: var(--vf-danger-lighter);
-  --vf-bg-success: var(--vf-success-lighter);
-  --vf-bg-tag: var(--vf-primary);
-  --vf-bg-slider-handle: var(--vf-primary);
-  --vf-bg-toggle-handle: #ffffff;
-  --vf-bg-date-head: var(--vf-gray-100);
-  --vf-bg-addon: #ffffff00;
-  --vf-bg-btn: var(--vf-primary);
-  --vf-bg-btn-danger: var(--vf-danger);
-  --vf-bg-btn-secondary: var(--vf-gray-200);
-  --vf-color-input: var(--vf-gray-800);
-  --vf-color-input-hover: var(--vf-gray-800);
-  --vf-color-input-focus: var(--vf-gray-800);
-  --vf-color-input-danger: var(--vf-gray-800);
-  --vf-color-input-success: var(--vf-gray-800);
-  --vf-color-disabled: var(--vf-gray-400);
-  --vf-color-placeholder: var(--vf-gray-300);
-  --vf-color-passive: var(--vf-gray-700);
-  --vf-color-muted: var(--vf-gray-500);
-  --vf-color-floating: var(--vf-gray-500);
-  --vf-color-floating-focus: var(--vf-gray-500);
-  --vf-color-floating-success: var(--vf-gray-500);
-  --vf-color-floating-danger: var(--vf-gray-500);
-  --vf-color-danger: var(--vf-danger);
-  --vf-color-success: var(--vf-success);
-  --vf-color-tag: var(--vf-color-on-primary);
-  --vf-color-addon: var(--vf-gray-800);
-  --vf-color-date-head: var(--vf-gray-700);
-  --vf-color-btn: var(--vf-color-on-primary);
-  --vf-color-btn-danger: #ffffff;
-  --vf-color-btn-secondary: var(--vf-gray-700);
-  --vf-border-color-input: var(--vf-gray-300);
-  --vf-border-color-input-hover: var(--vf-gray-300);
-  --vf-border-color-input-focus: var(--vf-primary);
-  --vf-border-color-input-danger: var(--vf-gray-300);
-  --vf-border-color-input-success: var(--vf-gray-300);
-  --vf-border-color-checkbox: var(--vf-gray-300);
-  --vf-border-color-checkbox-focus: var(--vf-primary);
-  --vf-border-color-checkbox-hover: var(--vf-gray-300);
-  --vf-border-color-checkbox-danger: var(--vf-gray-300);
-  --vf-border-color-checkbox-success: var(--vf-gray-300);
-  --vf-border-color-checked: var(--vf-primary);
-  --vf-border-color-passive: var(--vf-gray-300);
-  --vf-border-color-slider-tooltip: var(--vf-primary);
-  --vf-border-color-tag: var(--vf-primary);
-  --vf-border-color-btn: var(--vf-primary);
-  --vf-border-color-btn-danger: var(--vf-danger);
-  --vf-border-color-btn-secondary: var(--vf-gray-200);
-  --vf-border-color-blockquote: var(--vf-gray-300);
-  --vf-border-color-hr: var(--vf-gray-300);
-  --vf-border-color-signature-hr: var(--vf-gray-300);
-  --vf-border-width-input-t: 1px;
-  --vf-border-width-input-r: 1px;
-  --vf-border-width-input-b: 1px;
-  --vf-border-width-input-l: 1px;
-  --vf-border-width-radio-t: 1px;
-  --vf-border-width-radio-r: 1px;
-  --vf-border-width-radio-b: 1px;
-  --vf-border-width-radio-l: 1px;
-  --vf-border-width-checkbox-t: 1px;
-  --vf-border-width-checkbox-r: 1px;
-  --vf-border-width-checkbox-b: 1px;
-  --vf-border-width-checkbox-l: 1px;
-  --vf-border-width-dropdown: 1px;
-  --vf-border-width-btn: 1px;
-  --vf-border-width-toggle: 0.125rem;
-  --vf-border-width-tag: 1px;
-  --vf-border-width-blockquote: 3px;
-  --vf-shadow-input: 0px 0px 0px 0px rgba(0, 0, 0, 0);
-  --vf-shadow-input-hover: 0px 0px 0px 0px rgba(0, 0, 0, 0);
-  --vf-shadow-input-focus: 0px 0px 0px 0px rgba(0, 0, 0, 0);
-  --vf-shadow-handles: 0px 0px 0px 0px rgba(0, 0, 0, 0);
-  --vf-shadow-handles-hover: 0px 0px 0px 0px rgba(0, 0, 0, 0);
-  --vf-shadow-handles-focus: 0px 0px 0px 0px rgba(0, 0, 0, 0);
-  --vf-shadow-btn: 0px 0px 0px 0px rgba(0, 0, 0, 0);
-  --vf-shadow-dropdown: 0px 0px 0px 0px rgba(0, 0, 0, 0);
-  --vf-radius-input: 0.25rem;
-  --vf-radius-input-sm: 0.25rem;
-  --vf-radius-input-lg: 0.25rem;
-  --vf-radius-btn: 0.25rem;
-  --vf-radius-btn-sm: 0.25rem;
-  --vf-radius-btn-lg: 0.25rem;
-  --vf-radius-small: 0.25rem;
-  --vf-radius-small-sm: 0.25rem;
-  --vf-radius-small-lg: 0.25rem;
-  --vf-radius-large: 0.25rem;
-  --vf-radius-large-sm: 0.25rem;
-  --vf-radius-large-lg: 0.25rem;
-  --vf-radius-tag: 0.25rem;
-  --vf-radius-tag-sm: 0.25rem;
-  --vf-radius-tag-lg: 0.25rem;
-  --vf-radius-checkbox: 0.25rem;
-  --vf-radius-checkbox-sm: 0.25rem;
-  --vf-radius-checkbox-lg: 0.25rem;
-  --vf-radius-slider: 0.25rem;
-  --vf-radius-slider-sm: 0.25rem;
-  --vf-radius-slider-lg: 0.25rem;
-  --vf-radius-image: 0.25rem;
-  --vf-radius-image-sm: 0.25rem;
-  --vf-radius-image-lg: 0.25rem;
-  --vf-radius-gallery: 0.25rem;
-  --vf-radius-gallery-sm: 0.25rem;
-  --vf-radius-gallery-lg: 0.25rem;
-  --vf-checkbox-size: 1rem;
-  --vf-checkbox-size-sm: 0.875rem;
-  --vf-checkbox-size-lg: 1rem;
-  --vf-gallery-size: 6rem;
-  --vf-gallery-size-sm: 5rem;
-  --vf-gallery-size-lg: 7rem;
-  --vf-toggle-width: 3rem;
-  --vf-toggle-width-sm: 2.75rem;
-  --vf-toggle-width-lg: 3rem;
-  --vf-toggle-height: 1.25rem;
-  --vf-toggle-height-sm: 1rem;
-  --vf-toggle-height-lg: 1.25rem;
-  --vf-slider-height: 0.375rem;
-  --vf-slider-height-sm: 0.3125rem;
-  --vf-slider-height-lg: 0.5rem;
-  --vf-slider-height-vertical: 20rem;
-  --vf-slider-height-vertical-sm: 20rem;
-  --vf-slider-height-vertical-lg: 20rem;
-  --vf-slider-handle-size: 1rem;
-  --vf-slider-handle-size-sm: 0.875rem;
-  --vf-slider-handle-size-lg: 1.25rem;
-  --vf-slider-tooltip-distance: 0.5rem;
-  --vf-slider-tooltip-distance-sm: 0.375rem;
-  --vf-slider-tooltip-distance-lg: 0.5rem;
-  --vf-slider-tooltip-arrow-size: 0.3125rem;
-  --vf-slider-tooltip-arrow-size-sm: 0.3125rem;
-  --vf-slider-tooltip-arrow-size-lg: 0.3125rem;
+.volinteers-application-overlay {
+  padding-top: 20svh;
+  position: fixed;
+  inset: 0;
+  background-color: #000000aa;
+  flex-direction: column;
+  align-items: center;
+  display: none;
+}
+
+.volinteers-application-overlay .message-box {
+  background-color: var(--clr-background);
+  border-radius: 0.5rem;
+  color: var(--clr-text);
+  padding: 3rem;
+  width: 25vw;
+  min-width: 20rem;
+  aspect-ratio: 4 / 3;
+}
+
+.volinteers-application-overlay .mesage-box__title {
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+  font-size: var(--fs-600);
+}
+
+.mesage-box__text {
+  margin-top: 2rem;
+  font-size: var(--fs-400);
+}
+
+.volinteers-application-overlay .message-box__footer {
+  margin-top: 2rem;
+  font-size: var(--fs-200);
+  color: var(--clr-text-muted);
+}
+
+.volinteers-application-overlay .message-box__footer a {
+  text-decoration: underline;
+  color: var(--clr-primary);
+}
+
+@media (max-width: 768px) {
+  .volinteers-application {
+    padding: 0rem;
+    min-height: 0;
+  }
+  .volinteers-application form {
+    padding: 1.5rem;
+    border-radius: 0rem;
+  }
+}
+:root,
+:before,
+:after,
+* {
+  --vf-primary: #ff881a;
+  --vf-primary-darker: #d46a0e;
+  --vf-color-passive: var(--clr-text-muted);
 }
 </style>

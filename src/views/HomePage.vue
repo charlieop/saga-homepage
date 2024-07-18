@@ -7,7 +7,6 @@
   <TheValues></TheValues>
   <CallToActionCards></CallToActionCards>
   <TheAcknowledgments></TheAcknowledgments>
-  <TheNamelist></TheNamelist>
   <Footer></Footer>
 </template>
 
