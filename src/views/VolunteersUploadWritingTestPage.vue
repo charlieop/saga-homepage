@@ -18,7 +18,7 @@
           <FormStep
             name="page1"
             label="提交笔试"
-            :elements="['h2_1', 'file', 'video_link', 'grade']"
+            :elements="['h2_1', 'writing_test_file', 'video_link', 'grade']"
           />
         </FormSteps>
         <FormElements>
@@ -97,22 +97,27 @@
             description="你可以在截止日期前重复提交. 注意⚠️:只有最后一次提交会被保存"
           />
           <FileElement
-            name="file"
+            name="writing_test_file"
             label="笔试文件:"
-            info="请将你的所有笔试文件合并到一个pdf或是word文档中上传"
-            description="大小限制: 10MB, 文件格式: .pdf | .doc | .docx"
+            info="请将你的所有笔试文件合并到一个pdf中上传"
+            description="大小限制: 10MB, 文件格式: .pdf"
             :drop="true"
-            :auto="false"
-            accept="application/pdf,application/msword"
+            accept="application/pdf"
             :rules="[
-              'mimetypes:application/pdf,application/msword',
+              'mimetypes:application/pdf',
               'max:10240',
+              'required',
             ]"
+            :remove-endpoint="{
+              url: fileUrl,
+              method: 'DELETE',
+            }"
+            :upload-temp-endpoint="handleUploadFile"
           />
           <TextElement
             name="video_link"
             input-type="url"
-            :rules="['nullable', 'url']"
+            :rules="['nullable', 'url', 'required']"
             placeholder="eg. http(s)://www.example.com"
             :floating="false"
             info="请上传腾讯会议或哔哩哔哩的视频链接"
@@ -163,11 +168,12 @@ const form$ = ref(null);
 let isMobile = ref(window.innerWidth <= 768);
 let messageTitle = ref("");
 let messageText = ref("");
-let url = undefined;
+let url = inject("ApiUrl") + "applicants/writing-tests/" + route.query.id;
+let fileUrl =
+  inject("ApiUrl") + "applicants/writing-tests/files/" + route.query.id;
 
 onMounted(() => {
   window.scrollTo(0, 0);
-  url = inject("ApiUrl") + "applicants/writing-tests/" + route.query.id;
   fetch(url, {
     method: "GET",
     headers: {
@@ -190,14 +196,24 @@ onMounted(() => {
     });
 });
 
+async function handleUploadFile(value, el$) {
+  let data = new FormData();
+  data.append("writing_test_file", value);
+  let res = await el$.$vueform.services.axios.request({
+    url: fileUrl,
+    method: "PUT",
+    data: data,
+  });
+  console.log(res.data);
+  return res.data;
+}
+
 async function handleSubmit(form$, FormData) {
   let requestData = form$.requestData;
   requestData.video_link = "https://aaa.com";
-  console.log(requestData);
 
   form$.submitting = true;
   // perform request here...
-  console.log(url);
   fetch(url, {
     method: "PUT",
     headers: {
@@ -206,7 +222,6 @@ async function handleSubmit(form$, FormData) {
     body: JSON.stringify(requestData),
   })
     .then((response) => {
-      console.log(response);
       if (response.ok) {
         onSuccess();
       } else if (response.status === 400) {
