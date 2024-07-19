@@ -1,5 +1,4 @@
 <template>
-  <!-- <MainNavigation></MainNavigation> -->
   <section class="volinteers-application">
     <Vueform
       :endpoint="false"
@@ -442,7 +441,6 @@
             :search="true"
             input-type="search"
             open-direction="top"
-            :rules="['required']"
             :conditions="[
               [
                 ['first_choice', 'in', ['TUT']],
@@ -602,15 +600,14 @@ IT部: developers@saga-xingguang.com <br>
             top="1"
             content="请点击这里提交你的申请 &nbsp; ↓ &nbsp;"
           />
+          <StaticElement
+            name="divider7"
+            tag="hr"
+            top="1"
+            bottom="1"
+            v-if="isMobile"
+          />
         </FormElements>
-
-        <StaticElement
-          name="divider7"
-          tag="hr"
-          top="1"
-          bottom="1"
-          v-if="isMobile"
-        />
 
         <FormStepsControls v-if="!isMobile" />
         <ButtonElement
@@ -642,16 +639,14 @@ IT部: developers@saga-xingguang.com <br>
       </div>
     </div>
   </div>
-  <!-- <Footer></Footer> -->
 </template>
 
 <script setup>
-import MainNavigation from "@/components/MainNavigation.vue";
-import Footer from "@/components/Footer.vue";
-import { onMounted, ref } from "vue";
-import { routeLocationKey, useRouter } from "vue-router";
+import { onMounted, ref, inject } from "vue";
+import { useRouter, useRoute } from "vue-router";
 
 const router = useRouter();
+const route = useRoute();
 
 let isMobile = ref(window.innerWidth <= 768);
 let messageTitle = ref("");
@@ -662,12 +657,35 @@ onMounted(() => {
 });
 
 async function handleSubmit(form$, FormData) {
-  const requestData = form$.requestData;
+  let requestData = form$.requestData;
+  requestData.src = route.query.src ?? null;
   console.log(requestData);
+
   form$.submitting = true;
   // perform request here...
-  setTimeout(onFailed, 2000);
-  form$.submitting = false;
+  const url = inject("ApiUrl") + "api/v1/applicants/";
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(requestData),
+  })
+    .then((response) => {
+      console.log(response);
+      if (response.ok) {
+        onSuccess();
+      } else if (response.status === 400) {
+        onBadRequest();
+      } else {
+        onFailed();
+      }
+      form$.submitting = false;
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      onFailed();
+    });
 }
 
 function onSuccess() {
@@ -684,6 +702,18 @@ function onFailed() {
   const overlay = document.querySelector("#volinteers-application-overlay");
   messageTitle.value = "提交失败";
   messageText.value = "请在稍后重试...";
+  overlay.style.display = "flex";
+  setTimeout(() => {
+    overlay.style.display = "none";
+  }, 3000);
+}
+
+function onBadRequest() {
+  const overlay = document.querySelector(
+    "#volinteers-upload-writing-test-overlay"
+  );
+  messageTitle.value = "你上传的信息有误";
+  messageText.value = "请检查你的输入并重试...";
   overlay.style.display = "flex";
   setTimeout(() => {
     overlay.style.display = "none";
@@ -760,6 +790,7 @@ function onFailed() {
     min-height: 0;
   }
   .volinteers-application form {
+    overflow-x: clip;
     padding: 1.5rem;
     border-radius: 0rem;
   }

@@ -111,7 +111,7 @@ onMounted(() => {
 function handleIntersection(entries) {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      console.log(entry.target.dataset.index);
+      // console.log(entry.target.dataset.index);
       setActive(entry.target.dataset.index);
       setDisappear(entry.target.dataset.index);
     } else {

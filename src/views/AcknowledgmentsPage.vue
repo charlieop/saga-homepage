@@ -88,6 +88,8 @@ let selectedInfo = ref({
 });
 
 onMounted(() => {
+  scroll(0, 0);
+
   selectedMembers.value = members.slice(0);
 
   selectedInfo.value.term = document.querySelector("#term-select").value;

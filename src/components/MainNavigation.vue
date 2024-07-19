@@ -50,7 +50,6 @@
 <style scoped>
 .call-to-action {
   margin-left: auto;
-  margin-right: 2rem;
 }
 
 .button {

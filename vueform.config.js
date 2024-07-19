@@ -9,7 +9,7 @@ import { defineConfig } from "@vueform/vueform";
 import "@vueform/vueform/dist/vueform.css";
 zh_CN.vueform.steps.previous = "返回";
 zh_CN.vueform.steps.next = "继续";
-zh_CN.vueform.steps.finish = "提交申请";
+zh_CN.vueform.steps.finish = "提交";
 
 
 export default defineConfig({

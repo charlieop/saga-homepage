@@ -20,8 +20,10 @@ import CallToActionCards from "@/components/HomePage/CallToActionCards.vue";
 import TheAcknowledgments from "@/components/HomePage/TheAcknowledgments.vue";
 import Footer from "@/components/Footer.vue";
 
+import { onMounted } from "vue";
+onMounted(() => {
+  window.scrollTo(0, 0);
+});
 </script>
 
-<style scoped>
-</style>
-
+<style scoped></style>

@@ -15,6 +15,11 @@ const routes = [
     component: () => import("@/views/VolunteersApplicationPage.vue"),
   },
   {
+    path: "/appreciation/volunteers/upload-writing-test",
+    name: "VolunteersUploadWritingTestPage",
+    component: () => import("@/views/VolunteersUploadWritingTestPage.vue"),
+  },
+  {
     path: "/:pathMatch(.*)*",
     name: "NotFound",
     component: () => import("@/views/NotFound.vue"),

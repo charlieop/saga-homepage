@@ -200,5 +200,8 @@
     flex-direction: column;
     text-align: center;
   }
+  .value__image svg {
+    width: 80%;
+  }
 }
 </style>

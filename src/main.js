@@ -7,4 +7,10 @@ import router from "./router";
 import Vueform from "@vueform/vueform";
 import vueformConfig from "./../vueform.config";
 
-createApp(App).use(router).use(Vueform, vueformConfig).mount("#app");
+const app = createApp(App);
+app.provide("ApiUrl", "http://127.0.0.1:8000/api/v1/");
+app.provide("message", "hello");
+
+app.use(router);
+app.use(Vueform, vueformConfig);
+app.mount("#app");
