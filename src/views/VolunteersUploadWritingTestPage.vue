@@ -18,7 +18,7 @@
           <FormStep
             name="page1"
             label="提交笔试"
-            :elements="['h2_1', 'writing_test_file', 'video_link', 'grade']"
+            :elements="['h2_1', 'writing_test_file', 'video_link']"
           />
         </FormSteps>
         <FormElements>
@@ -103,11 +103,7 @@
             description="大小限制: 10MB, 文件格式: .pdf"
             :drop="true"
             accept="application/pdf"
-            :rules="[
-              'mimetypes:application/pdf',
-              'max:10240',
-              'required',
-            ]"
+            :rules="['mimetypes:application/pdf', 'max:10240', 'required']"
             :remove-endpoint="{
               url: fileUrl,
               method: 'DELETE',
@@ -168,7 +164,8 @@ const form$ = ref(null);
 let isMobile = ref(window.innerWidth <= 768);
 let messageTitle = ref("");
 let messageText = ref("");
-let url = inject("ApiUrl") + "applicants/writing-tests/" + route.query.id;
+
+const url = inject("ApiUrl") + "applicants/writing-tests/" + route.query.id;
 let fileUrl =
   inject("ApiUrl") + "applicants/writing-tests/files/" + route.query.id;
 
@@ -188,7 +185,6 @@ onMounted(() => {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
       form$.value.update(data);
     })
     .catch((error) => {
@@ -196,21 +192,33 @@ onMounted(() => {
     });
 });
 
+function getCSRFToken() {
+  return document.cookie
+    ?.split("; ")
+    ?.find((row) => row.startsWith("csrftoken="))
+    ?.split("=")[1];
+}
+
 async function handleUploadFile(value, el$) {
   let data = new FormData();
   data.append("writing_test_file", value);
   let res = await el$.$vueform.services.axios.request({
     url: fileUrl,
     method: "PUT",
+    headers: {
+      "Content-Type": "multipart/form-data",
+      "X-CSRFToken": getCSRFToken(),
+    },
     data: data,
+    onUploadProgress: (e) => {
+      el$.progress = Math.round((e.loaded * 100) / e.total);
+    },
   });
-  console.log(res.data);
   return res.data;
 }
 
 async function handleSubmit(form$, FormData) {
   let requestData = form$.requestData;
-  requestData.video_link = "https://aaa.com";
 
   form$.submitting = true;
   // perform request here...
@@ -218,6 +226,7 @@ async function handleSubmit(form$, FormData) {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
+      "X-CSRFToken": getCSRFToken(),
     },
     body: JSON.stringify(requestData),
   })

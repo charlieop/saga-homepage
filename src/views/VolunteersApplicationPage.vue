@@ -449,6 +449,7 @@
               ],
             ]"
             field-name="偏好科目"
+            :rules="['nullable']"
           />
 
           <StaticElement
@@ -651,10 +652,18 @@ const route = useRoute();
 let isMobile = ref(window.innerWidth <= 768);
 let messageTitle = ref("");
 let messageText = ref("");
+const url = inject("ApiUrl") + "applicants/";
 
 onMounted(() => {
   window.scrollTo(0, 0);
 });
+
+function getCSRFToken() {
+  return document.cookie
+    ?.split("; ")
+    ?.find((row) => row.startsWith("csrftoken="))
+    ?.split("=")[1];
+}
 
 async function handleSubmit(form$, FormData) {
   let requestData = form$.requestData;
@@ -663,11 +672,12 @@ async function handleSubmit(form$, FormData) {
 
   form$.submitting = true;
   // perform request here...
-  const url = inject("ApiUrl") + "api/v1/applicants/";
+  console.log(url);
   fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "X-CSRFToken": getCSRFToken(),
     },
     body: JSON.stringify(requestData),
   })
