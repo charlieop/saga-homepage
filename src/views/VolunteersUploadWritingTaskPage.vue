@@ -1,11 +1,11 @@
 <template>
-  <section class="volinteers-upload-writing-test">
+  <section class="volinteers-upload-writing-task">
     <Vueform
       :endpoint="false"
       @submit="handleSubmit"
       :display-errors="false"
       :force-labels="false"
-      add-class="vf-volunteer-upload-writing-test"
+      add-class="vf-volunteer-upload-writing-task"
       ref="form$"
     >
       <template #empty>
@@ -13,12 +13,12 @@
           <FormStep
             name="page0"
             label="确认信息"
-            :elements="['h1', 'h2', 'name', 'created_at', 'first_choice']"
+            :elements="['h1', 'h2', 'name', 'handle_by', 'writing_task_ddl']"
           />
           <FormStep
             name="page1"
             label="提交笔试"
-            :elements="['h2_1', 'writing_test_file', 'video_link']"
+            :elements="['h2_1', 'writing_task_file', 'writing_task_video_link']"
           />
         </FormSteps>
         <FormElements>
@@ -40,55 +40,27 @@
             :submit="false"
             :readonly="true"
           />
-          <DateElement
-            name="created_at"
-            label="申请提交时间:"
-            :time="true"
-            :readonly="true"
-          />
           <SelectElement
-            name="first_choice"
-            :items="[
-              {
-                value: 'TUT',
-                label: '教学部',
-              },
-              {
-                value: 'CM',
-                label: '行研部',
-              },
-              {
-                value: 'IT',
-                label: 'IT部',
-              },
-              {
-                value: 'HR',
-                label: '人事部',
-              },
-              {
-                value: 'PR',
-                label: '宣传部',
-              },
-              {
-                value: 'FIN',
-                label: '财务部',
-              },
-              {
-                value: 'LAW',
-                label: '法务部',
-              },
-              {
-                value: 'LIA',
-                label: '外联部',
-              },
-            ]"
+            name="handle_by"
+            :items="items"
             :search="true"
             :native="false"
             input-type="search"
             autocomplete="off"
             label="笔试提交部门:"
+            placeholder="请选择对应的部门"
+            :floating="false"
+            :rules="['required']"
+            @change="handleDeptChange"
+          />
+          <DateElement
+            name="writing_task_ddl"
+            label="提交截止时间:"
+            placeholder="请先选择需要提交的部门"
+            :time="true"
+            :floating="false"
+            :readonly="true"
             :submit="false"
-            :disabled="true"
           />
           <StaticElement
             name="h2_1"
@@ -97,21 +69,18 @@
             description="你可以在截止日期前重复提交. 注意⚠️:只有最后一次提交会被保存"
           />
           <FileElement
-            name="writing_test_file"
+            name="writing_task_file"
             label="笔试文件:"
             info="请将你的所有笔试文件合并到一个pdf中上传"
             description="大小限制: 10MB, 文件格式: .pdf"
             :drop="true"
             accept="application/pdf"
             :rules="['mimetypes:application/pdf', 'max:10240', 'required']"
-            :remove-endpoint="{
-              url: fileUrl,
-              method: 'DELETE',
-            }"
+            :remove-endpoint="handleFileRemove"
             :upload-temp-endpoint="handleUploadFile"
           />
           <TextElement
-            name="video_link"
+            name="writing_task_video_link"
             input-type="url"
             :rules="['nullable', 'url', 'required']"
             placeholder="eg. http(s)://www.example.com"
@@ -119,7 +88,7 @@
             info="请上传腾讯会议或哔哩哔哩的视频链接"
             label="试讲视频链接"
             description=" 请保留链接前的 http(s):// 前缀"
-            :conditions="[['first_choice', 'in', ['TUT', 'CM']]]"
+            :conditions="[['handle_by', 'in', ['TUT', 'CM']]]"
           />
           <ButtonElement
             v-if="isMobile"
@@ -134,8 +103,8 @@
     </Vueform>
   </section>
   <div
-    class="volinteers-upload-writing-test-overlay"
-    id="volinteers-upload-writing-test-overlay"
+    class="volinteers-upload-writing-task-overlay"
+    id="volinteers-upload-writing-task-overlay"
   >
     <div class="message-box">
       <div class="mesage-box__title">{{ messageTitle }}</div>
@@ -161,13 +130,17 @@ const router = useRouter();
 const route = useRoute();
 const form$ = ref(null);
 
-let isMobile = ref(window.innerWidth <= 768);
-let messageTitle = ref("");
-let messageText = ref("");
+const isMobile = ref(window.innerWidth <= 768);
+const messageTitle = ref("");
+const messageText = ref("");
 
-const url = inject("ApiUrl") + "applicants/writing-tests/" + route.query.id;
-let fileUrl =
-  inject("ApiUrl") + "applicants/writing-tests/files/" + route.query.id;
+const items = ref([]);
+let data = undefined;
+let expired = false;
+let curDept = undefined;
+
+const url = inject("ApiUrl") + "applicants/writing-tasks/" + route.query.id;
+let fileUrl = inject("ApiUrl") + "applicants/writing-tasks/files/" + route.query.id;
 
 onMounted(() => {
   window.scrollTo(0, 0);
@@ -184,13 +157,62 @@ onMounted(() => {
       }
       return response.json();
     })
-    .then((data) => {
-      form$.value.update(data);
+    .then((d) => {
+      console.log(d);
+      data = d;
+      handelInit();
     })
     .catch((error) => {
       console.error("Error:", error);
     });
 });
+
+function handelInit() {
+  form$.value.update({
+    name: data.name,
+  });
+
+  if (data.applications.length == 0) {
+    onNoValidApplication();
+    return;
+  } else if (data.applications.length == 1) {
+    form$.value.update({
+      handle_by: data.applications[0].handle_by,
+    });
+  }
+
+  for (let i = 0; i < data.applications.length; i++) {
+    items.value.push({
+      value: data.applications[i].handle_by,
+      label: codeToDeptName(data.applications[i].handle_by),
+    });
+  }
+}
+
+function handleDeptChange(value) {
+  if (data == undefined) {
+    return;
+  }
+  curDept = value;
+  if (value == undefined) {
+    form$.value.update({
+      writing_task_ddl: "",
+      writing_task_file: "",
+      writing_task_video_link: "",
+    });
+    return;
+  }
+  let application = data.applications.find((app) => app.handle_by == value);
+  form$.value.update({
+    writing_task_ddl: application.writing_task_ddl,
+    writing_task_file: application.writing_task_file,
+    writing_task_video_link: application.writing_task_video_link,
+  });
+
+  // check passed ddl
+  expired = Date.parse(application.writing_task_ddl) < Date.now();
+  console.log(expired);
+}
 
 function getCSRFToken() {
   return document.cookie
@@ -200,8 +222,14 @@ function getCSRFToken() {
 }
 
 async function handleUploadFile(value, el$) {
+  if (expired) {
+    onExpired();
+    return;
+  }
+
   let data = new FormData();
-  data.append("writing_test_file", value);
+  data.append("writing_task_file", value);
+  data.append("handle_by", curDept);
   let res = await el$.$vueform.services.axios.request({
     url: fileUrl,
     method: "PUT",
@@ -217,8 +245,37 @@ async function handleUploadFile(value, el$) {
   return res.data;
 }
 
+async function handleFileRemove(value, el$) {
+  if (expired) {
+    onExpired();
+    return;
+  }
+
+  let res = await el$.$vueform.services.axios.request({
+    url: fileUrl,
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRFToken": getCSRFToken(),
+    },
+    data: {
+      handle_by: curDept,
+    },
+  });
+  return res.data;
+}
+
 async function handleSubmit(form$, FormData) {
+  if (expired) {
+    onExpired();
+    return;
+  }
+
   let requestData = form$.requestData;
+  if (requestData.writing_task_video_link == undefined) {
+    onSuccess();
+    return;
+  }
 
   form$.submitting = true;
   // perform request here...
@@ -228,7 +285,10 @@ async function handleSubmit(form$, FormData) {
       "Content-Type": "application/json",
       "X-CSRFToken": getCSRFToken(),
     },
-    body: JSON.stringify(requestData),
+    body: JSON.stringify({
+      writing_task_video_link: requestData.writing_task_video_link,
+      handle_by: requestData.handle_by,
+    }),
   })
     .then((response) => {
       if (response.ok) {
@@ -246,19 +306,42 @@ async function handleSubmit(form$, FormData) {
     });
 }
 
+function onExpired() {
+  const overlay = document.querySelector(
+    "#volinteers-upload-writing-task-overlay"
+  );
+  messageTitle.value = "提交已过期";
+  messageText.value =
+    "提交已过期, 请联系: human-resources@saga-xingguang.com 以提交你的笔试";
+  overlay.style.display = "flex";
+  setTimeout(() => {
+    overlay.style.display = "none";
+  }, 5000);
+}
+
+function onNoValidApplication() {
+  const overlay = document.querySelector(
+    "#volinteers-upload-writing-task-overlay"
+  );
+  messageTitle.value = "没有找到合适的申请";
+  messageText.value =
+    "目前没有可以提交的申请. 如果你认为这是一个错误, 请联系: support@saga-xingguang.com";
+  overlay.style.display = "flex";
+}
+
 function onBadID() {
   const overlay = document.querySelector(
-    "#volinteers-upload-writing-test-overlay"
+    "#volinteers-upload-writing-task-overlay"
   );
   messageTitle.value = "链接错误";
   messageText.value =
-    "你输入的链接有误, 请检查后重试. 若问题仍然存在, 请联系我们";
+    "你输入的链接有误, 请检查后重试. 若问题仍然存在, 请联系: support@saga-xingguang.com";
   overlay.style.display = "flex";
 }
 
 function onSuccess() {
   const overlay = document.querySelector(
-    "#volinteers-upload-writing-test-overlay"
+    "#volinteers-upload-writing-task-overlay"
   );
   messageTitle.value = "提交成功";
   messageText.value = "即将重定向至首页...";
@@ -270,10 +353,10 @@ function onSuccess() {
 
 function onFailed() {
   const overlay = document.querySelector(
-    "#volinteers-upload-writing-test-overlay"
+    "#volinteers-upload-writing-task-overlay"
   );
   messageTitle.value = "上传失败";
-  messageText.value = "请在稍后重试...";
+  messageText.value = "请在稍后重试... 如果问题仍然存在, 请联系: support@saga-xingguang.com";
   overlay.style.display = "flex";
   setTimeout(() => {
     overlay.style.display = "none";
@@ -282,7 +365,7 @@ function onFailed() {
 
 function onBadRequest() {
   const overlay = document.querySelector(
-    "#volinteers-upload-writing-test-overlay"
+    "#volinteers-upload-writing-task-overlay"
   );
   messageTitle.value = "你上传的信息有误";
   messageText.value = "请检查你的输入并重试...";
@@ -291,10 +374,33 @@ function onBadRequest() {
     overlay.style.display = "none";
   }, 3000);
 }
+
+function codeToDeptName(code) {
+  switch (code) {
+    case "TUT":
+      return "教学部";
+    case "CM":
+      return "行研部";
+    case "IT":
+      return "IT部";
+    case "HR":
+      return "人事部";
+    case "PR":
+      return "宣传部";
+    case "FIN":
+      return "财务部";
+    case "LAW":
+      return "法务部";
+    case "LIA":
+      return "外联部";
+    default:
+      return "error";
+  }
+}
 </script>
 
 <style>
-.volinteers-upload-writing-test {
+.volinteers-upload-writing-task {
   display: flex;
   justify-content: center;
   padding: 5rem 2rem;
@@ -302,7 +408,7 @@ function onBadRequest() {
   background-color: var(--clr-background-muted);
 }
 
-.volinteers-upload-writing-test form {
+.volinteers-upload-writing-task form {
   color: var(--clr-text);
   width: 100%;
   max-width: 40rem;
@@ -313,7 +419,7 @@ function onBadRequest() {
   box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
 }
 
-.volinteers-upload-writing-test-overlay {
+.volinteers-upload-writing-task-overlay {
   padding-top: 20svh;
   position: fixed;
   inset: 0;
@@ -323,17 +429,17 @@ function onBadRequest() {
   display: none;
 }
 
-.volinteers-upload-writing-test-overlay .message-box {
+.volinteers-upload-writing-task-overlay .message-box {
   background-color: var(--clr-background);
   border-radius: 0.5rem;
   color: var(--clr-text);
-  padding: 3rem;
-  width: 25vw;
+  padding: 5rem 3rem;
+  width: fit-content;
+  max-width: 40vw;
   min-width: 20rem;
-  aspect-ratio: 4 / 3;
 }
 
-.volinteers-upload-writing-test-overlay .mesage-box__title {
+.volinteers-upload-writing-task-overlay .mesage-box__title {
   width: 100%;
   text-align: center;
   font-weight: 600;
@@ -345,23 +451,23 @@ function onBadRequest() {
   font-size: var(--fs-400);
 }
 
-.volinteers-upload-writing-test-overlay .message-box__footer {
+.volinteers-upload-writing-task-overlay .message-box__footer {
   margin-top: 2rem;
   font-size: var(--fs-200);
   color: var(--clr-text-muted);
 }
 
-.volinteers-upload-writing-test-overlay .message-box__footer a {
+.volinteers-upload-writing-task-overlay .message-box__footer a {
   text-decoration: underline;
   color: var(--clr-primary);
 }
 
 @media (max-width: 768px) {
-  .volinteers-upload-writing-test {
+  .volinteers-upload-writing-task {
     padding: 0rem;
     min-height: 0;
   }
-  .volinteers-upload-writing-test form {
+  .volinteers-upload-writing-task form {
     overflow-x: clip;
     padding: 1.5rem;
     border-radius: 0rem;

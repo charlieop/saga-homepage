@@ -720,7 +720,7 @@ function onFailed() {
 
 function onBadRequest() {
   const overlay = document.querySelector(
-    "#volinteers-upload-writing-test-overlay"
+    "#volinteers-upload-writing-task-overlay"
   );
   messageTitle.value = "你上传的信息有误";
   messageText.value = "请检查你的输入并重试...";
@@ -765,10 +765,10 @@ function onBadRequest() {
   background-color: var(--clr-background);
   border-radius: 0.5rem;
   color: var(--clr-text);
-  padding: 3rem;
-  width: 25vw;
+  padding: 5rem 3rem;
+  width: fit-content;
+  max-width: 40vw;
   min-width: 20rem;
-  aspect-ratio: 4 / 3;
 }
 
 .volinteers-application-overlay .mesage-box__title {
