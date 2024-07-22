@@ -82,13 +82,13 @@
           <TextElement
             name="writing_task_video_link"
             input-type="url"
-            :rules="['nullable', 'url', 'required']"
+            :rules="['nullable', 'url']"
             placeholder="eg. http(s)://www.example.com"
             :floating="false"
             info="请上传腾讯会议或哔哩哔哩的视频链接"
-            label="试讲视频链接"
+            label="视频链接"
             description=" 请保留链接前的 http(s):// 前缀"
-            :conditions="[['handle_by', 'in', ['TUT', 'CM']]]"
+            :conditions="[['handle_by', 'in', ['TUT', 'CM', 'PR']]]"
           />
           <ButtonElement
             v-if="isMobile"

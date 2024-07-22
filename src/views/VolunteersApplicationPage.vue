@@ -186,7 +186,7 @@
             ]"
             :search="true"
             :native="false"
-            label="你的姓别是?"
+            label="你的性别是?"
             input-type="search"
             :rules="['required']"
             open-direction="top"
