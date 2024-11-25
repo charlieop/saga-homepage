@@ -32,12 +32,41 @@
         </svg>
       </a>
     </div>
+    <div class="call-to-action">
+        <RouterLink
+          class="button"
+          :to="{
+            name: 'VolunteersApplicationPage',
+          }"
+          title="SAGA星光志愿者报名"
+          >志愿者报名</RouterLink
+        >
+    </div>
   </nav>
 </template>
 
 <script setup></script>
 
 <style scoped>
+.call-to-action {
+  margin-left: auto;
+}
+
+.button {
+  display: inline-block;
+  padding: 1rem 1.25rem;
+  background-color: var(--clr-primary);
+  color: var(--clr-background);
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: 0.3s cubic-bezier(0.3, 0, 0, 1.3);
+
+}
+
+.button:hover {
+  transform: scale(105%);
+}
+
 .main-navigation {
   display: flex;
   align-items: center;

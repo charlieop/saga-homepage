@@ -9,8 +9,8 @@
         <svg
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
-          height="15rem"
-          width="15rem"
+          height="240px"
+          width="240px"
           version="1.1"
           id="Layer_1"
           viewBox="0 0 507.9 507.9"
@@ -99,8 +99,8 @@
         <svg
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
-          width="15rem"
-          height="15rem"
+          height="240px"
+          width="240px"
           viewBox="0 0 128 128"
           aria-hidden="true"
           role="img"
@@ -199,6 +199,9 @@
   .value__block:nth-child(even) {
     flex-direction: column;
     text-align: center;
+  }
+  .value__image svg {
+    width: 80%;
   }
 }
 </style>

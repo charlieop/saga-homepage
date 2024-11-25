@@ -36,10 +36,10 @@
 <script setup>
 import { ref, onMounted } from "vue";
 
-const finalYears = 3;
-const finalMinutes = 10;
-const finalChildren = 500;
-const finalVolunteers = 500;
+const finalYears = 4;
+const finalMinutes = 21;
+const finalChildren = 750;
+const finalVolunteers = 620;
 
 let foundedYears = ref(finalYears);
 let teachingMintues = ref(finalMinutes);

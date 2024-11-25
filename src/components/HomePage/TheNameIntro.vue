@@ -11,6 +11,17 @@
       </h2>
     </div>
     <div class="name-intro__scrolling-area">
+      <article class="name-intro__article" data-index="-1">
+        <h3 class="name-intro__word">
+          <img class="name-intro__img" src="@/assets/imgs/intro.png" alt="">
+        </h3>
+        <div class="name-intro__desc">
+          <p class="name-intro__title">简介</p>
+          <p class="name-intro__detail">
+            SAGA是一个社会公益组织，专注于为因患有白血病而需要长期住院的儿童提供线上课堂服务，旨在保障这些无法正常上学的儿童的教育。
+          </p>
+        </div>
+      </article>
       <article class="name-intro__article" data-index="0">
         <h3 class="name-intro__word">
           <span class="name-intro__initial">S</span>ense
@@ -100,11 +111,11 @@ onMounted(() => {
 function handleIntersection(entries) {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      console.log(entry.target.dataset.index);
+      // console.log(entry.target.dataset.index);
       setActive(entry.target.dataset.index);
-      setDisappear(entry.target.dataset.index - 1);
+      setDisappear(entry.target.dataset.index);
     } else {
-      setAppear(entry.target.dataset.index - 1);
+      setAppear(entry.target.dataset.index);
       setActive(entry.target.dataset.index - 1);
     }
   });
@@ -139,6 +150,7 @@ function setAppear(i) {
   background-color: var(--_bg-clr);
   border-radius: 0 0 10vw 10vw;
   position: relative;
+  margin-bottom: 20svh;
 }
 
 .name-intro__sticky-area {
@@ -170,6 +182,11 @@ function setAppear(i) {
   justify-content: center;
   align-items: center;
   letter-spacing: 0.1ch;
+}
+
+.name-intro__img {
+  width: 90%;
+  object-fit: cover;
 }
 
 .name-intro__title-letter {

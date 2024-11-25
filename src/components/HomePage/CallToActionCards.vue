@@ -4,23 +4,38 @@
       <h2 class="title">志愿者报名</h2>
       <p class="text">让这个世界变得更加美好</p>
       <div class="button-container">
-        <a href="#nav" class="button">加入我们</a>
+        <RouterLink
+          class="button"
+          :to="{
+            name: 'VolunteersApplicationPage',
+          }"
+          title="SAGA星光志愿者报名"
+          >立刻报名</RouterLink
+        >
       </div>
       <div class="decoration"></div>
     </article>
     <article class="card">
+      <h2 class="title">志愿者名单</h2>
+      <p class="text">查看所有闪耀过的星星</p>
+      <div class="button-container">
+        <RouterLink
+          class="button"
+          :to="{
+            name: 'AcknowledgementsPage',
+          }"
+          title="SAGA星光志愿者名单"
+          >前往查看</RouterLink
+        >
+      </div>
+      <div class="decoration"></div>
+    </article>
+    <article class="card disabled">
       <h2 class="title">小朋友报名</h2>
       <p class="text">你从不孤单</p>
       <div class="button-container">
-        <a href="#nav" class="button">参与课程</a>
-      </div>
-      <div class="decoration"></div>
-    </article>
-    <article class="card">
-      <h2 class="title">组织合作</h2>
-      <p class="text">与我们携手为孩子教育出一份力</p>
-      <div class="button-container">
-        <a href="#nav" class="button">联系我们</a>
+        <!-- <a class="button disabled">参与课程</a> -->
+        <a class="button">暂未开放</a>
       </div>
       <div class="decoration"></div>
     </article>
@@ -124,6 +139,10 @@
   border-radius: 2rem;
   font-weight: 600;
   font-size: var(--fs-300);
+}
+
+.disabled {
+  filter: grayscale(0.5) brightness(0.9);
 }
 
 .button:hover {
