@@ -1,31 +1,29 @@
-<!-- 此部分未适配响应式设计 -->
-
 <template>
   <section class="data-banner">
-    <div class="data-banner__block">
+    <div class="data-banner__block" ref="block1">
       <div class="data-banner__figure">
         <span class="data-banner__number">{{ foundedYears }}</span
         ><span class="data-banner__unit">年</span>
       </div>
       <span class="data-banner__desc">SAGA星光成立已达</span>
     </div>
-    <div class="data-banner__block">
+    <div class="data-banner__block" ref="block2">
       <div class="data-banner__figure">
         <span class="data-banner__number">{{ teachingMintues }}</span
         ><span class="data-banner__unit">万</span>
       </div>
       <span class="data-banner__desc">提供的教学时长 (分钟)</span>
     </div>
-    <div class="data-banner__block">
+    <div class="data-banner__block" ref="block3">
       <div class="data-banner__figure">
-        <span class="data-banner__number">{{ childrenServed }}+</span
+        <span class="data-banner__number">{{ childrenServed }}</span
         ><span class="data-banner__unit">名</span>
       </div>
       <span class="data-banner__desc">服务的白血病儿童</span>
     </div>
-    <div class="data-banner__block">
+    <div class="data-banner__block" ref="block4">
       <div class="data-banner__figure">
-        <span class="data-banner__number">{{ volunteers }}+</span
+        <span class="data-banner__number">{{ volunteers }}</span
         ><span class="data-banner__unit">名</span>
       </div>
       <span class="data-banner__desc">来自世界各地的志愿者</span>
@@ -41,21 +39,77 @@ const finalMinutes = 21;
 const finalChildren = 750;
 const finalVolunteers = 620;
 
-let foundedYears = ref(finalYears);
-let teachingMintues = ref(finalMinutes);
-let childrenServed = ref(finalChildren);
-let volunteers = ref(finalVolunteers);
+const foundedYears = ref(0);
+const teachingMintues = ref(0);
+const childrenServed = ref(0);
+const volunteers = ref(0);
+
+const block1 = ref(null);
+const block2 = ref(null);
+const block3 = ref(null);
+const block4 = ref(null);
+
+const animateValue = (start, end, duration, updateFn) => {
+  const startTime = performance.now();
+  
+  const animate = (currentTime) => {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    
+    const easeOutQuad = progress => 1 - (1 - progress) * (1 - progress);
+    const easedProgress = easeOutQuad(progress);
+    
+    const current = start + (end - start) * easedProgress;
+    
+    if (progress === 1) {
+      updateFn(end);
+      return;
+    }
+
+    updateFn(Math.round(current));
+    requestAnimationFrame(animate);
+  };
+
+  requestAnimationFrame(animate);
+};
 
 onMounted(() => {
-  let observer = new IntersectionObserver(
-    () => {
+  // Durations for animations
+  createObserver(block1.value, () => {
+    animateValue(0, finalYears, 2500, (val) => foundedYears.value = val);
+  });
+
+  createObserver(block2.value, () => {
+    animateValue(0, finalMinutes, 2500, (val) => teachingMintues.value = val);
+  });
+
+  createObserver(block3.value, () => {
+    animateValue(0, finalChildren, 2500, (val) => childrenServed.value = val);
+  });
+
+  createObserver(block4.value, () => {
+    animateValue(0, finalVolunteers, 2500, (val) => volunteers.value = val);
+  });
+});
+
+const createObserver = (element, animationFn) => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animationFn();
+          observer.unobserve(entry.target);
+        }
+      });
     },
     {
-      threshold: 1,
+      threshold: 0.3,
+      rootMargin: "50px",
     }
   );
-  observer.observe(document.querySelector(".data-banner"));
-});
+
+  observer.observe(element);
+};
 </script>
 
 <style scoped>
