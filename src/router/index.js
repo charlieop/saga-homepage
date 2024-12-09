@@ -20,6 +20,11 @@ const routes = [
     component: () => import("@/views/VolunteersUploadWritingTaskPage.vue"),
   },
   {
+    path: "/gifts-exchange",
+    name: "GiftsExchangePage",
+    component: () => import("@/views/GiftsExchangePage.vue"),
+  },
+  {
     path: "/:pathMatch(.*)*",
     name: "NotFound",
     component: () => import("@/views/NotFound.vue"),
