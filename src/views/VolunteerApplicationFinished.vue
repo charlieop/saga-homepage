@@ -114,11 +114,11 @@ function makesnow(snowbackground) {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    height: 120vh;
+    height: auto;
     width: 100vw;
     gap: 3rem;
     background-color: var(--clr-background);
-    padding: 9rem 4rem 0 4rem ;
+    padding: 9rem 4rem 9rem 4rem ;
 }
 
 .application-finish-notice .qrcode {
@@ -229,7 +229,7 @@ function makesnow(snowbackground) {
 @media screen and (max-width: 700px) {
     .application-finish-notice {
         width: 100vw;
-        height: 150vh;
+        height: auto;
         padding: 7rem 4rem;
         background: var(--clr-background-muted);
     }
