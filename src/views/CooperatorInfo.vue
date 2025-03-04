@@ -25,7 +25,8 @@ import { useRoute } from 'vue-router'
 const route = useRoute();
 const cooperatorList = ref(cooperators);
 const coorpContainer = document.querySelector('.cooperatorContainer');
-const starColors = ["var(--clr-primary)","lightblue", "pink"]
+const starColors_light = ["#01847f","#ea5511","#ff5736", "#f9d4dc"]
+const starColors_dark = ["#f6322d","#ffb300", "#0e4da6","#00ae75"]
 
 let isMobile = ref(window.innerWidth <= 700);
 let starContainer = [];
@@ -83,10 +84,17 @@ function scrollToCooperator() {
   }
 }
 
+const systemSettingDark = window.matchMedia("(prefers-color-scheme: dark)");
 // 星星颜色会用到
 function getRandomColor() {
-  const randomIndex = Math.floor(Math.random() * starColors.length);
-  return starColors[randomIndex];
+    if (systemSettingDark.matches) {
+        const randomIndex = Math.floor(Math.random() * starColors_dark.length);
+        return starColors_dark[randomIndex];
+    } else {
+        const randomIndex = Math.floor(Math.random() * starColors_light.length);
+        return starColors_light[randomIndex];
+    }
+    
 }
 
 // 创建星星下落动效
@@ -121,7 +129,11 @@ function makeStar(starBackground) {
             requestAnimationFrame(sparkling);
         },100)
     }
-    sparkling();
+    if (systemSettingDark.matches) {
+        singleStar.style.opacity = 1;
+    } else{
+        sparkling();
+    }
     starBackground.appendChild(singleStar);
     starContainer.push(singleStar);
 }
@@ -142,7 +154,6 @@ function makeStar(starBackground) {
     gap: 20px;
 }
 
-
 .star {
     position: absolute;
     aspect-ratio: 1/1;
@@ -161,9 +172,6 @@ function makeStar(starBackground) {
     aspect-ratio: 1/1;
     opacity: .7;
 }
-
-
-
 
 @keyframes rotate {
     0% {
@@ -200,8 +208,5 @@ function makeStar(starBackground) {
 
     }
 }
-
-
-
 
 </style>

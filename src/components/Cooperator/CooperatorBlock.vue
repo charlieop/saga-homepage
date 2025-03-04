@@ -31,7 +31,7 @@
         border-radius: 10px;
         width: 40vw;
         height: 300px;
-        box-shadow: 2px 2px 10px lightgray;
+        box-shadow: 1px 1px 6px lightgray;
     }
 
     .partnerIntro {
@@ -41,7 +41,7 @@
         justify-content: space-around;
         align-items: flex-start;
         padding: 10px 20px;
-        box-shadow: 1px 0 5px lightgray;
+        box-shadow: 0px 1px 10px rgb(213, 213, 213);
         border-radius: 5px;
     }
 
@@ -61,65 +61,68 @@
 
     .className {
         font-family: var(--ff-primary);
+        font-size: var(--fs-400);
+    }
+
+    .coorpTime, .partnerName {
+        font-family: var(--ff-primary);
         font-size: var(--fs-300);
     }
 
-    .coorpTime, .partnerName, .details {
+    .details {
         font-family: var(--ff-primary);
         font-size: var(--fs-200);
     }
 
     @media (prefers-color-scheme: light) {
        .mainCard {
-        background-color: var(--clr-background-muted);
+        background-color: #ffefcd;
        } 
 
        .partnerIntro {
-        background-color: hsl(30, 100%, 87%) ;
+        background-color: #fccb9d ;
        }
 
        .className {
-           color: var(--clr-text);
+           color: #161823;
        }
 
        .partnerName {
-           color: var(--clr-text);
+           color: #161823;
        }
 
        .coorpTime {
-           color: var(--clr-primary);
+           color: #f89418;
        }
 
        .details {
-           color: var(--clr-text);
-       }
-
-    
+           color: #161823;
+       } 
 }
 
 @media (prefers-color-scheme: dark) {
     .mainCard {
-        background-color: var(--clr-background-muted);
+        background-color: #f4bc64;
        } 
 
        .partnerIntro {
-        background-color: hsl(30, 100%, 87%) ;
+        background-color: #feefce ;
        }
 
        .className {
-           color: var(--clr-text);
+           color: #25211e;
        }
 
        .partnerName {
-           color: var(--clr-text);
+           color: #25211e;
        }
 
        .coorpTime {
-           color: var(--clr-primary);
+           color: #cd5921;
        }
 
        .details {
-           color: var(--clr-text);
+           color: #25211e;
        }
    
 }
@@ -129,5 +132,4 @@
         width: 60vw;
     }
 }
-
 </style>
