@@ -1,20 +1,20 @@
 <template>
     <div class="mainCard">
       <div class="partnerImg">
-        <img :src="coorporator.logo" alt="partner logo" class="partnerlogo">
+        <img :src="cooperator.logo" alt="partner logo" class="partnerlogo">
       </div>
       <div class="partnerIntro">
-        <h1 class="className">{{ coorporator.className }}</h1>
-        <h2 class="partnerName">{{ coorporator.instituteName }}</h2>
-        <h2 class="coorpTime">{{ coorporator.period }}</h2>
-        <p class="details">{{ coorporator.programmeDetails }}</p>
+        <h1 class="className">{{ cooperator.className }}</h1>
+        <h2 class="partnerName">{{ cooperator.instituteName }}</h2>
+        <h2 class="coorpTime">{{ cooperator.period }}</h2>
+        <p class="details">{{ cooperator.programmeDetails }}</p>
       </div>
     </div>
   </template>
   
   <script setup>
     defineProps({
-        coorporator: {
+        cooperator: {
         type: Object,
         required: true
         }

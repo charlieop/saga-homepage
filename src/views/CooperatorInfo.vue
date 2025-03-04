@@ -1,14 +1,14 @@
 <template>
-    <div class="coorporatorInfo">
+    <div class="cooperatorInfo">
         <MainNavigation></MainNavigation>
-        <div class="coorporatorContainer">
+        <div class="cooperatorContainer">
             <div class="starsContainer"></div>
-            <CoorporatorBlock 
-                v-for="coorporator in coorporatorList"
-                :key="coorporator.id"
-                :coorporator="coorporator"
-                :id = "'coorp-' + coorporator.id"
-            />
+            <CooperatorBlock 
+                v-for="cooperator in cooperatorList"
+                :key="cooperator.id"
+                :cooperator="cooperator"
+                :id = "'coorp-' + cooperator.id"
+            ></CooperatorBlock>
         </div>
         <Footer></Footer>
     </div>
@@ -17,14 +17,14 @@
 <script setup>
 import MainNavigation from '@/components/MainNavigation.vue';
 import Footer from '@/components/Footer.vue';
-import CoorporatorBlock from '@/components/Coorporator/CoorporatorBlock.vue';
-import { coorporators } from '@/assets/dataset/coorporator_list'
+import CooperatorBlock from '@/components/Cooperator/CooperatorBlock.vue';
+import { cooperators } from '@/assets/dataset/cooperator_list'
 import { onMounted, ref, onUnmounted, nextTick} from 'vue';
 import { useRoute } from 'vue-router'
 
 const route = useRoute();
-const coorporatorList = ref(coorporators);
-const coorpContainer = document.querySelector('.coorporatorContainer');
+const cooperatorList = ref(cooperators);
+const coorpContainer = document.querySelector('.cooperatorContainer');
 const starColors = ["var(--clr-primary)","lightblue", "pink"]
 
 let isMobile = ref(window.innerWidth <= 700);
@@ -47,14 +47,14 @@ onMounted(async () => {
   window.scrollTo(0, 0);
   window.addEventListener('resize', handleResize);
 
-  const starBackground = document.querySelector('.coorporatorContainer');
+  const starBackground = document.querySelector('.cooperatorContainer');
   for (let i = 0; i < 50; i++) {
     makeStar(starBackground);
   }
 
   // 等待 DOM 渲染后读取URL参数然后跳转
   await nextTick();
-  scrollToCoorporator();
+  scrollToCooperator();
 }
 );
 
@@ -73,7 +73,7 @@ const handleResize = () => {
 };
 
 // 跳转函数
-function scrollToCoorporator() {
+function scrollToCooperator() {
   const coorpId = route.query.id || window.location.hash.replace('#', ''); // 获取id参数
   if (coorpId) {
     const targetElement = document.getElementById(`coorp-${coorpId}`);
@@ -129,7 +129,7 @@ function makeStar(starBackground) {
 </script>
 
 <style>
-.coorporatorContainer {
+.cooperatorContainer {
     position: relative;
     display: flex;
     flex-direction: column;

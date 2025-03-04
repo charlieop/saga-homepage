@@ -1,4 +1,4 @@
-export const  coorporators = [
+export const  cooperators = [
     {"id": 1,
     "className": "自学月围棋课",
     "instituteName": "山东理工大学仙弈围棋协会",
