@@ -9,7 +9,7 @@
                     @click="navigateToCooperator(cooperator)"
                     class="p-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg shadow-md transition-all duration-300 text-lg font-medium"
                 >
-                    {{ cooperator.className }}
+                    {{ cooperator.instituteName }}
                 </button>
             </div>
         </CooperatorLayout>
