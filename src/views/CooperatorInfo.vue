@@ -7,7 +7,7 @@
                 v-for="cooperator in cooperatorList"
                 :key="cooperator.id"
                 :cooperator="cooperator"
-                :id = "'coorp-' + cooperator.id"
+                :id="`coorp-${cooperator.id}`"
             ></CooperatorBlock>
         </div>
         <Footer></Footer>
@@ -75,13 +75,19 @@ const handleResize = () => {
 
 // 跳转函数
 function scrollToCooperator() {
-  const coorpId = route.query.id || window.location.hash.replace('#', ''); // 获取id参数
-  if (coorpId) {
-    const targetElement = document.getElementById(`coorp-${coorpId}`);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // Check for both query params and hash
+    const coorpId = route.query.id || route.hash.slice(1).replace('coorp-', '');
+    if (coorpId) {
+        setTimeout(() => {
+            const targetElement = document.getElementById(`coorp-${coorpId}`);
+            if (targetElement) {
+                targetElement.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+            }
+        }, 80);
     }
-  }
 }
 
 const systemSettingDark = window.matchMedia("(prefers-color-scheme: dark)");

@@ -2,19 +2,29 @@
   <div class="page-container" :style="bgStyle">
     <div class="container mx-auto">
       <div class="grid-layout">
-        <!-- Apply styles to the slot content -->
-        <slot :starStyles="starStyles"></slot>
+        <!-- Modify the slot to pass the navigation function -->
+        <slot :starStyles="starStyles" :navigateToCard="navigateToCard"></slot>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
 import backgroundImage from '@/assets/imgs/coop-nav-bg-web.jpg';
 import buttonBgImage from '@/assets/imgs/logos/orangeStar.png';
 
+const router = useRouter();
+
 const bgStyle = `url(${backgroundImage})`;
 const buttonStyle = {backgroundImage: `url(${buttonBgImage})`};
+
+const navigateToCard = (id) => {
+  router.push({
+    path: '/cooperator-info',
+    hash: `#coorp-${id}`
+  });
+};
 
 const starStyles = {
   1: { transform: 'rotate(-30deg) scale(1.05)',
