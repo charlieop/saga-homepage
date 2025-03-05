@@ -31,6 +31,11 @@ const routes = [
     component: () => import("@/views/NotFound.vue"),
   },
   {
+    path: '/cooperator-nav', 
+    name: 'CooperatorNavigation',
+    component: () => import("@/views/CooperatorNavigation.vue"),
+  },
+  {
     path: "/cooperator-info",
     name: "CooperatorsPage",
     component: () => import("@/views/CooperatorInfo.vue"),
