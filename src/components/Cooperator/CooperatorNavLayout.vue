@@ -1,11 +1,12 @@
 <template>
-    <div class="page-container">
-        <div class="container mx-auto">
-            <div class="grid-layout">
-                <slot></slot>
-            </div>
-        </div>
+  <div class="page-container" :style="bgStyle">
+    <div class="container mx-auto">
+      <div class="grid-layout">
+        <!-- Apply styles to the slot content -->
+        <slot :starStyles="starStyles"></slot>
+      </div>
     </div>
+  </div>
 </template>
 
 <script setup>
@@ -14,6 +15,39 @@ import buttonBgImage from '@/assets/imgs/logos/orangeStar.png';
 
 const bgStyle = `url(${backgroundImage})`;
 const buttonStyle = {backgroundImage: `url(${buttonBgImage})`};
+
+const starStyles = {
+  1: { transform: 'rotate(-30deg) scale(1.05)',
+    position: 'relative',
+    top: '20px',
+    left: '-40px' },
+  2: { transform: 'rotate(-15deg) scale(0.9)',
+    position: 'relative',
+    top: '-40px',
+    left: '-40px' },
+  3: { transform: 'rotate(15deg) scale(0.95)',
+    position: 'relative',
+    top: '-25px',
+    left: '-15px' },
+  4: { transform: 'rotate(30deg) scale(1)',
+    position: 'relative',
+    top: '10px',
+    left: '30px'},
+  5: { transform: 'rotate(-25deg) scale(0.9)',
+    position: 'relative',
+    top: '-25px',
+    left: '-30px' },
+  6: { transform: 'rotate(-28deg) scale(0.95)',
+    position: 'relative',
+    top: '-65px',
+    left: '-40px' },
+  7: { transform: 'rotate(28deg) scale(0.95)',
+    position: 'relative',
+    top: '-65px'},
+  8: { transform: 'rotate(25deg) scale(0.9)',
+    position: 'relative',
+    top: '5px'}
+};
 </script>
 
 <style>
@@ -32,6 +66,7 @@ const buttonStyle = {backgroundImage: `url(${buttonBgImage})`};
     padding: 2rem;
     width: 70%;
     max-width: 1400px;
+    margin-top: -10rem;
 }
 
 .grid-layout {
@@ -44,9 +79,9 @@ const buttonStyle = {backgroundImage: `url(${buttonBgImage})`};
 
 /* Button styling */
 .coop-button {
-    width: 100%;
+    width: 95%;
     aspect-ratio: 1;
-    padding: 0;
+    padding: 1.5rem;
     border: none;
     background: none;
     background-image: url('../../assets/imgs/logos/orangeStar.png');

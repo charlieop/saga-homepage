@@ -1,18 +1,18 @@
 <template>
     <div class="cooperatorNav">
-        <MainNavigation></MainNavigation>
-        <CooperatorNavLayout>
-            <button 
-                v-for="cooperator in cooperators" 
-                :key="cooperator.id"
-                @click="navigateToCooperator(cooperator)"
-                class="coop-button"
-            >
-                {{ cooperator.instituteName }}
-            </button>
-        </CooperatorNavLayout>
-        <Footer></Footer>
-    </div>
+    <MainNavigation />
+    <CooperatorNavLayout v-slot="{ starStyles }">
+      <button 
+        v-for="(cooperator, index) in cooperators" 
+        :key="cooperator.id"
+        class="coop-button"
+        :style="starStyles[index + 1]"
+      >
+        <span>{{ cooperator.instituteName }}</span>
+      </button>
+    </CooperatorNavLayout>
+    <Footer />
+  </div>
 </template>
 
 <script setup>
