@@ -91,15 +91,16 @@ const starStyles = {
 .coop-button {
     width: 95%;
     aspect-ratio: 1;
-    padding: 1.5rem;
+    padding: 1.6rem;
     border: none;
     background: none;
     background-image: url('../../assets/imgs/logos/orangeStar.png');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    font-size: 1.125rem;
-    font-weight: 500;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Noto Sans', sans-serif;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
@@ -113,6 +114,7 @@ const starStyles = {
     appearance: none;
     box-shadow: none;
 }
+
 
 .coop-button:hover {
     transform: scale(1.05);
