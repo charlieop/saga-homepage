@@ -32,7 +32,6 @@ let isMobile = ref(window.innerWidth <= 700);
 let starContainer = [];
 let resizeTimeout = null;
 
-
 const updateIsMobile = () => {
   isMobile.value = window.innerWidth <= 700;
 };
@@ -140,7 +139,7 @@ function makeStar(starBackground) {
 
 </script>
 
-<style>
+<style scoped>
 .cooperatorContainer {
     position: relative;
     display: flex;
@@ -154,7 +153,7 @@ function makeStar(starBackground) {
     gap: 20px;
 }
 
-.star {
+.cooperatorContainer:deep(.star) {
     position: absolute;
     aspect-ratio: 1/1;
     opacity: .7;
@@ -162,7 +161,7 @@ function makeStar(starBackground) {
     z-index: -1;
 }
 
-.star:nth-child(2n) {
+.cooperatorContainer:deep(.star:nth-child(2n)) {
     animation: inverserotate 10s linear infinite, breathing 3s linear infinite;
 }
 
