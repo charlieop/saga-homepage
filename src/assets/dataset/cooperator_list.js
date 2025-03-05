@@ -39,6 +39,21 @@ export const  cooperators = [
     "instituteName": "翼鸥",
     "logo": "/src/assets/imgs/logos/qingnuan-charity-min.png",
     "period": "合作时间：SAGA X期",
-    "programmeDetails": "为了丰富 SAGA 第三期的课堂内容及为报名的小朋友们提供更好的线上教育，SAGA 向 ClassIn教育公益项目申请为其提供教育公益线上平台的使用。"}
+    "programmeDetails": "为了丰富 SAGA 第三期的课堂内容及为报名的小朋友们提供更好的线上教育，SAGA 向 ClassIn教育公益项目申请为其提供教育公益线上平台的使用。"},
+
+    {"id": 7,
+        "className": "儿白科普培训",
+    "instituteName": "心方向儿童",
+    "logo": "/src/assets/imgs/logos/qingnuan-charity-min.png",
+    "period": "合作时间：SAGA 五期",
+    "programmeDetails": "基于现状，希望志愿者们能对我们的小朋友们有更多的了解——儿白患者的日常生活和学习习惯等，以及在和小朋友及家长相处的时候的注意点，怎么才能和小朋友们成为好朋友，并对他们的学习和社交都产生积极的影响等。因此和心方向儿童共同合作，开展儿白科普培训。"},
+
+    {"id": 8,
+        "className": "点点星光·蔚为汪洋明信片活动",
+    "instituteName": "缘起·看见",
+    "logo": "/src/assets/imgs/logos/qingnuan-charity-min.png",
+    "period": "合作时间：SAGA 四期",
+    "programmeDetails": "同学们围绕关爱白血病儿童主题创作一份作品，为孩子们送去真挚的祝福。此次活动分为线上与线下两种形式，线下活动将在香港大学义卖活动期间举行。线上参与的同学们直接创作电子明信片，完成后提交上传至主题活动平台，由SAGA志愿者统一打印并寄送至白血病患儿处。线下参与的同学们可在港大义卖活动现场领取明信片，创作完成后由义卖活动的志愿者收集并统一邮寄。"},
+
 
 ]
