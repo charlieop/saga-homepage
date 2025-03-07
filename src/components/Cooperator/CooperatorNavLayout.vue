@@ -130,8 +130,6 @@ const starStylesMobile = {
   },
 };
 
-console.log("isMobile:", isMobile.value);
-
 const starStyles = computed(() => {
   return isMobile.value ? starStylesMobile : starStylesDesktop;
 });
