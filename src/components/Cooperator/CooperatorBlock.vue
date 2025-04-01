@@ -25,12 +25,12 @@
 <style scoped>
     .mainCard {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         grid-template-rows: 1fr;
-        grid-template-areas: "partnerImg partnerIntro partnerIntro";
+        grid-template-areas: "partnerImg partnerImg partnerIntro partnerIntro partnerIntro";
         border-radius: 10px;
-        width: 40vw;
-        height: 300px;
+        width: 45vw;
+        height: max-content;
         box-shadow: 1px 1px 6px lightgray;
     }
 
@@ -40,9 +40,10 @@
         flex-direction: column;
         justify-content: space-around;
         align-items: flex-start;
-        padding: 10px 20px;
+        padding: 20px 20px;
         box-shadow: 0px 1px 10px rgb(213, 213, 213);
-        border-radius: 5px;
+        border-radius: 0 5px 5px 0;
+        gap: 15px;
     }
 
     .partnerImg {
@@ -50,28 +51,39 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 5px;
+        padding: 10px;
     }
 
     .partnerlogo {
-        width: 90%;
-        aspect-ratio: 1/1;
+        width: 100%;
+        aspect-ratio: auto;
         border-radius: 10px;
     }
 
     .className {
         font-family: var(--ff-primary);
-        font-size: var(--fs-400);
+        font-size: var(--fs-500);
+    }
+
+    .coorpTime::before {
+        position: absolute;
+        content: '';
+        width: 102%;
+        height: 3px;
+        left: -2px;
+        bottom: -2px;
+        background-image: linear-gradient(to Right, #ffa837, #dd7643);
     }
 
     .coorpTime, .partnerName {
+        position: relative;
         font-family: var(--ff-primary);
-        font-size: var(--fs-300);
+        font-size: var(--fs-400);
     }
 
     .details {
         font-family: var(--ff-primary);
-        font-size: var(--fs-200);
+        font-size: var(--fs-300);
     }
 
     @media (prefers-color-scheme: light) {
@@ -129,7 +141,7 @@
 
 @media (max-width: 1200px) {
     .mainCard {
-        width: 60vw;
+        width: 70vw;
     }
 }
 </style>
