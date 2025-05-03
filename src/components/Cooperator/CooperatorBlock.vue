@@ -24,14 +24,16 @@
 
 <style scoped>
     .mainCard {
+        position: relative;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         grid-template-rows: 1fr;
         grid-template-areas: "partnerImg partnerImg partnerIntro partnerIntro partnerIntro";
         border-radius: 10px;
-        width: 45vw;
+        width: 40vw;
         height: max-content;
         box-shadow: 1px 1px 6px lightgray;
+        cursor: pointer;
     }
 
     .partnerIntro {
@@ -42,7 +44,7 @@
         align-items: flex-start;
         padding: 20px 20px;
         box-shadow: 0px 1px 10px rgb(213, 213, 213);
-        border-radius: 0 5px 5px 0;
+        border-radius: 0 10px 10px 0;
         gap: 15px;
     }
 
@@ -52,6 +54,7 @@
         justify-content: center;
         align-items: center;
         padding: 10px;
+        overflow: hidden;
     }
 
     .partnerlogo {
@@ -61,18 +64,9 @@
     }
 
     .className {
+        position: relative;
         font-family: var(--ff-primary);
         font-size: var(--fs-500);
-    }
-
-    .coorpTime::before {
-        position: absolute;
-        content: '';
-        width: 102%;
-        height: 3px;
-        left: -2px;
-        bottom: -2px;
-        background-image: linear-gradient(to Right, #ffa837, #dd7643);
     }
 
     .coorpTime, .partnerName {
@@ -84,6 +78,47 @@
     .details {
         font-family: var(--ff-primary);
         font-size: var(--fs-300);
+    }
+
+    .partnerName::before {
+        position: absolute;
+        content: '';
+        width: var(--pseudo-width, 0%);
+        height: 3px;
+        left: -2px;
+        bottom: -2px;
+        background-image: linear-gradient(to Right, #ffa837, #eb5020);
+    }
+
+    .className::before {
+        content: '';
+        position: absolute;
+        width: var(--pseudo-width, 0%);
+        height: 3px;
+        left: -2px;
+        bottom: -2px;
+        background-image: linear-gradient(to Right, #ffa837, #eb5020);
+    }
+
+    .enlarge {
+        transform: scale(1.1);
+    }
+
+    .moveup {
+        transform: translateY(-40px);
+        position: relative;
+        opacity: .8;
+    }
+
+    .movedown {
+        transform: translateY(40px);
+        position: relative;
+        opacity: .8;
+    }
+
+    .mainCard, .className::before, .partnerName::before {
+        --animation-duration: .5s;
+        transition: all var(--animation-duration) ease-in-out;
     }
 
     @media (prefers-color-scheme: light) {
@@ -112,6 +147,48 @@
        } 
 }
 
+    .mainCard:nth-of-type(odd):before {
+        content: '';
+        position: absolute;
+        background: url('/src/assets/imgs/cooperator/狮子.png');
+        aspect-ratio: 1/1;
+        width: 25%;
+        left: -20%;
+        bottom: -10%;
+        display: block;
+        z-index: 1;
+        background-size: cover;
+        transform: rotate(-30deg);
+    }
+
+    .mainCard:nth-of-type(4n-2):before {
+        content: '';
+        position: absolute;
+        background: url('/src/assets/imgs/cooperator/大鹅.png');
+        aspect-ratio: 1/1;
+        width: 25%;
+        right: -15%;
+        bottom: -10%;
+        display: block;
+        z-index: 1;
+        background-size: cover;
+        transform: rotate(30deg);
+    }
+
+    .mainCard:nth-of-type(4n):before {
+        content: '';
+        position: absolute;
+        background: url('/src/assets/imgs/cooperator/熊猫.png');
+        aspect-ratio: 1/1;
+        width: 25%;
+        right: -15%;
+        bottom: -10%;
+        display: block;
+        z-index: 1;
+        background-size: cover;
+        transform: rotate(30deg);
+    }
+
 @media (prefers-color-scheme: dark) {
     .mainCard {
         background-color: #f4bc64;
@@ -122,11 +199,11 @@
        }
 
        .className {
-           color: #25211e;
+           color: #161823;
        }
 
        .partnerName {
-           color: #25211e;
+           color: #161823;
        }
 
        .coorpTime {
@@ -134,7 +211,7 @@
        }
 
        .details {
-           color: #25211e;
+           color: #161823;
        }
    
 }

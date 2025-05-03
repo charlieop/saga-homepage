@@ -2,12 +2,14 @@
     <div class="cooperatorInfo">
         <MainNavigation></MainNavigation>
         <div class="cooperatorContainer">
-            <div class="starsContainer"></div>
+            <!-- <div class="starsContainer"></div> -->
             <CooperatorBlock 
-                v-for="cooperator in cooperatorList"
+                v-for="cooperator  in cooperatorList"
                 :key="cooperator.id"
                 :cooperator="cooperator"
                 :id = "'coorp-' + cooperator.id"
+                @mouseover="enlarge(cooperator.id)"
+                @mouseleave="shrink(cooperator.id)"
             ></CooperatorBlock>
         </div>
         <Footer></Footer>
@@ -137,9 +139,49 @@ function makeStar(starBackground) {
     starContainer.push(singleStar);
 }
 
+function enlarge(id){
+    const targetElement = document.getElementById(`coorp-${id}`);
+    const allCooperators = document.querySelectorAll('.mainCard');
+    const targetName = targetElement.querySelector('.className');
+    const targetPartner = targetElement.querySelector('.partnerName');
+
+    allCooperators.forEach((cooperator) => {
+        if (cooperator == targetElement){
+            cooperator.classList.add('enlarge');
+            targetName.style.setProperty("--pseudo-width", "102%")
+            targetPartner.style.setProperty("--pseudo-width", "102%")
+        }else if (cooperator.id < targetElement.id) {
+            cooperator.classList.add('moveup');
+        }else if (cooperator.id > targetElement.id){
+            cooperator.classList.add('movedown');
+        }
+    });
+}
+
+function shrink(id){
+    const targetElement = document.getElementById(`coorp-${id}`);
+    const allCooperators = document.querySelectorAll('.mainCard');
+    const targetName = targetElement.querySelector('.className');
+    const targetPartner = targetElement.querySelector('.partnerName');
+
+    allCooperators.forEach((cooperator) => {
+        if (cooperator == targetElement){
+            cooperator.classList.remove('enlarge');
+            targetName.style.setProperty("--pseudo-width", "0%")
+            targetPartner.style.setProperty("--pseudo-width", "0%")
+        }else if (cooperator.id < targetElement.id) {
+            cooperator.classList.remove('moveup');
+        }else if (cooperator.id > targetElement.id) {
+            cooperator.classList.remove('movedown');
+        }
+    });
+}
 </script>
 
 <style scoped>
+/* This is specifically for the font family in the background of this page */
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
 .cooperatorContainer {
     position: relative;
     display: flex;
@@ -150,7 +192,31 @@ function makeStar(starBackground) {
     height: auto;
     padding-top: 8rem;
     padding-bottom: 100px;
-    gap: 20px;
+    gap: 30px;
+}
+
+.cooperatorContainer::before, .cooperatorContainer::after {
+    content: 'S\A   A\A G\A   A';
+    white-space: pre;
+    position: absolute;
+    font-family: "Bagel Fat One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 350px;
+    /* opacity: 0.8; */
+    z-index: -1;
+    line-height: 0.6;
+    animation: glowing 5s linear infinite;
+}
+
+.cooperatorContainer::before {
+    top: 3%;
+    left: 5%;
+}
+
+.cooperatorContainer::after {
+    bottom: 5%;
+    right: 5%;
 }
 
 .cooperatorContainer:deep(.star) {
@@ -208,4 +274,57 @@ function makeStar(starBackground) {
     }
 }
 
+@media (prefers-color-scheme: dark) {
+    .cooperatorContainer::before, .cooperatorContainer::after {
+        color: #ffd05a;  
+        /* color: transparent;   */
+    }
+
+    @keyframes glowing {
+    0% {
+        text-shadow: -5px -5px 5px #ff9d00,
+                0 0 .7em #ffc815,
+                0 0 0.2em #ffd69c;
+    }
+    50% {
+        text-shadow: 5px 5px 5px #ff9d00,
+                0 0 0.3em #ffc815,
+                0 0 0.1em #ffd69c;
+    }
+    100% {
+        text-shadow: -5px -5px 5px #ff9d00,
+                0 0 .7em #ffc815,
+                0 0 0.2em #ffd69c;
+    }
+}
+}
+
+@media (prefers-color-scheme: light) {
+    .cooperatorContainer::before, .cooperatorContainer::after {
+        color: #f8ad57;  
+    }
+    @keyframes glowing {
+    0% {
+        text-shadow: -5px -5px 5px #ff5858,
+                0 0 .7em #ffc815,
+                0 0 0.2em #ffd69c;
+    }
+    50% {
+        text-shadow: 5px 5px 5px #ff5858,
+                0 0 0.3em #ffc815,
+                0 0 0.1em #ffd69c;
+    }
+    100% {
+        text-shadow: -5px -5px 5px #ff5858,
+                0 0 .7em #ffc815,
+                0 0 0.2em #ffd69c;
+    }
+    }
+}
+
+@media (max-width: 1400px) {
+    .cooperatorContainer::before, .cooperatorContainer::after {
+        font-size: 250px;
+    }
+}
 </style>
