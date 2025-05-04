@@ -30,7 +30,7 @@
         grid-template-rows: 1fr;
         grid-template-areas: "partnerImg partnerImg partnerIntro partnerIntro partnerIntro";
         border-radius: 10px;
-        width: 40vw;
+        width: 45vw;
         height: max-content;
         box-shadow: 1px 1px 6px lightgray;
         cursor: pointer;
@@ -61,6 +61,7 @@
         width: 100%;
         aspect-ratio: auto;
         border-radius: 10px;
+        filter: drop-shadow(3px 3px 3px rgb(97, 57, 0));
     }
 
     .className {

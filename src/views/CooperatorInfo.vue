@@ -196,21 +196,21 @@ function shrink(id){
 }
 
 .cooperatorContainer::before, .cooperatorContainer::after {
-    content: 'S\A   A\A G\A   A';
+    content: 'S\A    A\A G\A    A';
     white-space: pre;
     position: absolute;
     font-family: "Bagel Fat One", system-ui;
     font-weight: 400;
     font-style: normal;
-    font-size: 350px;
+    font-size: 300px;
     /* opacity: 0.8; */
     z-index: -1;
-    line-height: 0.6;
+    line-height: 0.8;
     animation: glowing 5s linear infinite;
 }
 
 .cooperatorContainer::before {
-    top: 5%;
+    top: 3%;
     left: 5%;
 }
 

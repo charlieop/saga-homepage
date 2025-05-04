@@ -8,7 +8,7 @@ export const  cooperators = [
 
     {"id": 2,
     "className": "自学月科普课",
-    "instituteName": "清华大学青天与白鸟社团",
+    "instituteName": "清华大学青天与白鸟志愿项目",
     "logo": "/src/assets/imgs/cooperator/kepuke.PNG",
     "period": "合作时间：2023-2025",
     "programmeDetails": "自学月期间，SAGA星光公益课堂与清华大学青天与白鸟志愿项目开展兴趣课堂，意在传播科学知识，广阔小朋友们的视野。青天与白鸟的志愿者老师们为小朋友教授科学知识，辅助他们进行阅读。目标是让SAGA星光的小朋友们兴趣课堂的学习中提高科学知识水平，进一步了解广阔的天地。"},
@@ -42,11 +42,11 @@ export const  cooperators = [
     "programmeDetails": "翼鸥 EEO 成立于 2014 年。致力于用科技“推动教育进步”，帮助全球的老师“培养独立自律的学习者”，成为广受老师和学生欢迎的教育科技企业。为了丰富 SAGA 的课堂内容及为报名的小朋友们提供更好的线上教育，ClassIn教育公益项目为SAGA星光提供教育线上平台的公益使用权。"},
 
     {"id": 7,
-        "className": "心方向",
-    "instituteName": "心方向儿童",
+        "className": "心方向儿童",
+    "instituteName": "心方向儿童关爱中心",
     "logo": "/src/assets/imgs/cooperator/xinfangxiang.png",
     "period": "合作时间：2024-2025",
-    "programmeDetails": "心方向儿童关爱中心，又名Dear baby儿白互助联盟，成立于2021年，是由来自全国20余个省的一群儿白父母发起的全国公益性志愿者组织。2024年SAGA与心方向儿童开展合作，心方向为SAGA五期全体志愿者开展儿白科普培训，同时也与SAGA合作推送儿白科普文章。"},
+    "programmeDetails": "心方向儿童关爱中心，又名Dear baby儿白互助联盟，成立于2021年，是由来自全国20余个省的一群儿白父母发起的全国公益性志愿者组织。2024年SAGA与心方向儿童开展合作，心方向儿童为SAGA五期全体志愿者开展儿白科普培训，同时也与SAGA合作推送儿白科普文章。"},
 
     {"id": 8,
         "className": "点点星光·蔚为汪洋明信片活动",
