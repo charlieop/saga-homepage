@@ -210,7 +210,7 @@ function shrink(id){
 }
 
 .cooperatorContainer::before {
-    top: 3%;
+    top: 5%;
     left: 5%;
 }
 
@@ -277,7 +277,6 @@ function shrink(id){
 @media (prefers-color-scheme: dark) {
     .cooperatorContainer::before, .cooperatorContainer::after {
         color: #ffd05a;  
-        /* color: transparent;   */
     }
 
     @keyframes glowing {
@@ -305,17 +304,17 @@ function shrink(id){
     }
     @keyframes glowing {
     0% {
-        text-shadow: -5px -5px 5px #ff5858,
+        text-shadow: -5px -5px 5px #ff8080,
                 0 0 .7em #ffc815,
                 0 0 0.2em #ffd69c;
     }
     50% {
-        text-shadow: 5px 5px 5px #ff5858,
+        text-shadow: 5px 5px 5px #ff8080,
                 0 0 0.3em #ffc815,
                 0 0 0.1em #ffd69c;
     }
     100% {
-        text-shadow: -5px -5px 5px #ff5858,
+        text-shadow: -5px -5px 5px #ff8080,
                 0 0 .7em #ffc815,
                 0 0 0.2em #ffd69c;
     }

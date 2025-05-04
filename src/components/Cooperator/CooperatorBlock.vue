@@ -153,12 +153,14 @@
         background: url('/src/assets/imgs/cooperator/狮子.png');
         aspect-ratio: 1/1;
         width: 25%;
-        left: -20%;
-        bottom: -10%;
+        left: -18%;
+        bottom: -15%;
         display: block;
         z-index: 1;
         background-size: cover;
-        transform: rotate(-30deg);
+        transform: rotate(-20deg);
+        filter: drop-shadow(-2px -2px 4px #59553dc1);
+
     }
 
     .mainCard:nth-of-type(4n-2):before {
@@ -167,12 +169,13 @@
         background: url('/src/assets/imgs/cooperator/大鹅.png');
         aspect-ratio: 1/1;
         width: 25%;
-        right: -15%;
+        right: -14%;
         bottom: -10%;
         display: block;
         z-index: 1;
         background-size: cover;
-        transform: rotate(30deg);
+        transform: rotate(20deg);
+        filter: drop-shadow(-2px 2px 4px #59553dc1);
     }
 
     .mainCard:nth-of-type(4n):before {
@@ -181,12 +184,13 @@
         background: url('/src/assets/imgs/cooperator/熊猫.png');
         aspect-ratio: 1/1;
         width: 25%;
-        right: -15%;
-        bottom: -10%;
+        right: -12%;
+        bottom: -15%;
         display: block;
         z-index: 1;
         background-size: cover;
-        transform: rotate(30deg);
+        transform: rotate(15deg);
+        filter: drop-shadow(-2px 2px 4px #59553dc1);
     }
 
 @media (prefers-color-scheme: dark) {
