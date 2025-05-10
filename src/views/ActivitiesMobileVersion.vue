@@ -21,12 +21,12 @@
                 </div>
               </div>
               <div class="self-start group_4 view mt-5">
-                <span class="font_4">合作时间：四期、五期</span>
+                <span class="font_4">合作时间：2022-2025</span>
               </div>
             </div>
             <div class="shrink-0 self-stretch divider view_5"></div>
             <p class="font_5 text_2">
-              SAGA星光公益课堂将与仙弈围棋协会开展为期一个月的围棋兴趣课堂活动。围棋特色课堂意在宣扬围棋文化，激发小朋友们的围棋兴趣。仙弈围棋协会的志愿者老师们将教授围棋的基础知识，辅助进行围棋练习。
+              自学月期间，SAGA星光公益课堂与山东理工大学仙弈围棋协会开展为期一个月的围棋兴趣课堂活动。围棋特色课堂意在宣扬围棋文化，激发小朋友们的围棋兴趣。仙弈围棋协会的志愿者老师们教授围棋的基础知识，辅助进行围棋练习。我们的目标是丰富小朋友们的课余生活，让孩子们对围棋产生学习兴趣。
             </p>
           </div>
 
@@ -34,20 +34,20 @@
           <div class="flex-col section_4">
             <div class="flex-col group_5">
               <div class="flex-col justify-start self-stretch section_5">
-                <div class="flex-col justify-start items-start section_3">
+                <div class="flex-col justify-start items-start section_3_pre">
                   <div class="group_6">
                     <span class="font">自学月科普课<br /></span>
-                    <span class="font_2">清华大学青天与白鸟社团</span>
+                    <span class="font_2">清华大学青天与白鸟志愿项目</span>
                   </div>
                 </div>
               </div>
               <div class="self-start group_9">
-                <span class="font_4">合作时间：四期、五期</span>
+                <span class="font_4">合作时间：2023-2025</span>
               </div>
             </div>
             <div class="shrink-0 self-stretch divider view_5"></div>
             <p class="font_5 text_2 text_4">
-              科普兴趣课意在传播科学知识，广阔小朋友们的视野。青天与白鸟的志愿者老师们将教授科学知识，辅助进行阅读等练习。
+              自学月期间，SAGA星光公益课堂与清华大学青天与白鸟志愿项目开展兴趣课堂，意在传播科学知识，广阔小朋友们的视野。青天与白鸟的志愿者老师们为小朋友教授科学知识，辅助他们进行阅读。目标是让SAGA星光的小朋友们兴趣课堂的学习中提高科学知识水平，进一步了解广阔的天地。
             </p>
           </div>
 
@@ -56,44 +56,46 @@
             <div class="flex-col justify-start self-stretch section_7">
               <div class="flex-col justify-start items-start section_8">
                 <div class="group_7">
-                  <span class="font">编程兴趣课<br /></span>
+                  <span class="font">编程兴趣课<br/></span>
                   <span class="text_5">Coding Girls</span>
                 </div>
               </div>
             </div>
             <div class="self-start group_8">
-              <span class="font_4">合作时间：四期、五期</span>
+              <span class="font_4">合作时间：2023-2025</span>
             </div>
             <div class="shrink-0 self-stretch divider view_5"></div>
             <div class="flex-col self-stretch group_10">
               <p class="self-center font_5 text_7">
-              为了丰富SAGA第三期的课堂内容，为报名的小朋友们提供更好的线上教育，SAGA邀约Coding Girls提供线上编程课堂。
+                Coding Girls成立于2019年4月，致力于帮助全年龄段的女性入门计算机领域，打造女性编程社区，推动科技行业性别平等。在SAGA三、四期中Coding Girls为小朋友们提供线上编程教学；在SAGA五期中，Coding Girls为小朋友们提供自研的编程学习资源。
               </p>
             </div>
           </div>
 
           <!-- Counseling Section -->
           <div class="flex-col section_9">
-            <img class="shrink-0 self-stretch image_2" src="../assets/imgs/activities/xl.png" alt="Counseling" />
+            <img class="shrink-0 self-stretch image_2" src="../assets/imgs/activities/img-update/4.png" alt="Counseling" />
             <span class="self-stretch font_6 text_8">SAGA陪伴计划 - 心理咨询师洗研老师</span>
             <div class="self-start group_9">
-              <span class="font_4">合作时间：四期、五期</span>
+              <span class="font_4">合作时间：2022-2025</span>
             </div>
             <div class="shrink-0 self-start divider_2"></div>
             <div class="flex-col self-stretch group_10">
               <p class="font_5 text_10">
-                在成长过程中，孩子们收获着知识和渐渐成熟的心智，但烦恼也在日益增长。<br />
+                洗砚老师是国家二级心理咨询师，社会工作师，2014年5月至今为长治龙泰心理研究所签约咨询师；2023年5月至今为湖南心知灵心理咨询有限公司签约线上咨询师。<br />
               </p>
               <p class="font_5 text_11">
-                SAGA陪伴计划旨在为孩子们打造可以轻松畅谈的心理舒适空间，将由SAGA特聘心理咨询师陪伴孩子、倾听他们的烦恼和忧虑。
+                SAGA陪伴计划旨在为孩子和家长们打造可以轻松畅谈的心理舒适空间，将由SAGA特聘心理咨询师陪伴孩子和家长，倾听他们的烦恼和忧虑。
               </p>
             </div>
           </div>
         </div>
 
         <!-- Footer Image -->
-        <div class="flex-col items-center section_10">
-          <img class="shrink-0 image_3" src="../assets/imgs/activities/gb.png" alt="Footer Image" />
+        <div class="flex-col items-center section_9">
+          <img class="shrink-0 image_3" src="../assets/imgs/activities/img-update/5-1.png" alt="Footer Image" />
+          <img class="shrink-0 image_3" src="../assets/imgs/activities/img-update/5-2.jpg" alt="Footer Image" />
+          <img class="shrink-0 image_3" src="../assets/imgs/activities/img-update/5-3.jpg" alt="Footer Image" />
           <span class="self-stretch font_6 text_8">高博项目——医博同行</span>
             <div class="self-start group_9">
               <span class="font_4">合作时间：四期、五期</span>
@@ -101,10 +103,66 @@
             <div class="shrink-0 self-start divider_2"></div>
             <div class="flex-col self-stretch group_10">
               <p class="font_5 text_10">
-                To be Continued... ...<br />
+                SAGA携手高博医疗集团，共同打造博医同行 X SAGA星光公益微课堂。由SAGA推送优秀录播课程，在博医同行平台上公开视频资源，致力于为大病患儿们提供充足和优质的学习资源。<br />
+              </p>
+              <p class="font_5 text_11">
+                除此之外，2023和2024年SAGA星光组织的大学生志愿者暑期线下出队都拜访了高博医疗集团下属的医院病房，为北京高博博仁医院、南方春富（儿童）血液病研究院等医院的小朋友们带去生动精彩的互动课堂。
               </p>
             </div>
         </div>
+
+          <!-- Footer Image -->
+        <div class="flex-col items-center section_9">
+          <img class="shrink-0 image_3" src="../assets/imgs/activities/img-update/6.png" alt="Footer Image" />
+          <span class="self-stretch font_6 text_8">ClassIn教育公益课堂平台 - 翼鸥</span>
+            <div class="self-start group_9">
+              <span class="font_4">合作时间：2022-2025</span>
+            </div>
+            <div class="shrink-0 self-start divider_2"></div>
+            <div class="flex-col self-stretch group_10">
+              <p class="font_5 text_10">
+                翼鸥 EEO 成立于 2014 年。致力于用科技“推动教育进步”，帮助全球的老师“培养独立自律的学习者”，成为广受老师和学生欢迎的教育科技企业。为了丰富 SAGA 的课堂内容及为报名的小朋友们提供更好的线上教育，ClassIn教育公益项目为SAGA星光提供教育线上平台的公益使用权。
+              </p>
+            </div>
+        </div>
+
+        <!-- Footer Image -->
+        <div class="flex-col items-center section_9">
+          <img class="shrink-0 image_3" src="../assets/imgs/activities/img-update/7-1.png" alt="Footer Image" />
+          <img class="shrink-0 image_3" src="../assets/imgs/activities/img-update/7-2.png" alt="Footer Image" />
+          <span class="self-stretch font_6 text_8">心方向儿童 - 心方向儿童关爱中心</span>
+            <div class="self-start group_9">
+              <span class="font_4">合作时间：2024-2025</span>
+            </div>
+            <div class="shrink-0 self-start divider_2"></div>
+            <div class="flex-col self-stretch group_10">
+              <p class="font_5 text_10">
+                心方向儿童关爱中心，又名Dear baby儿白互助联盟，成立于2021年，是由来自全国20余个省的一群儿白父母发起的全国公益性志愿者组织。<br />
+              </p>
+              <p class="font_5 text_11">
+                2024年SAGA与心方向儿童开展合作，心方向儿童为SAGA五期全体志愿者开展儿白科普培训，同时也与SAGA合作推送儿白科普文章。
+              </p>
+            </div>
+        </div>
+
+         <!-- Footer Image -->
+        <div class="flex-col items-center section_9">
+          <img class="shrink-0 image_3" src="../assets/imgs/activities/img-update/8.jpg" alt="Footer Image" />
+          <span class="self-stretch font_6 text_8">点点星光·蔚为汪洋明信片活动 - 缘起·看见</span>
+            <div class="self-start group_9">
+              <span class="font_4">合作时间：2024.3-2024.5</span>
+            </div>
+            <div class="shrink-0 self-start divider_2"></div>
+            <div class="flex-col self-stretch group_10">
+              <p class="font_5 text_10">
+                缘起·看见公益项目组关爱留守儿童乡村振兴图书计划，旨在帮助在校大学生以实际行动参与关爱留守儿童的行动，并通过绘画、明信片、手工作品等多样化形式向山区儿童送去温暖。<br />
+              </p>
+              <p class="font_5 text_11">
+                SAGA四期与缘起·看见项目组携手，共同发起“点点星光·蔚为汪洋”明信片活动，动员全国各地高校大学生，制作精美明信片，书写美好寄语，通过参与活动为白血病儿童们捐赠爱心物资，传递爱心和祝福
+              </p>
+            </div>
+        </div>
+
         <div class="flex-col self-stretch group_10"></div>
       </div>
 
@@ -222,10 +280,15 @@ export default {
 .section_2 {
   padding-top: 23rem;
   background-size: 100% 100%;
-  background-image: url('../assets/imgs/activities/go.png');
+  background-image: url('../assets/imgs/activities/img-update/1.png');
   background-repeat: no-repeat;
   background-position: center; /* ✅ 居中对齐 */
 }
+.section_3_pre {
+  padding: 0.5rem 0; /* Increased spacing */
+  background-color: #f0ebebc8;
+}
+
 .section_3 {
   padding: 0.5rem 0; /* Increased spacing */
   background-color: #99999952;
@@ -292,7 +355,7 @@ export default {
 .section_5 {
   padding-top: 23rem;
   background-size: 100% 100%;
-  background-image: url('../assets/imgs/activities/thu.png');
+  background-image: url('../assets/imgs/activities/img-update/2.png');
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -315,11 +378,11 @@ export default {
   border-radius: 0.5rem;
   overflow: hidden;
   height: auto; 
-  border: solid 0.031rem #9797975e;
+  border: solid 0.031rem #ede5e55e;
 }
 .section_7 {
-    padding-top: 7.38rem;
-    background-image: url('../assets/imgs/activities/coding-girls.png');
+    padding-top: 25rem;
+    background-image: url('../assets/imgs/activities/img-update/3.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
   }
