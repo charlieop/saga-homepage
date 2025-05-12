@@ -12,7 +12,8 @@
           id="term-select"
           @change="handelTermChange($event)"
         >
-          <option value="4" selected>SAGA第四期</option>
+          <option value="5" selected>SAGA第五期</option>
+          <option value="4">SAGA第四期</option>
           <option value="3">SAGA第三期</option>
           <option value="2">SAGA第二期</option>
           <option value="1">SAGA第一期</option>
@@ -82,7 +83,7 @@ import { members } from "@/assets/dataset/volunteers_list.js";
 
 const selectedMembers = ref([]);
 let selectedInfo = ref({
-  term: 4,
+  term: 5,
   department: "所有部门",
   honor: "所有荣誉",
 });
