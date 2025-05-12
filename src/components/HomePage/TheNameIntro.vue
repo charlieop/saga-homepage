@@ -18,7 +18,7 @@
         <div class="name-intro__desc">
           <p class="name-intro__title">简介</p>
           <p class="name-intro__detail">
-            SAGA是一个社会公益组织，专注于为因患有白血病而需要长期住院的儿童提供线上课堂服务，旨在保障这些无法正常上学的儿童的教育。
+            SAGA是一个由世界各地大学生组成的团体，专注于为因患有白血病而需要长期住院的儿童提供线上课堂服务，旨在保障这些无法正常上学的儿童的教育。
           </p>
         </div>
       </article>

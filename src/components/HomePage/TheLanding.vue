@@ -17,7 +17,7 @@
           <li class="landing__keyword" data-display-prev>前行</li>
         </ul>
       </h2>
-      <h1 class="landing__main-heading">SAGA星光公益课堂</h1>
+      <h1 class="landing__main-heading">SAGA星光<br />白血病患儿课堂</h1>
     </div>
     <img class="landing__img" src="@/assets/imgs/hero.jpg" alt="hero image" />
   </section>
