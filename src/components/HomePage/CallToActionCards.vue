@@ -39,6 +39,21 @@
       </div>
       <div class="decoration"></div>
     </article>
+     <article class="card">
+      <h2 class="title">与我们合作</h2>
+      <p class="text">助力散发更耀眼的星光</p>
+      <div class="button-container">
+        <RouterLink
+          class="button"
+          :to="{
+            name: 'PartnersActivitiesPage',
+          }"
+          title="SAGA合作项目"
+          >前往查看</RouterLink
+        >  
+      </div>
+      <div class="decoration"></div>
+    </article>
   </section>
 </template>
 
@@ -153,6 +168,9 @@
   --_color: var(--clr-accent);
 }
 .card:nth-child(3) {
+  --_color: #f25b89;
+}
+  .card:nth-child(4) {
   --_color: #2196f3;
 }
 

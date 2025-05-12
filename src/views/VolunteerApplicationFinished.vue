@@ -107,7 +107,7 @@ function makesnow(snowbackground) {
 
 </script>
 
-<style>
+<style scoped>
 .application-finish-notice {
     position: relative;
     display: flex;
@@ -202,7 +202,7 @@ function makesnow(snowbackground) {
 
 }
 /* adding some backgroudn snow effect: */
-.snow {
+.application-finish-notice:deep(.snow) {
     position: absolute;
     border-radius: 50%;
     opacity: .7;
@@ -211,7 +211,7 @@ function makesnow(snowbackground) {
 }
 
 @media (prefers-color-scheme: light) {
-    .snow {
+    .application-finish-notice:deep(.snow) {
         background: var(--clr-primary);
     }
 
@@ -219,7 +219,7 @@ function makesnow(snowbackground) {
 }
 
 @media (prefers-color-scheme: dark) {
-    .snow {
+    .application-finish-notice:deep(.snow) {
         background: var(--clr-text);
     }
 
@@ -269,7 +269,7 @@ function makesnow(snowbackground) {
         width: 12rem;
     }
     
-    .snow {
+    .application-finish-notice:deep(.snow) {
         display: none;
     }
 
