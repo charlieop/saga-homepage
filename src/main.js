@@ -12,7 +12,6 @@ const app = createApp(App);
 // app.provide("ApiUrl", "http://www.saga-xingguang.com/api/v1/");
 app.provide("ApiUrl", "/api/v1/");
 
-
 app.provide("message", "hello");
 
 app.use(router);

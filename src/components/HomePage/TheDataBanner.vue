@@ -1,31 +1,29 @@
-<!-- 此部分未适配响应式设计 -->
-
 <template>
   <section class="data-banner">
-    <div class="data-banner__block">
+    <div class="data-banner__block" data-value="4">
       <div class="data-banner__figure">
-        <span class="data-banner__number">{{ foundedYears }}</span
+        <span class="data-banner__number">0</span
         ><span class="data-banner__unit">年</span>
       </div>
       <span class="data-banner__desc">SAGA星光成立已达</span>
     </div>
-    <div class="data-banner__block">
+    <div class="data-banner__block" data-value="21">
       <div class="data-banner__figure">
-        <span class="data-banner__number">{{ teachingMintues }}</span
+        <span class="data-banner__number">0</span
         ><span class="data-banner__unit">万</span>
       </div>
       <span class="data-banner__desc">提供的教学时长 (分钟)</span>
     </div>
-    <div class="data-banner__block">
+    <div class="data-banner__block" data-value="750">
       <div class="data-banner__figure">
-        <span class="data-banner__number">{{ childrenServed }}+</span
+        <span class="data-banner__number">0</span
         ><span class="data-banner__unit">名</span>
       </div>
       <span class="data-banner__desc">服务的白血病儿童</span>
     </div>
-    <div class="data-banner__block">
+    <div class="data-banner__block" data-value="620">
       <div class="data-banner__figure">
-        <span class="data-banner__number">{{ volunteers }}+</span
+        <span class="data-banner__number">0</span
         ><span class="data-banner__unit">名</span>
       </div>
       <span class="data-banner__desc">来自世界各地的志愿者</span>
@@ -34,27 +32,55 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { onMounted } from "vue";
 
-const finalYears = 4;
-const finalMinutes = 21;
-const finalChildren = 750;
-const finalVolunteers = 620;
+const animateValue = (element, start, end, duration) => {
+  const numberElement = element.querySelector('.data-banner__number');
+  const startTime = performance.now();
+  
+  const animate = (currentTime) => {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    
+    const easeOutQuad = progress => 1 - (1 - progress) * (1 - progress);
+    const easedProgress = easeOutQuad(progress);
+    
+    const current = start + (end - start) * easedProgress;
+    
+    if (progress === 1) {
+      numberElement.textContent = end;
+      return;
+    }
 
-let foundedYears = ref(finalYears);
-let teachingMintues = ref(finalMinutes);
-let childrenServed = ref(finalChildren);
-let volunteers = ref(finalVolunteers);
+    numberElement.textContent = Math.round(current);
+    requestAnimationFrame(animate);
+  };
+
+  requestAnimationFrame(animate);
+};
 
 onMounted(() => {
-  let observer = new IntersectionObserver(
-    () => {
-    },
-    {
-      threshold: 1,
-    }
-  );
-  observer.observe(document.querySelector(".data-banner"));
+  const blocks = document.querySelectorAll('.data-banner__block');
+  
+  blocks.forEach(block => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const targetValue = parseInt(block.dataset.value);
+            animateValue(block, 0, targetValue, 2500);
+            observer.unobserve(block);
+          }
+        });
+      },
+      {
+        threshold: 0.3,
+        rootMargin: "50px",
+      }
+    );
+
+    observer.observe(block);
+  });
 });
 </script>
 

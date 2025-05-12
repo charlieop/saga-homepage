@@ -12,12 +12,23 @@ const routes = [
   {
     path: "/appreciation/volunteers",
     name: "VolunteersApplicationPage",
-    component: () => import("@/views/VolunteersApplicationPage.vue"),
+    component: () => import("@/views/VolunteerApplicationFinished.vue"),
+    // path had been updated for the finished application page
   },
   {
     path: "/appreciation/volunteers/upload-writing-task",
     name: "VolunteersUploadWritingTaskPage",
     component: () => import("@/views/VolunteersUploadWritingTaskPage.vue"),
+  },
+  {
+    path: "/gifts-exchange",
+    name: "GiftsExchangePage",
+    component: () => import("@/views/GiftsExchangePage.vue"),
+  },
+  {
+    path: "/partnerliststar/partnerActivities",
+    name: "ActivitiesMobileVersion",
+    component: () => import("@/views/ActivitiesMobileVersion.vue"),
   },
   {
     path: "/:pathMatch(.*)*",
