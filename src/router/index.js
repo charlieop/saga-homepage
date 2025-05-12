@@ -26,6 +26,11 @@ const routes = [
     component: () => import("@/views/GiftsExchangePage.vue"),
   },
   {
+    path: "/partnerliststar/partnerActivities",
+    name: "ActivitiesMobileVersion",
+    component: () => import("@/views/ActivitiesMobileVersion.vue"),
+  },
+  {
     path: "/:pathMatch(.*)*",
     name: "NotFound",
     component: () => import("@/views/NotFound.vue"),
