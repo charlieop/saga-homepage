@@ -17,7 +17,7 @@
           <p class="volunteer-honor">{{ honor }}</p>
         </div>
         <p class="volunteer-uni">{{ uni }}</p>
-        <p class="volunteer-dept">{{ dept }}</p>
+        <p class="volunteer-dept" :data-display-dept="displayDept">{{ dept }}</p>
         <div class="decoration-wave colored">
           <svg
             id="wave"
@@ -82,6 +82,13 @@ let color = computed(() => {
     (colorForDepts[props.dept] || "#000000") +
     "99;"
   );
+});
+
+const displayDept = computed(() => {
+  if (props.dept === "主席团" || props.dept === "核心团队") {
+    return props.dept;
+  }
+  return `${props.dept}志愿者`;
 });
 </script>
 
@@ -240,42 +247,37 @@ let color = computed(() => {
   }
 
   .volunteer-name {
-    text-align: left !important;
+    text-align: left;
     margin: 0;
     font-size: 20px;
-    text-align: left;
     flex: 1;
   }
 
-  /* Hide original dept and honor */
-  .volunteer-dept {
+  /* Hide original honor*/
+  .volunteer-honor {
     display: none;
   }
 
-  /* Show dept in the same row */
-  .row:after {
-    content: attr(data-dept);
+  /* Keep dept but style it for mobile */
+  .volunteer-dept {
+    display: block;
     font-size: 14px;
-    position: absolute;
-    right: 0;
-    top: 20%;
-    transform: translateY(-50%);
-  }
-
-  /* Show honor below instead of using pseudo-element */
-  .volunteer-honor {
-    display: block !important; /* Override previous display: none */
-    font-size: 14px;
+    color: var(--clr-text-muted);
     text-align: left;
     margin-top: 0;
-    background: none;
     padding: 0;
-    order: 2; /* Move it below the row */
+    text-decoration: none;
   }
 
-  /* Remove the pseudo-element that was adding the text */
-  .volunteer-info:after {
-    display: none;
+  /* Hide the original dept text in mobile view */
+  .volunteer-dept {
+    font-size: 0;  /* Hide the original text */
+  }
+
+  .volunteer-dept::after {
+    content: attr(data-display-dept);
+    display: inline;
+    font-size: 14px;
   }
 
   .decoration-wave,
@@ -311,24 +313,12 @@ let color = computed(() => {
     font-size: 16px;
   }
 
-  .row:after {
-    content: attr(data-dept);
-    font-size: 12px;
-    position: absolute;
-    right: 0;
-    top: 20%;
-    transform: translateY(-50%);
+  .volunteer-dept {
+    font-size: 0;
   }
 
-  .volunteer-honor {
-    display: block !important; /* Override previous display: none */
+  .volunteer-dept::after {
     font-size: 12px;
-    text-align: left;
-    margin-top: 0;
-    background: none;
-    padding: 0;
-    order: 2; /* Move it below the row */
   }
-
 }
 </style>
