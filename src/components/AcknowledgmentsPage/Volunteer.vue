@@ -12,12 +12,12 @@
         />
       </div>
       <div class="volunteer-info">
-        <div class="row">
+        <div class="row" :data-dept="dept">
           <p class="volunteer-name">{{ name }}</p>
           <p class="volunteer-honor">{{ honor }}</p>
         </div>
         <p class="volunteer-uni">{{ uni }}</p>
-        <p class="volunteer-dept">{{ dept }}</p>
+        <p class="volunteer-dept" :data-display-dept="displayDept">{{ dept }}</p>
         <div class="decoration-wave colored">
           <svg
             id="wave"
@@ -83,6 +83,13 @@ let color = computed(() => {
     "99;"
   );
 });
+
+const displayDept = computed(() => {
+  if (props.dept === "主席团" || props.dept === "核心团队") {
+    return props.dept;
+  }
+  return `${props.dept}志愿者`;
+});
 </script>
 
 <style scoped>
@@ -114,39 +121,6 @@ let color = computed(() => {
   transition: all 0.3s ease-in-out;
 }
 
-@container (max-width: 290px) {
-  .card-wrapper .volunteer-card {
-    aspect-ratio: 3 / 5;
-    grid-template-rows: auto 1fr;
-  }
-  .card-wrapper .volunteer-card .row {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  .card-wrapper .volunteer-card .volunteer-dept {
-    padding-top: 0.25rem;
-  }
-}
-
-@media (max-width: 700px) {
-  .card-wrapper .volunteer-card {
-    aspect-ratio: 3 / 2;
-    grid-template-columns: 1fr 40%;
-    grid-template-rows: 1fr;
-    border-radius: 1rem 1rem 1rem 1rem;
-  }
-  .row {
-    flex-direction: column;
-    gap: 0.5rem;
-    padding-bottom: 0.75rem;
-  }
-  .volunteer-name {
-    margin-top: 0.75rem;
-  }
-  .volunteer-dept {
-    margin-top: auto;
-  }
-}
 .volunteer-avatar {
   background-color: var(--clr-accent);
 }
@@ -214,5 +188,137 @@ let color = computed(() => {
 .volunteer-uni {
   font-size: var(--fs-200);
   font-weight: 400;
+}
+
+@container (max-width: 290px) {
+  .card-wrapper .volunteer-card {
+    aspect-ratio: 3 / 5;
+    grid-template-rows: auto 1fr;
+  }
+  .card-wrapper .volunteer-card .row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .card-wrapper .volunteer-card .volunteer-dept {
+    padding-top: 0.25rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .card-wrapper .volunteer-card.volunteer-card {
+    min-width: 0;
+    padding: 0.8rem;
+    width: 157px;
+    height: 202px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+    border-radius: 5px;
+    border: 1px solid rgba(115, 198, 33, 1);
+    border-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
+    text-align: left;
+    aspect-ratio: auto; 
+  }
+
+  .volunteer-avatar {
+    width: 125px;
+    height: 120px;
+    margin: 0 auto;
+  }
+
+  .volunteer-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 2px;
+  }
+
+  .volunteer-info {
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: left;
+    position: relative;
+  }
+
+  .volunteer-name {
+    text-align: left;
+    margin: 0;
+    font-size: 20px;
+    flex: 1;
+  }
+
+  /* Hide original honor*/
+  .volunteer-honor {
+    display: none;
+  }
+
+  /* Keep dept but style it for mobile */
+  .volunteer-dept {
+    display: block;
+    font-size: 14px;
+    color: var(--clr-text-muted);
+    text-align: left;
+    margin-top: 0;
+    padding: 0;
+    text-decoration: none;
+  }
+
+  /* Hide the original dept text in mobile view */
+  .volunteer-dept {
+    font-size: 0;  /* Hide the original text */
+  }
+
+  .volunteer-dept::after {
+    content: attr(data-display-dept);
+    display: inline;
+    font-size: 14px;
+  }
+
+  .decoration-wave,
+  .volunteer-uni {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .card-wrapper .volunteer-card.volunteer-card {
+    min-width: 0;
+    padding: 0.5rem;
+    width: 120px;
+    height: 150px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+    border-radius: 5px;
+    border: 1px solid rgba(115, 198, 33, 1);
+    border-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    aspect-ratio: auto; 
+  }
+
+  .volunteer-avatar {
+    width: 85px;
+    height: 80px;
+    margin: 0 auto;
+  }
+
+  .volunteer-name {
+    margin-top: 0;
+    margin-left: 0;
+    font-size: 16px;
+  }
+
+  .volunteer-dept {
+    font-size: 0;
+  }
+
+  .volunteer-dept::after {
+    font-size: 12px;
+  }
 }
 </style>

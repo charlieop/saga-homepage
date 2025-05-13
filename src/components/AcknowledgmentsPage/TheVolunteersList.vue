@@ -34,6 +34,7 @@
 
       <aside class="past-thanks">
         <div>往期志愿者致谢</div>
+        <a href="#">&#8226;五期志愿者致谢</a><br />
         <a href="#">&#8226;四期志愿者致谢</a><br />
         <a href="#">&#8226;三期志愿者致谢</a><br />
         <a href="#">&#8226;二期志愿者致谢</a><br />
@@ -44,7 +45,7 @@
 </template>
 
 <script>
-import members from '@/assets/dataset/volunteers_fourth.json';
+import members from '@/assets/dataset/volunteers_fifth.json';
 
 export default {
   data() {

@@ -2,7 +2,7 @@
   <MainNavigation></MainNavigation>
   <section class="pageContent-wrapper volunteers-acknowledgments">
     <div class="title">
-      <h1>SAGA星光全体志愿者名单</h1>
+      <h1><span class="title-first">SAGA星光</span><span class="title-second">全体志愿者名单</span></h1>
       <p class="subheading">最璀璨耀眼的星空, 由我们共同组成</p>
     </div>
     <div class="filter-bar">
@@ -12,7 +12,8 @@
           id="term-select"
           @change="handelTermChange($event)"
         >
-          <option value="4" selected>SAGA第四期</option>
+          <option value="5" selected>SAGA第五期</option>
+          <option value="4">SAGA第四期</option>
           <option value="3">SAGA第三期</option>
           <option value="2">SAGA第二期</option>
           <option value="1">SAGA第一期</option>
@@ -82,7 +83,7 @@ import { members } from "@/assets/dataset/volunteers_list.js";
 
 const selectedMembers = ref([]);
 let selectedInfo = ref({
-  term: 4,
+  term: 5,
   department: "所有部门",
   honor: "所有荣誉",
 });
@@ -195,6 +196,7 @@ function showAllVolunteers() {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 .volunteers-acknowledgments .fade-in {
   animation: fade-in 0.3s ease-in-out forwards;
 }
@@ -259,6 +261,7 @@ function showAllVolunteers() {
 .volunteers-acknowledgments h1 {
   font-size: var(--fs-800);
   text-wrap: balance;
+  white-space: nowrap;
 }
 
 .volunteers-acknowledgments .subheading {
@@ -267,6 +270,7 @@ function showAllVolunteers() {
   color: var(--clr-text-muted);
   padding-left: 3ch;
   text-wrap: balance;
+  white-space: nowrap;
 }
 
 .volunteers-acknowledgments .filter-bar {
@@ -353,12 +357,32 @@ function showAllVolunteers() {
 
 @media (max-width: 700px) {
   .volunteers-acknowledgments .volunteers-display-area {
-    grid-template-columns: 100%;
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, 157px);
+    justify-content: space-between;
+    padding: 1rem 0;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .volunteers-acknowledgments h1 {
+    text-align: center;
+    font-size: 34px;
+    font-family: Inter, sans-serif;
+    line-height: 1.2;
+  }
+
+  .volunteers-acknowledgments h1 .title-first,
+  .volunteers-acknowledgments h1 .title-second {
+    display: block;
   }
 
   .volunteers-acknowledgments .subheading {
+    text-align: center;
     padding-left: 0;
+    font-size: 21px;
+    color: rgba(0, 0, 0, 0.47);
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
 
   .volunteers-acknowledgments .filter-bar {
@@ -372,6 +396,19 @@ function showAllVolunteers() {
 
   .volunteers-acknowledgments .filter-entry {
     width: 100%;
+    font-size: 20px;
+    font-family: itim, sans-serif;
+  }
+}
+
+@media (max-width: 400px) {
+  .volunteers-acknowledgments .volunteers-display-area {
+    grid-template-columns: repeat(2, 120px);
+    justify-content: space-between;
+    padding: 0.3rem 0;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 325px;
   }
 }
 </style>
