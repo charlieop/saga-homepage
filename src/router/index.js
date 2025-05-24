@@ -23,7 +23,13 @@ const routes = [
   {
     path: "/gifts-exchange",
     name: "GiftsExchangePage",
-    component: () => import("@/views/GiftsExchangePage.vue"),
+    component: () => {
+      if (window.innerWidth <= 748) {
+        return import("@/views/GiftsExchangeMobile.vue")
+    } else {
+        return import("@/views/GiftsExchangePage.vue")
+      }
+    },
   },
   {
     path: "/partnerliststar/partnerActivities",
@@ -44,7 +50,7 @@ const routes = [
     path: "/cooperator-info",
     name: "CooperatorsPage",
     component: () => import("@/views/CooperatorInfo.vue"),
-  },
+  }
 ];
 
 const router = createRouter({
